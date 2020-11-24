@@ -7,7 +7,7 @@ import org.graalvm.polyglot.*;
 
 @RestController
 public class CodeController {
-	// Context polyglot = Context.create();
+	Context polyglot = Context.create();
 
 	@GetMapping(value = "/", produces = "text/plain")
 	public String test() {
