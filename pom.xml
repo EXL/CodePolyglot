@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.exlmoto</groupId>
-	<artifactId>code-service</artifactId>
+	<artifactId>code-polyglot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>code-service</name>
+	<name>code-polyglot</name>
 	<description>Polyglot code sharing service based on GraalVM and Spring Boot</description>
 
 	<properties>
