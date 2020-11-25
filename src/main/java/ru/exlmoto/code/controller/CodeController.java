@@ -15,7 +15,7 @@ public class CodeController {
 
 	@GetMapping(value = "/", produces = "text/plain")
 	public String index() {
-		String JS = "\nJS: " + polyglotService.executeJavaScript("'Hello, World!'").orElse("ERROR!");
+		String JS = "\nJS: " + polyglotService.executeJavaScript("hljs.highlightAuto('<span>Hello World!</span>').value").orElse("ERROR!");
 		String PY = "\nPY: " + polyglotService.executePython("HtmlFormatter().get_style_defs('.highlight')").orElse("ERROR!");
 		String RB = "\nRB: " + polyglotService.executeRuby("Rouge::Theme.find('base16.light').render(scope: '.highlight')").orElse("ERROR!");
 

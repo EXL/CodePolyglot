@@ -29,9 +29,9 @@ public class PolyglotService {
 	}
 
 	private void hotspotPolyglot() {
-		log.info("Loaded GraalVM JavaScript:\t" + javaScriptPolyglot.loadRequiredLibrariesAndGetVersion());
-		log.info("Loaded GraalVM Python:\t\t" + pythonPolyglot.loadRequiredLibrariesAndGetVersion());
-		log.info("Loaded GraalVM Ruby:\t\t" + rubyPolyglot.loadRequiredLibrariesAndGetVersion());
+		log.info("Loaded GraalVM JavaScript version:\t" + javaScriptPolyglot.loadRequiredLibrariesAndGetVersion());
+		log.info("Loaded GraalVM Python version:\t\t" + pythonPolyglot.loadRequiredLibrariesAndGetVersion());
+		log.info("Loaded GraalVM Ruby version:\t\t" + rubyPolyglot.loadRequiredLibrariesAndGetVersion());
 	}
 
 	public Optional<String> executeJavaScript(String code) {
