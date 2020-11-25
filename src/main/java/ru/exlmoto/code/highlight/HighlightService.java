@@ -15,22 +15,22 @@ import javax.annotation.PostConstruct;
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
-	private final HighlightJs hightlightJs;
+	private final HighlightJs highlightJs;
 	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
-	public HighlightService(HighlightJs hightlightJs,
+	public HighlightService(HighlightJs highlightJs,
 	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
-		this.hightlightJs = hightlightJs;
+		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
 	}
 
 	@PostConstruct
 	private void getLibraryVersions() {
-		log.info("Highlight.js version:\t" + hightlightJs.getLibraryVersion());
-		log.info("Pygments version:\t\t" + highlightPygments.getLibraryVersion());
-		log.info("Rouge version:\t\t" + highlightRouge.getLibraryVersion());
+		log.info(String.format("==> Highlight.js (JavaScript) version '%s' loaded.", highlightJs.getLibraryVersion()));
+		log.info(String.format("==> Pygments (Python) version '%s' loaded.", highlightPygments.getLibraryVersion()));
+		log.info(String.format("==> Rouge (Ruby) version '%s' loaded.", highlightRouge.getLibraryVersion()));
 	}
 }

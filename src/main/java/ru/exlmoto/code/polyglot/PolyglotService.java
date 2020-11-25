@@ -31,9 +31,9 @@ public class PolyglotService {
 
 	@PostConstruct
 	private void getLanguageVersions() {
-		log.info("Loaded GraalVM JavaScript version:\t" + polyglotJavaScript.getLanguageVersion());
-		log.info("Loaded GraalVM Python version:\t\t" + polyglotPython.getLanguageVersion());
-		log.info("Loaded GraalVM Ruby version:\t\t" + polyglotRuby.getLanguageVersion());
+		log.info(String.format("=> GraalVM JavaScript version '%s' loaded.", polyglotJavaScript.getLanguageVersion()));
+		log.info(String.format("=> GraalVM Python version '%s' loaded.", polyglotPython.getLanguageVersion()));
+		log.info(String.format("=> GraalVM Ruby version '%s' loaded.", polyglotRuby.getLanguageVersion()));
 	}
 
 	public Optional<String> executeJavaScript(String code) {
