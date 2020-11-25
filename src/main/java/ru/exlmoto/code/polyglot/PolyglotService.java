@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 
 import java.util.Optional;
 
-@Service
+//@Service
 public class PolyglotService {
 	private final Logger log = LoggerFactory.getLogger(PolyglotService.class);
 

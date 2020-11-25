@@ -11,7 +11,7 @@ import ru.exlmoto.code.highlight.impl.HighlightRouge;
 
 import javax.annotation.PostConstruct;
 
-@Service
+//@Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 

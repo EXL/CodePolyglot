@@ -1,27 +1,35 @@
 package ru.exlmoto.code.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import ru.exlmoto.code.highlight.HighlightService;
-import ru.exlmoto.code.polyglot.PolyglotService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+import ru.exlmoto.code.form.CodeForm;
+import ru.exlmoto.code.highlight.Mode;
+
+@Controller
 public class CodeController {
-	private final PolyglotService polyglotService;
-	private final HighlightService highlightService;
+	private final Logger log = LoggerFactory.getLogger(CodeController.class);
 
-	public CodeController(PolyglotService polyglotService, HighlightService highlightService) {
-		this.polyglotService = polyglotService;
-		this.highlightService = highlightService;
+	@RequestMapping(path = "/")
+	public String index(Model model, CodeForm form) {
+		form.setHighlight(Mode.HighlightPygments); // TODO: get/set from cookie
+		model.addAttribute("form", form);
+
+		return "index";
 	}
 
-	@GetMapping(value = "/", produces = "text/plain")
-	public String index() {
-		String JS = "\nJS: " + polyglotService.executeJavaScript("hljs.highlightAuto('<span>Hello World!</span>').value").orElse("ERROR!");
-		String PY = "\nPY: " + polyglotService.executePython("HtmlFormatter().get_style_defs('.highlight')").orElse("ERROR!");
-		String RB = "\nRB: " + polyglotService.executeRuby("Rouge::Theme.find('base16.light').render(scope: '.highlight')").orElse("ERROR!");
+	@PostMapping(path = "/edit")
+	public String edit(CodeForm form) {
+		log.info(form.getTitle());
+		log.info(form.getOptions());
+		log.info(form.getCode());
+		log.info(Mode.getName(form.getHighlight()));
 
-		return JS + "\n" + PY + "\n" + RB;
+		return "redirect:/";
 	}
 }

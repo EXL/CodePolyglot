@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Code Polyglot</title>
+</head>
+<body>
+	<div class="page">
+		<div th:class="edit">
+			<form th:action="@{/edit}" th:object="${form}" th:method="post">
+				<div>
+					<label for="title">Title:</label>
+					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
+					<label for="options">Options:</label>
+					<input id="options" type="text" th:field="*{options}" placeholder="auto" value="auto" size="35"/>
+				</div>
+				<div>
+					<span th:each="mode : ${T(ru.exlmoto.code.highlight.Mode).values()}">
+						<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+						<label th:for="${mode}" th:text="${T(ru.exlmoto.code.highlight.Mode).getName(mode)}"></label>
+					</span>
+				</div>
+				<div class="form-block">
+					<label for="code-area">Code:</label>
+					<br/>
+					<textarea id="code-area" rows="20" cols="120" th:field="*{code}">Source</textarea>
+				</div>
+				<p><input class="button" type="submit" value="Render"/></p>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
