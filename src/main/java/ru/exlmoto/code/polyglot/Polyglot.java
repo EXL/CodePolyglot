@@ -28,5 +28,5 @@ public abstract class Polyglot {
 
 	protected abstract String executeAux(String sourceCode);
 
-	public abstract String loadRequiredLibrariesAndGetVersion();
+	public abstract String getLanguageVersion();
 }

@@ -3,14 +3,17 @@ package ru.exlmoto.code.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ru.exlmoto.code.highlight.HighlightService;
 import ru.exlmoto.code.polyglot.PolyglotService;
 
 @RestController
 public class CodeController {
 	private final PolyglotService polyglotService;
+	private final HighlightService highlightService;
 
-	public CodeController(PolyglotService polyglotService) {
+	public CodeController(PolyglotService polyglotService, HighlightService highlightService) {
 		this.polyglotService = polyglotService;
+		this.highlightService = highlightService;
 	}
 
 	@GetMapping(value = "/", produces = "text/plain")

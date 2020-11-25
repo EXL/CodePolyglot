@@ -2,11 +2,14 @@ package ru.exlmoto.code.polyglot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 
-import ru.exlmoto.code.polyglot.impl.JavaScriptPolyglot;
-import ru.exlmoto.code.polyglot.impl.PythonPolyglot;
-import ru.exlmoto.code.polyglot.impl.RubyPolyglot;
+import ru.exlmoto.code.polyglot.impl.PolyglotJavaScript;
+import ru.exlmoto.code.polyglot.impl.PolyglotPython;
+import ru.exlmoto.code.polyglot.impl.PolyglotRuby;
+
+import javax.annotation.PostConstruct;
 
 import java.util.Optional;
 
@@ -14,35 +17,34 @@ import java.util.Optional;
 public class PolyglotService {
 	private final Logger log = LoggerFactory.getLogger(PolyglotService.class);
 
-	private final JavaScriptPolyglot javaScriptPolyglot;
-	private final PythonPolyglot pythonPolyglot;
-	private final RubyPolyglot rubyPolyglot;
+	private final PolyglotJavaScript polyglotJavaScript;
+	private final PolyglotPython polyglotPython;
+	private final PolyglotRuby polyglotRuby;
 
-	public PolyglotService(JavaScriptPolyglot javaScriptPolyglot,
-	                       PythonPolyglot pythonPolyglot,
-	                       RubyPolyglot rubyPolyglot) {
-		this.javaScriptPolyglot = javaScriptPolyglot;
-		this.pythonPolyglot = pythonPolyglot;
-		this.rubyPolyglot = rubyPolyglot;
-
-		hotspotPolyglot();
+	public PolyglotService(PolyglotJavaScript polyglotJavaScript,
+	                       PolyglotPython polyglotPython,
+	                       PolyglotRuby polyglotRuby) {
+		this.polyglotJavaScript = polyglotJavaScript;
+		this.polyglotPython = polyglotPython;
+		this.polyglotRuby = polyglotRuby;
 	}
 
-	private void hotspotPolyglot() {
-		log.info("Loaded GraalVM JavaScript version:\t" + javaScriptPolyglot.loadRequiredLibrariesAndGetVersion());
-		log.info("Loaded GraalVM Python version:\t\t" + pythonPolyglot.loadRequiredLibrariesAndGetVersion());
-		log.info("Loaded GraalVM Ruby version:\t\t" + rubyPolyglot.loadRequiredLibrariesAndGetVersion());
+	@PostConstruct
+	private void getLanguageVersions() {
+		log.info("Loaded GraalVM JavaScript version:\t" + polyglotJavaScript.getLanguageVersion());
+		log.info("Loaded GraalVM Python version:\t\t" + polyglotPython.getLanguageVersion());
+		log.info("Loaded GraalVM Ruby version:\t\t" + polyglotRuby.getLanguageVersion());
 	}
 
 	public Optional<String> executeJavaScript(String code) {
-		return javaScriptPolyglot.execute(code);
+		return polyglotJavaScript.execute(code);
 	}
 
 	public Optional<String> executePython(String code) {
-		return pythonPolyglot.execute(code);
+		return polyglotPython.execute(code);
 	}
 
 	public Optional<String> executeRuby(String code) {
-		return rubyPolyglot.execute(code);
+		return polyglotRuby.execute(code);
 	}
 }

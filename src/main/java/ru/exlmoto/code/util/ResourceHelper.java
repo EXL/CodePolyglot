@@ -21,6 +21,10 @@ import java.nio.charset.StandardCharsets;
 public class ResourceHelper {
 	private final Logger log = LoggerFactory.getLogger(ResourceHelper.class);
 
+	public String readFileToString(String path) {
+		return readFileToString(path, StandardCharsets.UTF_8);
+	}
+
 	public String readFileToString(String path, Charset charset) {
 		ResourceLoader resourceLoader = new DefaultResourceLoader();
 		Resource resource = resourceLoader.getResource(path);
@@ -31,9 +35,5 @@ public class ResourceHelper {
 				resource.getFilename(), ioe.getLocalizedMessage()), ioe);
 			throw new UncheckedIOException(ioe);
 		}
-	}
-
-	public String readFileToString(String path) {
-		return readFileToString(path, StandardCharsets.UTF_8);
 	}
 }
