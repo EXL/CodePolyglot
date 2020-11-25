@@ -14,6 +14,12 @@ public class PolyglotJavaScript extends Polyglot {
 
 	@Override
 	public String getLanguageVersion() {
+		/*
+		 * TODO:
+		 *  Change `Graal.versionJS` to `Graal.versionECMAScript` if this variable appears in the next release.
+		 * Additional information:
+		 *  https://github.com/graalvm/graaljs/issues/378
+		 */
 		final String versionSnippet =
 			"Graal.versionJS";
 
