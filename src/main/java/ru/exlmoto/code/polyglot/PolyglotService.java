@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 
 import java.util.Optional;
 
-//@Service
+@Service
 public class PolyglotService {
 	private final Logger log = LoggerFactory.getLogger(PolyglotService.class);
 
@@ -31,9 +31,9 @@ public class PolyglotService {
 
 	@PostConstruct
 	private void getLanguageVersions() {
-		log.info(String.format("=> GraalVM JavaScript version '%s' loaded.", polyglotJavaScript.getLanguageVersion()));
-		log.info(String.format("=> GraalVM Python version '%s' loaded.", polyglotPython.getLanguageVersion()));
-		log.info(String.format("=> GraalVM Ruby version '%s' loaded.", polyglotRuby.getLanguageVersion()));
+		log.info(String.format("GraalVM JavaScript version '%s' loaded.", polyglotJavaScript.getLanguageVersion()));
+		log.info(String.format("GraalVM Python version '%s' loaded.", polyglotPython.getLanguageVersion()));
+		log.info(String.format("GraalVM Ruby version '%s' loaded.", polyglotRuby.getLanguageVersion()));
 	}
 
 	public Optional<String> executeJavaScript(String code) {

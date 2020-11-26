@@ -9,7 +9,7 @@ import ru.exlmoto.code.polyglot.Polyglot;
 public class PolyglotRuby extends Polyglot {
 	@Override
 	protected String executeAux(String sourceCode) {
-		return polyglot.eval(Language.ruby.name(), sourceCode).asString();
+		return polyglot.eval(language(), sourceCode).asString();
 	}
 
 	@Override
@@ -18,5 +18,10 @@ public class PolyglotRuby extends Polyglot {
 			"RUBY_VERSION";
 
 		return execute(versionSnippet).orElse("Error");
+	}
+
+	@Override
+	protected String language() {
+		return Language.ruby.name();
 	}
 }

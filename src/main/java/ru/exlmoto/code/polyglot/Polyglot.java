@@ -21,12 +21,24 @@ public abstract class Polyglot {
 				return Optional.of(output);
 			}
 		} catch (RuntimeException re) {
-			log.error(String.format("Cannot execute source code: '%s'.", re.getLocalizedMessage()), re);
+			log.error(String.format("Cannot execute '%s' code: '%s'.", language(), re.getLocalizedMessage()), re);
+			return Optional.of("Error: " + re.getLocalizedMessage());
 		}
 		return Optional.empty();
 	}
 
 	protected abstract String executeAux(String sourceCode);
 
+	public void importValue(String name, String value) {
+		try {
+			polyglot.getBindings(language()).putMember(name, value);
+		} catch (RuntimeException re) {
+			log.error(String.format("Cannot import '%s' value to '%s' language context: '%s'.",
+				name, language(), re.getLocalizedMessage()), re);
+		}
+	}
+
 	public abstract String getLanguageVersion();
+
+	protected abstract String language();
 }

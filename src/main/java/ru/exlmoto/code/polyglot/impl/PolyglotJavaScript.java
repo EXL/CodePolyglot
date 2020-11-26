@@ -9,7 +9,7 @@ import ru.exlmoto.code.polyglot.Polyglot;
 public class PolyglotJavaScript extends Polyglot {
 	@Override
 	protected String executeAux(String sourceCode) {
-		return polyglot.eval(Language.js.name(), sourceCode).asString();
+		return polyglot.eval(language(), sourceCode).asString();
 	}
 
 	@Override
@@ -24,5 +24,10 @@ public class PolyglotJavaScript extends Polyglot {
 			"Graal.versionJS";
 
 		return execute(versionSnippet).orElse("Error");
+	}
+
+	@Override
+	protected String language() {
+		return Language.js.name();
 	}
 }

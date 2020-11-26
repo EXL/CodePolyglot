@@ -9,7 +9,7 @@ import ru.exlmoto.code.polyglot.Polyglot;
 public class PolyglotPython extends Polyglot {
 	@Override
 	protected String executeAux(String sourceCode) {
-		return polyglot.eval(Language.python.name(), sourceCode).asString();
+		return polyglot.eval(language(), sourceCode).asString();
 	}
 
 	@Override
@@ -20,5 +20,10 @@ public class PolyglotPython extends Polyglot {
 			"platform.python_version()";
 
 		return execute(versionSnippet).orElse("Error");
+	}
+
+	@Override
+	protected String language() {
+		return Language.python.name();
 	}
 }
