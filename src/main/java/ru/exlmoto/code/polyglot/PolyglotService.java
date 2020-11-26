@@ -29,12 +29,12 @@ public class PolyglotService {
 		this.polyglotRuby = polyglotRuby;
 	}
 
-	@PostConstruct
-	private void getLanguageVersions() {
-		log.info(String.format("GraalVM JavaScript version '%s' loaded.", polyglotJavaScript.getLanguageVersion()));
-		log.info(String.format("GraalVM Python version '%s' loaded.", polyglotPython.getLanguageVersion()));
-		log.info(String.format("GraalVM Ruby version '%s' loaded.", polyglotRuby.getLanguageVersion()));
-	}
+//	@PostConstruct
+//	private void getLanguageVersions() {
+//		log.info(String.format("GraalVM JavaScript version '%s' loaded.", polyglotJavaScript.getLanguageVersion()));
+//		log.info(String.format("GraalVM Python version '%s' loaded.", polyglotPython.getLanguageVersion()));
+//		log.info(String.format("GraalVM Ruby version '%s' loaded.", polyglotRuby.getLanguageVersion()));
+//	}
 
 	public Optional<String> executeJavaScript(String code) {
 		return polyglotJavaScript.execute(code);
