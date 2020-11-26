@@ -32,13 +32,19 @@ public class DatabaseService {
 			final CodeEntity savedSnippet = codeRepository.saveAndFlush(snippet);
 			return Optional.of(savedSnippet.getId());
 		} catch (DataAccessException dae) {
-			log.error(String.format("Cannot save Code Snippet (timestamp: '%d') to DataBase: '%s'.",
+			log.error(String.format("Cannot save Code Snippet (timestamp: '%d') to database: '%s'.",
 				timestamp, dae.getLocalizedMessage()), dae);
 			return Optional.empty();
 		}
 	}
 
 	public Optional<CodeEntity> getCodeSnippet(long id) {
-		return codeRepository.findById(id);
+		try {
+			return codeRepository.findById(id);
+		} catch (DataAccessException dae) {
+			log.error(String.format("Cannot get Code Snippet (id: '%d') from database: '%s'.",
+				id, dae.getLocalizedMessage()), dae);
+		}
+		return Optional.empty();
 	}
 }

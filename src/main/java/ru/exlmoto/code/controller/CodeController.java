@@ -21,6 +21,7 @@ import ru.exlmoto.code.util.FilterHelper;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import java.util.Optional;
 
 @Controller
@@ -47,13 +48,14 @@ public class CodeController {
 	                    @CookieValue(value = "highlight", defaultValue = "Highlight.js") String highlight,
 	                    Model model, CodeForm form) {
 		readCookies(form, options, highlight);
-		id.flatMap(idString -> filter.getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
-			Optional.of(snippet.getTitle()).ifPresent(form::setTitle);
-			Optional.of(snippet.getOptions()).ifPresent(form::setOptions);
-			form.setHighlight(Mode.getMode(snippet.getHighlight()));
-			form.setCode(snippet.getCodeRaw());
-			model.addAttribute("code", snippet.getCodeHtml());
-			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
+		id.flatMap(idString ->
+			filter.getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
+				Optional.of(snippet.getTitle()).ifPresent(form::setTitle);
+				Optional.of(snippet.getOptions()).ifPresent(form::setOptions);
+				form.setHighlight(Mode.getMode(snippet.getHighlight()));
+				form.setCode(snippet.getCodeRaw());
+				model.addAttribute("code", snippet.getCodeHtml());
+				model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
 		model.addAttribute("form", form);
 

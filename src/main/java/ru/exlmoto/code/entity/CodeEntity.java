@@ -29,7 +29,7 @@ public class CodeEntity {
 	@Column(nullable = false, length = 262144)
 	private String codeRaw;
 
-	@Column(nullable = false, length = 262144 * 2)
+	@Column(nullable = false, length = 524288)
 	private String codeHtml;
 
 	public CodeEntity() {
