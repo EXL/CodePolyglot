@@ -8,11 +8,6 @@ import ru.exlmoto.code.polyglot.Polyglot;
 @Component
 public class PolyglotPython extends Polyglot {
 	@Override
-	protected String executeAux(String sourceCode) {
-		return polyglot.eval(language(), sourceCode).asString();
-	}
-
-	@Override
 	public String getLanguageVersion() {
 		final String versionSnippet =
 			"import platform" + "\n" +

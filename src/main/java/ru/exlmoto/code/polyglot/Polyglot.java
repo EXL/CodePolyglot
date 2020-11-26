@@ -16,7 +16,7 @@ public abstract class Polyglot {
 
 	public Optional<String> execute(String sourceCode) {
 		try {
-			String output = executeAux(sourceCode);
+			String output = polyglot.eval(language(), sourceCode).asString();
 			if (StringUtils.hasText(output)) {
 				return Optional.of(output);
 			}
@@ -26,8 +26,6 @@ public abstract class Polyglot {
 		}
 		return Optional.empty();
 	}
-
-	protected abstract String executeAux(String sourceCode);
 
 	public void importValue(String name, String value) {
 		try {
