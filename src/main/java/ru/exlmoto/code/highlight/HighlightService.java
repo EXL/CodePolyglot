@@ -10,6 +10,7 @@ import ru.exlmoto.code.highlight.impl.HighlightPygments;
 import ru.exlmoto.code.highlight.impl.HighlightRouge;
 
 import javax.annotation.PostConstruct;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,17 +32,25 @@ public class HighlightService {
 
 	@PostConstruct
 	private void getLibraryVersions() {
-		log.info(String.format("Highlight.js (JavaScript) version '%s' loaded.", highlightJs.getLibraryVersion()));
-		log.info(String.format("Pygments (Python) version '%s' loaded.", highlightPygments.getLibraryVersion()));
-		log.info(String.format("Rouge (Ruby) version '%s' loaded.", highlightRouge.getLibraryVersion()));
+		log.info(String.format("GraalVM JavaScript version '%s' and Highlight.js version '%s' loaded.",
+			highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
+		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
+			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+		log.info(String.format("GraalVM Ruby version '%s' and Rouge version '%s' loaded.",
+			highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
 	}
 
 	public String renderHtmlFromCode(Mode mode, String options, String code) {
+		// TODO Parse this.
 		final Map<Options, String> optionsMap = new HashMap<>();
 		optionsMap.put(Options.lang, options);
 
 		switch (mode) {
 			default:
+			case HighlightPygments:
+				return highlightPygments.renderHtmlFromCode(optionsMap, code);
+			case HighlightJs:
+				return highlightJs.renderHtmlFromCode(optionsMap, code);
 			case HighlightRouge:
 				return highlightRouge.renderHtmlFromCode(optionsMap, code);
 		}
