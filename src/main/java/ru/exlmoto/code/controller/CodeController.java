@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.CookieValue;
 
 import ru.exlmoto.code.form.CodeForm;
+import ru.exlmoto.code.highlight.HighlightService;
 import ru.exlmoto.code.highlight.Mode;
 import ru.exlmoto.code.service.DatabaseService;
 import ru.exlmoto.code.util.FilterHelper;
@@ -27,12 +28,16 @@ import java.util.Optional;
 public class CodeController {
 	private final Logger log = LoggerFactory.getLogger(CodeController.class);
 
-	private final DatabaseService databaseService;
 	private final FilterHelper filterHelper;
+	private final DatabaseService databaseService;
+	private final HighlightService highlightService;
 
-	public CodeController(DatabaseService databaseService, FilterHelper filterHelper) {
-		this.databaseService = databaseService;
+	public CodeController(FilterHelper filterHelper,
+	                      DatabaseService databaseService,
+	                      HighlightService highlightService) {
 		this.filterHelper = filterHelper;
+		this.databaseService = databaseService;
+		this.highlightService = highlightService;
 	}
 
 	@RequestMapping(path = { "/", "/{id}" })
@@ -59,12 +64,11 @@ public class CodeController {
 	public String edit(@Valid CodeForm form, BindingResult bindingResult, HttpServletResponse response) {
 		return (bindingResult.hasErrors()) ? "redirect:/?info=empty" : databaseService.saveCodeSnippet(
 			filterHelper.getCurrentUnixTime(),
-			form.getOptions(),
 			form.getTitle(),
+			form.getOptions(),
 			Mode.getName(form.getHighlight()),
 			form.getCode(),
-			form.getCode()
-		).map((id) -> {
+			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
 			response.addCookie(new Cookie("options", form.getOptions()));
 			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);

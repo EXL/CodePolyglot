@@ -3,10 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/syntax_pr.css" th:href="@{/css/syntax_pr.css}"/>
 </head>
 <body>
 	<div class="page">
-		<div class="code" th:utext="${code}">Code Container</div>
+		<div class="highlight" th:utext="${code}">Code Container</div>
+		<br/>
+		<br/>
 		<div class="edit">
 			<form th:action="@{/edit}" th:object="${form}" method="post">
 				<div>
