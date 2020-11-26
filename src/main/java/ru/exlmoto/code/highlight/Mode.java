@@ -16,4 +16,16 @@ public enum Mode {
 				return "Rouge";
 		}
 	}
+
+	public static Mode getMode(String name) {
+		switch (name) {
+			default:
+			case "Pygments":
+				return HighlightPygments;
+			case "Highlight.js":
+				return HighlightJs;
+			case "Rouge":
+				return HighlightRouge;
+		}
+	}
 }

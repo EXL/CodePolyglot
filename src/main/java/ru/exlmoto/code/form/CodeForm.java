@@ -2,13 +2,14 @@ package ru.exlmoto.code.form;
 
 import ru.exlmoto.code.highlight.Mode;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CodeForm {
 	private String title;
 	private String options;
 
-	@NotNull
+	@NotBlank
 	private String code;
 
 	@NotNull
