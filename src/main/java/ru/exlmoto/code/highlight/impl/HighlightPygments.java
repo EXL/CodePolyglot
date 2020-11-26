@@ -42,7 +42,8 @@ public class HighlightPygments extends Highlight {
 
 		final String renderSnippet =
 //			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
-			"formatter = HtmlFormatter(linenos=True)" + "\n" +
+//			"formatter = HtmlFormatter(linenos=True)" + "\n" +
+			"formatter = HtmlFormatter(wrapcode=True)" + "\n" +
 			"lexer = get_lexer_by_name('" + options.get(Options.lang) + "')" + "\n" +
 			"\n" +
 			"highlight(str(source), lexer, formatter)";

@@ -45,7 +45,7 @@ public class CodeController {
 	                    @RequestParam(name = "info", required = false) Optional<String> info,
 	                    @CookieValue(value = "lang", defaultValue = "ru") String tag,
 	                    @CookieValue(value = "options", defaultValue = "auto") String options,
-	                    @CookieValue(value = "highlight", defaultValue = "Pygments") String highlight,
+	                    @CookieValue(value = "highlight", defaultValue = "Highlight.js") String highlight,
 	                    Model model, CodeForm form) {
 		readCookies(form, options, highlight);
 		id.flatMap(idString -> filter.getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
@@ -54,7 +54,7 @@ public class CodeController {
 			form.setHighlight(Mode.getMode(snippet.getHighlight()));
 			form.setCode(snippet.getCodeRaw());
 			model.addAttribute("code", snippet.getCodeHtml());
-			model.addAttribute("simple", (Mode.getMode(snippet.getHighlight()) == Mode.HighlightJs));
+			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
 		model.addAttribute("form", form);
 

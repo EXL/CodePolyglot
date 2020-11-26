@@ -3,15 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
-	<link th:if="${simple}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
-	<link th:unless="${simple}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
+	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
 </head>
 <body>
 	<div class="page">
-		<div th:if="${simple}">
-			<pre class="hljs" th:utext="${code}">Highlight.js Code Container</pre>
+		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" class="hljs">
+			<pre><code th:utext="${code}">Highlight.js Code Container</code></pre>
 		</div>
-		<div th:unless="${simple}" class="highlight" th:utext="${code}">Pygments/Rouge Code Container</div>
+		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightPygments}" th:utext="${code}" class="highlight">
+			Pygments Code Container
+		</div>
+		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightRouge}" class="highlight">
+			<pre><code th:utext="${code}">Rouge Code Container</code></pre>
+		</div>
 		<br/>
 		<br/>
 		<div class="edit">

@@ -39,10 +39,10 @@ public class HighlightRouge extends Highlight {
 		final String renderSnippet =
 //			"$source = %{" + StringUtils.escapeJava(code) + "}" + "\n" +
 			"formatter = Rouge::Formatters::HTML.new" + "\n" +
-			"formatterTable = Rouge::Formatters::HTMLLineTable.new(formatter, opts={})" + "\n" +
+//			"formatterTable = Rouge::Formatters::HTMLLineTable.new(formatter, opts={})" + "\n" +
 			"lexer = Rouge::Lexer::find('" + options.get(Options.lang) + "')" + "\n" +
 			"\n" +
-			"formatterTable.format(lexer.lex($source.to_str))";
+			"formatter.format(lexer.lex($source.to_str))";
 
 		return polyglotRuby.execute(renderSnippet).orElse("Error");
 	}
