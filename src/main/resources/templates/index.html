@@ -3,11 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
-	<link rel="stylesheet" type="text/css" href="../static/css/syntax_pr.css" th:href="@{/css/syntax_pr.css}"/>
+	<link th:if="${simple}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
+	<link th:unless="${simple}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
 </head>
 <body>
 	<div class="page">
-		<div class="highlight" th:utext="${code}">Code Container</div>
+		<div th:if="${simple}">
+			<pre class="hljs" th:utext="${code}">Highlight.js Code Container</pre>
+		</div>
+		<div th:unless="${simple}" class="highlight" th:utext="${code}">Pygments/Rouge Code Container</div>
 		<br/>
 		<br/>
 		<div class="edit">

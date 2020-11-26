@@ -28,14 +28,14 @@ import java.util.Optional;
 public class CodeController {
 	private final Logger log = LoggerFactory.getLogger(CodeController.class);
 
-	private final FilterHelper filterHelper;
+	private final FilterHelper filter;
 	private final DatabaseService databaseService;
 	private final HighlightService highlightService;
 
-	public CodeController(FilterHelper filterHelper,
+	public CodeController(FilterHelper filter,
 	                      DatabaseService databaseService,
 	                      HighlightService highlightService) {
-		this.filterHelper = filterHelper;
+		this.filter = filter;
 		this.databaseService = databaseService;
 		this.highlightService = highlightService;
 	}
@@ -48,12 +48,13 @@ public class CodeController {
 	                    @CookieValue(value = "highlight", defaultValue = "Pygments") String highlight,
 	                    Model model, CodeForm form) {
 		readCookies(form, options, highlight);
-		id.flatMap(idString -> getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
+		id.flatMap(idString -> filter.getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
 			Optional.of(snippet.getTitle()).ifPresent(form::setTitle);
 			Optional.of(snippet.getOptions()).ifPresent(form::setOptions);
 			form.setHighlight(Mode.getMode(snippet.getHighlight()));
 			form.setCode(snippet.getCodeRaw());
 			model.addAttribute("code", snippet.getCodeHtml());
+			model.addAttribute("simple", (Mode.getMode(snippet.getHighlight()) == Mode.HighlightJs));
 		});
 		model.addAttribute("form", form);
 
@@ -63,12 +64,13 @@ public class CodeController {
 	@PostMapping(path = "/edit")
 	public String edit(@Valid CodeForm form, BindingResult bindingResult, HttpServletResponse response) {
 		return (bindingResult.hasErrors()) ? "redirect:/?info=empty" : databaseService.saveCodeSnippet(
-			filterHelper.getCurrentUnixTime(),
+			filter.getCurrentUnixTime(),
 			form.getTitle(),
 			form.getOptions(),
 			Mode.getName(form.getHighlight()),
 			form.getCode(),
-			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
+			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(),
+				filter.filterCarriageReturn(form.getCode()))).map((id) -> {
 			response.addCookie(new Cookie("options", form.getOptions()));
 			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);
@@ -78,13 +80,5 @@ public class CodeController {
 	private void readCookies(CodeForm form, String options, String highlight) {
 		form.setOptions(options);
 		form.setHighlight(Mode.getMode(highlight));
-	}
-
-	private Optional<Long> getLong(String number) {
-		if (StringUtils.hasText(number))
-			try {
-				return Optional.of(Long.parseLong(number));
-			} catch (NumberFormatException ignored) { }
-		return Optional.empty();
 	}
 }
