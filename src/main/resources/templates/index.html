@@ -6,8 +6,9 @@
 </head>
 <body>
 	<div class="page">
-		<div th:class="edit">
-			<form th:action="@{/edit}" th:object="${form}" th:method="post">
+		<div class="code" th:utext="${code}">Code Container</div>
+		<div class="edit">
+			<form th:action="@{/edit}" th:object="${form}" method="post">
 				<div>
 					<label for="title">Title:</label>
 					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>

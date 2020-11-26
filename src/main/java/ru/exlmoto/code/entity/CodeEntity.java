@@ -23,7 +23,7 @@ public class CodeEntity {
 	@Column
 	private String options;
 
-	@Column
+	@Column(nullable = false)
 	private String highlight;
 
 	@Column(nullable = false, length = 262144)

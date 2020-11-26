@@ -21,7 +21,7 @@ public class DatabaseService {
 		this.codeRepository = codeRepository;
 	}
 
-	public Optional<Long> saveCodeSnippet(Long timestamp,
+	public Optional<Long> saveCodeSnippet(long timestamp,
 	                                      String title,
 	                                      String options,
 	                                      String highlight,
@@ -36,5 +36,9 @@ public class DatabaseService {
 				timestamp, dae.getLocalizedMessage()), dae);
 			return Optional.empty();
 		}
+	}
+
+	public Optional<CodeEntity> getCodeSnippet(long id) {
+		return codeRepository.findById(id);
 	}
 }

@@ -5,8 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CookieValue;
 
 import ru.exlmoto.code.form.CodeForm;
 import ru.exlmoto.code.highlight.Mode;
@@ -31,18 +36,20 @@ public class CodeController {
 	}
 
 	@RequestMapping(path = { "/", "/{id}" })
-	public String index(@PathVariable(name = "id", required = false) String id,
-	                    @RequestParam(name = "error", required = false) String error,
+	public String index(@PathVariable(name = "id", required = false) Optional<String> id,
+	                    @RequestParam(name = "info", required = false) Optional<String> info,
 	                    @CookieValue(value = "lang", defaultValue = "ru") String tag,
 	                    @CookieValue(value = "options", defaultValue = "auto") String options,
 	                    @CookieValue(value = "highlight", defaultValue = "Pygments") String highlight,
 	                    Model model, CodeForm form) {
-		log.info("id: " + id);
-		log.info("error: " + error);
-
 		readCookies(form, options, highlight);
-		
-
+		id.flatMap(idString -> getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
+			Optional.of(snippet.getTitle()).ifPresent(form::setTitle);
+			Optional.of(snippet.getOptions()).ifPresent(form::setOptions);
+			form.setHighlight(Mode.getMode(snippet.getHighlight()));
+			form.setCode(snippet.getCodeRaw());
+			model.addAttribute("code", snippet.getCodeHtml());
+		});
 		model.addAttribute("form", form);
 
 		return "index";
@@ -50,17 +57,16 @@ public class CodeController {
 
 	@PostMapping(path = "/edit")
 	public String edit(@Valid CodeForm form, BindingResult bindingResult, HttpServletResponse response) {
-		final String highlight = Mode.getName(form.getHighlight());
-		return (bindingResult.hasErrors()) ? "redirect:/?error=empty" : databaseService.saveCodeSnippet(
+		return (bindingResult.hasErrors()) ? "redirect:/?info=empty" : databaseService.saveCodeSnippet(
 			filterHelper.getCurrentUnixTime(),
 			form.getOptions(),
 			form.getTitle(),
-			highlight,
+			Mode.getName(form.getHighlight()),
 			form.getCode(),
 			form.getCode()
 		).map((id) -> {
 			response.addCookie(new Cookie("options", form.getOptions()));
-			response.addCookie(new Cookie("highlight", highlight));
+			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);
 		}).orElse("redirect:/");
 	}
@@ -68,5 +74,13 @@ public class CodeController {
 	private void readCookies(CodeForm form, String options, String highlight) {
 		form.setOptions(options);
 		form.setHighlight(Mode.getMode(highlight));
+	}
+
+	private Optional<Long> getLong(String number) {
+		if (StringUtils.hasText(number))
+			try {
+				return Optional.of(Long.parseLong(number));
+			} catch (NumberFormatException ignored) { }
+		return Optional.empty();
 	}
 }
