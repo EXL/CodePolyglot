@@ -26,7 +26,7 @@ public abstract class Highlight {
 			}
 		} catch (RuntimeException re) {
 			log.error(String.format("Cannot execute '%s' code: '%s'.", language(), re.getLocalizedMessage()), re);
-			return Optional.of("Error: " + re.getLocalizedMessage());
+			// return Optional.of("Error: " + re.getLocalizedMessage());
 		}
 		return Optional.empty();
 	}

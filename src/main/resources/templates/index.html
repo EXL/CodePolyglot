@@ -3,19 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
-	<link th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
-	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
+	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
 </head>
 <body>
 	<div class="page">
-		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightJs}" class="hljs">
-			<pre><code th:utext="${code}">Highlight.js Code Container</code></pre>
-		</div>
-		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightPygments}" th:utext="${code}" class="highlight">
-			Pygments Code Container
-		</div>
-		<div th:if="${highlight == T(ru.exlmoto.code.highlight.Mode).HighlightRouge}" class="highlight">
-			<pre><code th:utext="${code}">Rouge Code Container</code></pre>
+		<div th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'">
+			<pre><code th:utext="${code}">Code Container</code></pre>
 		</div>
 		<br/>
 		<br/>
@@ -29,15 +23,15 @@
 				</div>
 				<div>
 					<span>Server-side syntax code highlighting:</span>
-					<span th:each="mode : ${T(ru.exlmoto.code.highlight.Mode).values()}">
+					<span th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
 						<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
-						<label th:for="${mode}" th:text="${T(ru.exlmoto.code.highlight.Mode).getName(mode)}"></label>
+						<label th:for="${mode}" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></label>
 					</span>
 				</div>
 				<div class="form-block">
 					<label for="code-area">Code:</label>
 					<br/>
-					<textarea id="code-area" rows="20" cols="120" th:field="*{code}">Source</textarea>
+					<textarea id="code-area" maxlength="262144" rows="20" cols="120" th:field="*{code}">Source</textarea>
 				</div>
 				<p><input class="button" type="submit" value="Render"/></p>
 			</form>
