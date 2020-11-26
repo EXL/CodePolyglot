@@ -1,12 +1,10 @@
-package ru.exlmoto.code.highlight.impl;
+package ru.exlmoto.code.highlight.implementation;
 
 import org.springframework.stereotype.Component;
 
-import org.thymeleaf.util.StringUtils;
-
 import ru.exlmoto.code.highlight.Highlight;
-import ru.exlmoto.code.highlight.Language;
-import ru.exlmoto.code.highlight.Options;
+import ru.exlmoto.code.highlight.enumeration.Language;
+import ru.exlmoto.code.highlight.enumeration.Options;
 
 import java.util.Map;
 

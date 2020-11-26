@@ -1,6 +1,6 @@
 package ru.exlmoto.code.form;
 
-import ru.exlmoto.code.highlight.Mode;
+import ru.exlmoto.code.highlight.enumeration.Mode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

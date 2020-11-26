@@ -1,4 +1,4 @@
-package ru.exlmoto.code.highlight;
+package ru.exlmoto.code.highlight.enumeration;
 
 public enum Options {
 	lang,

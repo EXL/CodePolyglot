@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 
 import ru.exlmoto.code.form.CodeForm;
 import ru.exlmoto.code.highlight.HighlightService;
-import ru.exlmoto.code.highlight.Mode;
+import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.service.DatabaseService;
 import ru.exlmoto.code.util.FilterHelper;
 

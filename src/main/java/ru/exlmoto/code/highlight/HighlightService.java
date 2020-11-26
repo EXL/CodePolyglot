@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 
-import ru.exlmoto.code.highlight.impl.HighlightJs;
-import ru.exlmoto.code.highlight.impl.HighlightPygments;
-import ru.exlmoto.code.highlight.impl.HighlightRouge;
+import ru.exlmoto.code.highlight.enumeration.Mode;
+import ru.exlmoto.code.highlight.enumeration.Options;
+import ru.exlmoto.code.highlight.implementation.HighlightJs;
+import ru.exlmoto.code.highlight.implementation.HighlightPygments;
+import ru.exlmoto.code.highlight.implementation.HighlightRouge;
 
 import javax.annotation.PostConstruct;
 
