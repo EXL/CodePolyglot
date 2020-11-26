@@ -10,8 +10,10 @@ import ru.exlmoto.code.highlight.impl.HighlightPygments;
 import ru.exlmoto.code.highlight.impl.HighlightRouge;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
-//@Service
+@Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
@@ -29,8 +31,19 @@ public class HighlightService {
 
 	@PostConstruct
 	private void getLibraryVersions() {
-		log.info(String.format("==> Highlight.js (JavaScript) version '%s' loaded.", highlightJs.getLibraryVersion()));
-		log.info(String.format("==> Pygments (Python) version '%s' loaded.", highlightPygments.getLibraryVersion()));
-		log.info(String.format("==> Rouge (Ruby) version '%s' loaded.", highlightRouge.getLibraryVersion()));
+		log.info(String.format("Highlight.js (JavaScript) version '%s' loaded.", highlightJs.getLibraryVersion()));
+		log.info(String.format("Pygments (Python) version '%s' loaded.", highlightPygments.getLibraryVersion()));
+		log.info(String.format("Rouge (Ruby) version '%s' loaded.", highlightRouge.getLibraryVersion()));
+	}
+
+	public String renderHtmlFromCode(Mode mode, String options, String code) {
+		final Map<Options, String> optionsMap = new HashMap<>();
+		optionsMap.put(Options.lang, options);
+
+		switch (mode) {
+			default:
+			case HighlightRouge:
+				return highlightRouge.renderHtmlFromCode(optionsMap, code);
+		}
 	}
 }
