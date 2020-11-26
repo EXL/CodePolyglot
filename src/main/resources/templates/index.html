@@ -19,6 +19,7 @@
 					<input id="options" type="text" th:field="*{options}" placeholder="auto" value="auto" size="35"/>
 				</div>
 				<div>
+					<span>Server-side syntax code highlighting:</span>
 					<span th:each="mode : ${T(ru.exlmoto.code.highlight.Mode).values()}">
 						<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
 						<label th:for="${mode}" th:text="${T(ru.exlmoto.code.highlight.Mode).getName(mode)}"></label>
