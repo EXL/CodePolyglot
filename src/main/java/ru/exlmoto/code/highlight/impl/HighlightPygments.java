@@ -5,17 +5,26 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
 import ru.exlmoto.code.highlight.Highlight;
+import ru.exlmoto.code.highlight.Language;
 import ru.exlmoto.code.highlight.Options;
-import ru.exlmoto.code.polyglot.impl.PolyglotPython;
 
 import java.util.Map;
 
 @Component
 public class HighlightPygments extends Highlight {
-	private final PolyglotPython polyglotPython;
+	@Override
+	protected String language() {
+		return Language.python.name();
+	}
 
-	public HighlightPygments(PolyglotPython polyglotPython) {
-		this.polyglotPython = polyglotPython;
+	@Override
+	public String getLanguageVersion() {
+		final String versionSnippet =
+			"import platform" + "\n" +
+				"\n" +
+				"platform.python_version()";
+
+		return execute(versionSnippet).orElse("Error");
 	}
 
 	@Override
@@ -29,16 +38,12 @@ public class HighlightPygments extends Highlight {
 			"\n" +
 			"PygmentsVersion";
 
-		return polyglotPython.execute(librarySnippet).orElse("Error");
+		return execute(librarySnippet).orElse("Error");
 	}
 
 	@Override
-	public String getLanguageVersion() {
-		return polyglotPython.getLanguageVersion();
-	}
-
 	public String renderHtmlFromCode(Map<Options, String> options, String code) {
-		polyglotPython.importValue("source", code);
+		importValue("source", code);
 
 		final String renderSnippet =
 //			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
@@ -48,6 +53,6 @@ public class HighlightPygments extends Highlight {
 			"\n" +
 			"highlight(str(source), lexer, formatter)";
 
-		return polyglotPython.execute(renderSnippet).orElse("Error");
+		return execute(renderSnippet).orElse("Error");
 	}
 }

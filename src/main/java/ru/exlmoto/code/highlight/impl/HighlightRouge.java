@@ -5,17 +5,24 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
 import ru.exlmoto.code.highlight.Highlight;
+import ru.exlmoto.code.highlight.Language;
 import ru.exlmoto.code.highlight.Options;
-import ru.exlmoto.code.polyglot.impl.PolyglotRuby;
 
 import java.util.Map;
 
 @Component
 public class HighlightRouge extends Highlight {
-	private final PolyglotRuby polyglotRuby;
+	@Override
+	protected String language() {
+		return Language.ruby.name();
+	}
 
-	public HighlightRouge(PolyglotRuby polyglotRuby) {
-		this.polyglotRuby = polyglotRuby;
+	@Override
+	public String getLanguageVersion() {
+		final String versionSnippet =
+			"RUBY_VERSION";
+
+		return execute(versionSnippet).orElse("Error");
 	}
 
 	@Override
@@ -25,16 +32,12 @@ public class HighlightRouge extends Highlight {
 			"\n" +
 			"Rouge::version()";
 
-		return polyglotRuby.execute(librarySnippet).orElse("Error");
+		return execute(librarySnippet).orElse("Error");
 	}
 
 	@Override
-	public String getLanguageVersion() {
-		return polyglotRuby.getLanguageVersion();
-	}
-
 	public String renderHtmlFromCode(Map<Options, String> options, String code) {
-		polyglotRuby.importValue("$source", code);
+		importValue("$source", code);
 
 		final String renderSnippet =
 //			"$source = %{" + StringUtils.escapeJava(code) + "}" + "\n" +
@@ -44,6 +47,6 @@ public class HighlightRouge extends Highlight {
 			"\n" +
 			"formatter.format(lexer.lex($source.to_str))";
 
-		return polyglotRuby.execute(renderSnippet).orElse("Error");
+		return execute(renderSnippet).orElse("Error");
 	}
 }

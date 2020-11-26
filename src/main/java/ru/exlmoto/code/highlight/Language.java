@@ -1,4 +1,4 @@
-package ru.exlmoto.code.polyglot;
+package ru.exlmoto.code.highlight;
 
 public enum Language {
 	js,
