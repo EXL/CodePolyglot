@@ -1,5 +1,7 @@
 package ru.exlmoto.code.highlight;
 
+import org.graalvm.home.Version;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,13 +41,14 @@ public class HighlightService {
 	}
 
 	@PostConstruct
-	private void getLibraryVersions() {
+	private void getVersions() {
 		log.info(String.format("GraalVM JavaScript version '%s' and Highlight.js version '%s' loaded.",
 			highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
 		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
 			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
 		log.info(String.format("GraalVM Ruby version '%s' and Rouge version '%s' loaded.",
 			highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
+		log.info(String.format("GraalVM version '%s'.", Version.getCurrent().toString()));
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {

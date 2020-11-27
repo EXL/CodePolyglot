@@ -1,5 +1,7 @@
 package ru.exlmoto.code.highlight.implementation;
 
+import org.graalvm.home.Version;
+
 import org.springframework.stereotype.Component;
 
 import ru.exlmoto.code.highlight.Highlight;
@@ -24,13 +26,16 @@ public class HighlightJs extends Highlight {
 	@Override
 	public String getLanguageVersion() {
 		/*
-		 * TODO:
-		 *  Change `Graal.versionJS` to `Graal.versionECMAScript` if this variable appears in the next release.
 		 * Additional information:
 		 *  https://github.com/graalvm/graaljs/issues/378
 		 */
-		final String versionSnippet =
-			"Graal.versionJS";
+		final String versionSnippet;
+		if (Version.getCurrent().compareTo(Version.parse("21.0.0")) >= 0)
+			versionSnippet =
+				"Graal.versionECMAScript";
+		else
+			versionSnippet =
+				"Graal.versionJS";
 
 		return execute(versionSnippet).orElse("Error");
 	}
