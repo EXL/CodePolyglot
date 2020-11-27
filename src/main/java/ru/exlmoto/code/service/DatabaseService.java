@@ -47,4 +47,15 @@ public class DatabaseService {
 		}
 		return Optional.empty();
 	}
+
+	public boolean deleteCodeSnippet(long id) {
+		try {
+			codeRepository.deleteById(id);
+			return true;
+		} catch (DataAccessException dae) {
+			log.error(String.format("Cannot delete Code Snippet (id: '%d') from database: '%s'.",
+				id, dae.getLocalizedMessage()), dae);
+		}
+		return false;
+	}
 }

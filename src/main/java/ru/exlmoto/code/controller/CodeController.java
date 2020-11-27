@@ -76,6 +76,14 @@ public class CodeController {
 		}).orElse("redirect:/?info=database");
 	}
 
+	@RequestMapping(path = "/delete/{id}")
+	public String delete(@PathVariable(name = "id", required = false) Optional<String> id) {
+		Optional<Long> deleteId = id.flatMap(filter::getLong);
+		if (deleteId.isPresent() && databaseService.deleteCodeSnippet(deleteId.get()))
+			return "redirect:/?info=deleteOk";
+		return "redirect:/?info=deleteError";
+	}
+
 	private void readCookies(CodeForm form, String options, String highlight) {
 		form.setOptions(options);
 		form.setHighlight(Mode.getMode(highlight));
