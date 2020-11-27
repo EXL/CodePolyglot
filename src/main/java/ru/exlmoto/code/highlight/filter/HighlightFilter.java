@@ -88,8 +88,9 @@ public class HighlightFilter {
 			}
 			case simple:
 			case plain: {
-				stringBuilder.append((i == hStart) ? "<span class=\"hll\">" + codeLine : codeLine);
-				stringBuilder.append((i == hEnd) ? "</span>" : "");
+				stringBuilder.append(((i >= hStart) && (i <= hEnd)) ?
+					"<span class=\"hll\">" + codeLine : "<span>" + codeLine);
+				stringBuilder.append("</span>\n");
 				break;
 			}
 		}
