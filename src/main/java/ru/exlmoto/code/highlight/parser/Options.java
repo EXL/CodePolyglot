@@ -13,17 +13,13 @@ public class Options {
 
 	public Options() {
 		this.language = DISABLE_HIGHLIGHT_OPTION;
-		this.table = false;
+		this.table = true;
 		this.hStart = 0L;
 		this.hEnd = 0L;
 	}
 
-	public boolean checkGuessLexer() {
-		return language.equals(GUESS_LEXER_OPTION);
-	}
-
-	public boolean checkHighlight() {
-		return !(language.equals(DISABLE_HIGHLIGHT_OPTION));
+	public boolean isHighlightDisabled() {
+		return language.equals(DISABLE_HIGHLIGHT_OPTION);
 	}
 
 	public String getLanguage() {
@@ -38,7 +34,7 @@ public class Options {
 		return table;
 	}
 
-	public void setNoLines(boolean table) {
+	public void setTable(boolean table) {
 		this.table = table;
 	}
 

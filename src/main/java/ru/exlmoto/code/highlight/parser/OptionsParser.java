@@ -22,7 +22,7 @@ public class OptionsParser {
 		final Options settings = new Options();
 		String[] optionsArray = options.split("\\|");
 		settings.setLanguage(scanOptionsForLanguage(optionsArray[0]));
-		settings.setNoLines(scanOptionsForNoLines(optionsArray));
+		settings.setTable(scanOptionsForTable(optionsArray));
 		scanOptionsForHighlightString(optionsArray, settings);
 		return settings;
 	}
@@ -37,11 +37,11 @@ public class OptionsParser {
 		return filter.getLong(firstToken).map((value) -> "").orElse(firstToken);
 	}
 
-	private boolean scanOptionsForNoLines(String[] options) {
+	private boolean scanOptionsForTable(String[] options) {
 		for (String option : options)
 			if (option.equals(Options.DISABLE_TABLE_OPTION))
-				return true;
-		return false;
+				return false;
+		return true;
 	}
 
 	private void scanOptionsForHighlightString(String[] options, Options settings) {

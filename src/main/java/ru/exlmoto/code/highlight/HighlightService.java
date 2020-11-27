@@ -53,7 +53,7 @@ public class HighlightService {
 		final long hStart = settings.gethStart();
 		final long hEnd = settings.gethEnd();
 		final String filteredCode = highlightFilter.filterCarriageReturn(code);
-		return (!settings.checkHighlight()) ?
+		return (settings.isHighlightDisabled()) ?
 			(settings.isTable()) ?
 				highlightFilter.tableCodePlain(filteredCode, hStart, hEnd) :
 				highlightFilter.plainCode(filteredCode, hStart, hEnd) :
