@@ -4,10 +4,9 @@ import org.springframework.stereotype.Component;
 
 import ru.exlmoto.code.highlight.Highlight;
 import ru.exlmoto.code.highlight.enumeration.Language;
-import ru.exlmoto.code.highlight.enumeration.Options;
 import ru.exlmoto.code.helper.ResourceHelper;
 
-import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class HighlightJs extends Highlight {
@@ -47,14 +46,19 @@ public class HighlightJs extends Highlight {
 	}
 
 	@Override
-	public String renderHtmlFromCode(Map<Options, String> options, String code) {
+	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 
 		final String renderSnippet =
 //			"source = `\n" + StringUtils.escapeJava(code) + "\n`" + "\n" +
 			"\n" +
-			"hljs.highlight('" + options.get(Options.lang) + "', String(source)).value";
+			"hljs.highlight('" + language + "', String(source)).value";
 
-		return execute(renderSnippet).orElse("Error");
+		return execute(renderSnippet);
+	}
+
+	@Override
+	public Optional<String> renderHtmlFromCodeAuto(String code) {
+		return Optional.empty();
 	}
 }

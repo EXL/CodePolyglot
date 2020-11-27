@@ -4,9 +4,8 @@ import org.springframework.stereotype.Component;
 
 import ru.exlmoto.code.highlight.Highlight;
 import ru.exlmoto.code.highlight.enumeration.Language;
-import ru.exlmoto.code.highlight.enumeration.Options;
 
-import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class HighlightRouge extends Highlight {
@@ -34,17 +33,21 @@ public class HighlightRouge extends Highlight {
 	}
 
 	@Override
-	public String renderHtmlFromCode(Map<Options, String> options, String code) {
+	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("$source", code);
 
 		final String renderSnippet =
 //			"$source = %{" + StringUtils.escapeJava(code) + "}" + "\n" +
 			"formatter = Rouge::Formatters::HTML.new" + "\n" +
-//			"formatterTable = Rouge::Formatters::HTMLLineTable.new(formatter, opts={})" + "\n" +
-			"lexer = Rouge::Lexer::find('" + options.get(Options.lang) + "')" + "\n" +
+			"lexer = Rouge::Lexer::find('" + language + "')" + "\n" +
 			"\n" +
 			"formatter.format(lexer.lex($source.to_str))";
 
-		return execute(renderSnippet).orElse("Error");
+		return execute(renderSnippet);
+	}
+
+	@Override
+	public Optional<String> renderHtmlFromCodeAuto(String code) {
+		return Optional.empty();
 	}
 }

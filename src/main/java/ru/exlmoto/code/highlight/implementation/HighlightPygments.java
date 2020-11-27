@@ -4,9 +4,8 @@ import org.springframework.stereotype.Component;
 
 import ru.exlmoto.code.highlight.Highlight;
 import ru.exlmoto.code.highlight.enumeration.Language;
-import ru.exlmoto.code.highlight.enumeration.Options;
 
-import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class HighlightPygments extends Highlight {
@@ -40,17 +39,21 @@ public class HighlightPygments extends Highlight {
 	}
 
 	@Override
-	public String renderHtmlFromCode(Map<Options, String> options, String code) {
+	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 
 		final String renderSnippet =
 //			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
-//			"formatter = HtmlFormatter(linenos=True)" + "\n" +
 			"formatter = HtmlFormatter(nowrap=True)" + "\n" +
-			"lexer = get_lexer_by_name('" + options.get(Options.lang) + "')" + "\n" +
+			"lexer = get_lexer_by_name('" + language + "')" + "\n" +
 			"\n" +
 			"highlight(str(source), lexer, formatter)";
 
-		return execute(renderSnippet).orElse("Error");
+		return execute(renderSnippet);
+	}
+
+	@Override
+	public Optional<String> renderHtmlFromCodeAuto(String code) {
+		return Optional.empty();
 	}
 }

@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import ru.exlmoto.code.highlight.enumeration.Language;
-import ru.exlmoto.code.highlight.enumeration.Options;
 
-import java.util.Map;
 import java.util.Optional;
 
 public abstract class Highlight {
@@ -46,5 +44,7 @@ public abstract class Highlight {
 
 	public abstract String getLibraryVersion();
 
-	public abstract String renderHtmlFromCode(Map<Options, String> options, String code);
+	public abstract Optional<String> renderHtmlFromCodeLanguage(String language, String code);
+
+	public abstract Optional<String> renderHtmlFromCodeAuto(String code);
 }

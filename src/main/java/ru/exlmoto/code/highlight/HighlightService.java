@@ -56,18 +56,25 @@ public class HighlightService {
 		switch (mode) {
 			default:
 			case HighlightPygments: {
-				renderedCode = highlightPygments.renderHtmlFromCode(optionsMap, filteredCode);
+				renderedCode = highlightPygments.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
 				break;
 			}
 			case HighlightJs: {
-				renderedCode = highlightJs.renderHtmlFromCode(optionsMap, filteredCode);
+				renderedCode = highlightJs.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
 				break;
 			}
 			case HighlightRouge: {
-				renderedCode = highlightRouge.renderHtmlFromCode(optionsMap, filteredCode);
+				renderedCode = highlightRouge.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
 			}
 		}
 
-		return highlightFilter.tableCodeHighlight(renderedCode, 10, 10);
+//		return highlightFilter.tableCode(renderedCode);
+//		return highlightFilter.tableCodeHighlight(renderedCode, 10, 10);
+//		return highlightFilter.tableCodeHighlight(renderedCode, 10, 15);
+//		return highlightFilter.simpleCode(renderedCode);
+//		return highlightFilter.simpleCodeHighlight(renderedCode, 10, 10);
+//		return highlightFilter.simpleCodeHighlight(renderedCode, 10, 15);
+//		return highlightFilter.plainCode(filteredCode);
+		return highlightFilter.plainCodeHighlight(filteredCode, 10, 10);
 	}
 }
