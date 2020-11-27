@@ -44,7 +44,7 @@ public class CodeController {
 	public String index(@PathVariable(name = "id", required = false) Optional<String> id,
 	                    @RequestParam(name = "info", required = false) Optional<String> info,
 	                    @CookieValue(value = "lang", defaultValue = "ru") String tag,
-	                    @CookieValue(value = "options", defaultValue = "auto") String options,
+	                    @CookieValue(value = "options", defaultValue = "java") String options,
 	                    @CookieValue(value = "highlight", defaultValue = "Highlight.js") String highlight,
 	                    Model model, CodeForm form) {
 		readCookies(form, options, highlight);
