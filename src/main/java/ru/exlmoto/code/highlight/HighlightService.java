@@ -6,30 +6,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ru.exlmoto.code.highlight.enumeration.Mode;
-import ru.exlmoto.code.highlight.enumeration.Options;
 import ru.exlmoto.code.highlight.filter.HighlightFilter;
 import ru.exlmoto.code.highlight.implementation.HighlightJs;
 import ru.exlmoto.code.highlight.implementation.HighlightPygments;
 import ru.exlmoto.code.highlight.implementation.HighlightRouge;
+import ru.exlmoto.code.highlight.parser.Options;
+import ru.exlmoto.code.highlight.parser.OptionsParser;
 
 import javax.annotation.PostConstruct;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
+	private final OptionsParser optionsParser;
 	private final HighlightFilter highlightFilter;
+
 	private final HighlightJs highlightJs;
 	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
-	public HighlightService(HighlightFilter highlightFilter,
+	public HighlightService(OptionsParser optionsParser,
+	                        HighlightFilter highlightFilter,
 	                        HighlightJs highlightJs,
 	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
+		this.optionsParser = optionsParser;
 		this.highlightFilter = highlightFilter;
 		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
@@ -46,40 +48,35 @@ public class HighlightService {
 			highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
 	}
 
-	public String renderHtmlFromCode(Mode mode, String options, String code) {
-		// TODO Parse this.
-		final Map<Options, String> optionsMap = new HashMap<>();
-		optionsMap.put(Options.lang, options);
-
+	public String highlightCode(Mode mode, String options, String code) {
+		final Options settings = optionsParser.parseOptions(options);
+		final long hStart = settings.gethStart();
+		final long hEnd = settings.gethEnd();
 		final String filteredCode = highlightFilter.filterCarriageReturn(code);
-		final String renderedCode;
+		return (!settings.checkHighlight()) ?
+			(settings.isTable()) ?
+				highlightFilter.tableCodePlain(filteredCode, hStart, hEnd) :
+				highlightFilter.plainCode(filteredCode, hStart, hEnd) :
+			(settings.isTable()) ?
+				highlightFilter.tableCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd) :
+				highlightFilter.simpleCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd);
+	}
+
+	private String highlightCodeAux(Mode mode, String code, Options options) {
 		switch (mode) {
 			default:
-			case HighlightPygments: {
-				renderedCode = highlightPygments.renderHtmlFromCodeAuto(filteredCode).orElse("Error");
-//				renderedCode = highlightPygments.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
-				break;
-			}
 			case HighlightJs: {
-//				renderedCode = highlightJs.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
-				renderedCode = highlightJs.renderHtmlFromCodeAuto(filteredCode).orElse("Error");
-				break;
+				return highlightJs.renderHtmlFromCode(options.getLanguage(), code)
+					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
 			}
 			case HighlightRouge: {
-				renderedCode = highlightRouge.renderHtmlFromCodeAuto(filteredCode).orElse("Error");
-//				renderedCode = highlightRouge.renderHtmlFromCodeLanguage(options, filteredCode).orElse("Error");
-				break;
+				return highlightRouge.renderHtmlFromCode(options.getLanguage(), code)
+					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+			}
+			case HighlightPygments: {
+				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code)
+					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
 			}
 		}
-
-		return highlightFilter.tableCode(renderedCode);
-//		return highlightFilter.tableCodeHighlight(renderedCode, 10, 10);
-//		return highlightFilter.tableCodeHighlight(renderedCode, 10, 15);
-//		return highlightFilter.simpleCode(renderedCode);
-//		return highlightFilter.simpleCodeHighlight(renderedCode, 10, 10);
-//		return highlightFilter.simpleCodeHighlight(renderedCode, 10, 15);
-//		return highlightFilter.plainCode(filteredCode);
-//		return highlightFilter.plainCodeHighlight(filteredCode, 10, 10);
-//		return highlightFilter.plainCodeHighlight(filteredCode, 10, 15);
 	}
 }

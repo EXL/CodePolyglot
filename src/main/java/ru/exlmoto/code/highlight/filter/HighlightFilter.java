@@ -21,31 +21,28 @@ public class HighlightFilter {
 		return source.replaceAll("\r", "");
 	}
 
-	public String tableCode(String codeLines) {
-		return filterBlock(filterLines(codeLines, 0, 0, Filter.table), Filter.table);
-	}
-
-	public String tableCodeHighlight(String codeLines, int hStart, int hEnd) {
+	public String tableCode(String codeLines, long hStart, long hEnd) {
 		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table), Filter.table);
 	}
 
-	public String simpleCode(String codeLines) {
-		return filterBlock(filterLines(codeLines, 0, 0, Filter.simple), Filter.simple);
+	public String tableCodePlain(String codeLines, long hStart, long hEnd) {
+		return filterBlock(filterLines(filterLines(codeLines, 0, 0, Filter.plain), hStart, hEnd, Filter.table),
+			Filter.table);
 	}
 
-	public String simpleCodeHighlight(String codeLines, int hStart, int hEnd) {
+	public String simpleCode(String codeLines, long hStart, long hEnd) {
 		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.simple), Filter.simple);
 	}
 
-	public String plainCode(String codeLines) {
-		return filterBlock(filterLines(codeLines, 0, 0, Filter.plain), Filter.plain);
-	}
-
-	public String plainCodeHighlight(String codeLines, int hStart, int hEnd) {
+	public String plainCode(String codeLines, long hStart, long hEnd) {
 		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain), Filter.plain);
 	}
 
-	protected String filterLines(String codeLines, int hStart, int hEnd, Filter filter) {
+	public String plainCodeLines(String codeLines, long hStart, long hEnd) {
+		return filterLines(codeLines, hStart, hEnd, Filter.plain);
+	}
+
+	protected String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
 		StringBuilder sb = new StringBuilder();
 		try {
 			BufferedReader reader = new BufferedReader(new StringReader(codeLines));
@@ -73,7 +70,9 @@ public class HighlightFilter {
 		}
 	}
 
-	private void filterLinesAux(StringBuilder stringBuilder, int i, int hStart, int hEnd, String line, Filter filter) {
+	private void filterLinesAux(StringBuilder stringBuilder,
+	                            long i, long hStart, long hEnd,
+	                            String line, Filter filter) {
 		final String codeLine = (filter == Filter.plain) ? Encode.forHtml(line) : line;
 		switch (filter) {
 			default:

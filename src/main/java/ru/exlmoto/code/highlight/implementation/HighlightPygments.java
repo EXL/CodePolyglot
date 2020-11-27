@@ -39,7 +39,7 @@ public class HighlightPygments extends Highlight {
 	}
 
 	@Override
-	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
+	protected Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 
 		final String renderLanguageSnippet =
@@ -53,7 +53,7 @@ public class HighlightPygments extends Highlight {
 	}
 
 	@Override
-	public Optional<String> renderHtmlFromCodeAuto(String code) {
+	protected Optional<String> renderHtmlFromCodeAuto(String code) {
 		importValue("source", code);
 
 		final String renderAutoSnippet =

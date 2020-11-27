@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import ru.exlmoto.code.highlight.enumeration.Language;
+import ru.exlmoto.code.highlight.parser.Options;
 
 import java.util.Optional;
 
@@ -40,11 +41,16 @@ public abstract class Highlight {
 
 	protected abstract String language();
 
+	protected abstract Optional<String> renderHtmlFromCodeLanguage(String language, String code);
+
+	protected abstract Optional<String> renderHtmlFromCodeAuto(String code);
+
 	public abstract String getLanguageVersion();
 
 	public abstract String getLibraryVersion();
 
-	public abstract Optional<String> renderHtmlFromCodeLanguage(String language, String code);
-
-	public abstract Optional<String> renderHtmlFromCodeAuto(String code);
+	public Optional<String> renderHtmlFromCode(String language, String code) {
+		return (language.equals(Options.GUESS_LEXER_OPTION)) ?
+			renderHtmlFromCodeAuto(code) : renderHtmlFromCodeLanguage(language, code);
+	}
 }

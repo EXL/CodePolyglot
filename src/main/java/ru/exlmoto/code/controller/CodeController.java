@@ -69,11 +69,11 @@ public class CodeController {
 			form.getOptions(),
 			Mode.getName(form.getHighlight()),
 			form.getCode(),
-			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
+			highlightService.highlightCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
 			response.addCookie(new Cookie("options", form.getOptions()));
 			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);
-		}).orElse("redirect:/");
+		}).orElse("redirect:/?info=database");
 	}
 
 	private void readCookies(CodeForm form, String options, String highlight) {
