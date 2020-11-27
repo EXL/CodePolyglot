@@ -36,18 +36,27 @@ public class HighlightRouge extends Highlight {
 	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("$source", code);
 
-		final String renderSnippet =
+		final String renderLanguageSnippet =
 //			"$source = %{" + StringUtils.escapeJava(code) + "}" + "\n" +
 			"formatter = Rouge::Formatters::HTML.new" + "\n" +
 			"lexer = Rouge::Lexer::find('" + language + "')" + "\n" +
 			"\n" +
 			"formatter.format(lexer.lex($source.to_str))";
 
-		return execute(renderSnippet);
+		return execute(renderLanguageSnippet);
 	}
 
 	@Override
 	public Optional<String> renderHtmlFromCodeAuto(String code) {
-		return Optional.empty();
+		importValue("$source", code);
+
+		final String renderAutoSnippet =
+//			"$source = %{" + StringUtils.escapeJava(code) + "}" + "\n" +
+			"formatter = Rouge::Formatters::HTML.new" + "\n" +
+			"lexer = Rouge::Lexer::guess(source: $source.to_str)" + "\n" +
+			"\n" +
+			"formatter.format(lexer.lex($source.to_str))";
+
+		return execute(renderAutoSnippet);
 	}
 }

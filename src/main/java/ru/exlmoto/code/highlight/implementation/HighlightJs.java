@@ -49,16 +49,23 @@ public class HighlightJs extends Highlight {
 	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 
-		final String renderSnippet =
+		final String renderLanguageSnippet =
 //			"source = `\n" + StringUtils.escapeJava(code) + "\n`" + "\n" +
 			"\n" +
 			"hljs.highlight('" + language + "', String(source)).value";
 
-		return execute(renderSnippet);
+		return execute(renderLanguageSnippet);
 	}
 
 	@Override
 	public Optional<String> renderHtmlFromCodeAuto(String code) {
-		return Optional.empty();
+		importValue("source", code);
+
+		final String renderAutoSnippet =
+//			"source = `\n" + StringUtils.escapeJava(code) + "\n`" + "\n" +
+			"\n" +
+			"hljs.highlightAuto(String(source)).value";
+
+		return execute(renderAutoSnippet);
 	}
 }

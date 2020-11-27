@@ -29,7 +29,7 @@ public class HighlightPygments extends Highlight {
 		final String librarySnippet =
 			"import site" + "\n" +
 			"from pygments import highlight" + "\n" +
-			"from pygments.lexers import get_lexer_by_name" + "\n" +
+			"from pygments.lexers import get_lexer_by_name, guess_lexer" + "\n" +
 			"from pygments.formatters import HtmlFormatter" + "\n" +
 			"from pygments import __version__ as PygmentsVersion" + "\n" +
 			"\n" +
@@ -42,18 +42,27 @@ public class HighlightPygments extends Highlight {
 	public Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 
-		final String renderSnippet =
+		final String renderLanguageSnippet =
 //			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
 			"formatter = HtmlFormatter(nowrap=True)" + "\n" +
 			"lexer = get_lexer_by_name('" + language + "')" + "\n" +
 			"\n" +
 			"highlight(str(source), lexer, formatter)";
 
-		return execute(renderSnippet);
+		return execute(renderLanguageSnippet);
 	}
 
 	@Override
 	public Optional<String> renderHtmlFromCodeAuto(String code) {
-		return Optional.empty();
+		importValue("source", code);
+
+		final String renderAutoSnippet =
+//			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
+			"formatter = HtmlFormatter(nowrap=True)" + "\n" +
+			"lexer = guess_lexer(str(source))" + "\n" +
+			"\n" +
+			"highlight(str(source), lexer, formatter)";
+
+		return execute(renderAutoSnippet);
 	}
 }
