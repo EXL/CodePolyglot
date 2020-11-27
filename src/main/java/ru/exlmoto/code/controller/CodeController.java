@@ -70,7 +70,7 @@ public class CodeController {
 			Mode.getName(form.getHighlight()),
 			form.getCode(),
 			highlightService.highlightCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
-			response.addCookie(new Cookie("options", form.getOptions()));
+			response.addCookie(new Cookie("options", filter.getCorrectCookie(form.getOptions())));
 			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);
 		}).orElse("redirect:/?info=database");

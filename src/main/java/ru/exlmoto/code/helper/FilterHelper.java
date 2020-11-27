@@ -18,4 +18,9 @@ public class FilterHelper {
 			} catch (NumberFormatException ignored) { }
 		return Optional.empty();
 	}
+
+	public String getCorrectCookie(String cookie) {
+		return StringUtils.hasText(cookie) ?
+			cookie.replaceAll(";", "").replaceAll(",", "").replaceAll(" ", "") : cookie;
+	}
 }
