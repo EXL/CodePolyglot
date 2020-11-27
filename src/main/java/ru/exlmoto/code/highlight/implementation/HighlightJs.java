@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.exlmoto.code.highlight.Highlight;
 import ru.exlmoto.code.highlight.enumeration.Language;
 import ru.exlmoto.code.highlight.enumeration.Options;
-import ru.exlmoto.code.util.ResourceHelper;
+import ru.exlmoto.code.helper.ResourceHelper;
 
 import java.util.Map;
 

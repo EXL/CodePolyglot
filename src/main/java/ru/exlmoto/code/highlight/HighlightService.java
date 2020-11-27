@@ -10,6 +10,7 @@ import ru.exlmoto.code.highlight.enumeration.Options;
 import ru.exlmoto.code.highlight.implementation.HighlightJs;
 import ru.exlmoto.code.highlight.implementation.HighlightPygments;
 import ru.exlmoto.code.highlight.implementation.HighlightRouge;
+import ru.exlmoto.code.helper.FilterHelper;
 
 import javax.annotation.PostConstruct;
 
@@ -20,13 +21,15 @@ import java.util.Map;
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
+	private final FilterHelper filter;
 	private final HighlightJs highlightJs;
 	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
-	public HighlightService(HighlightJs highlightJs,
+	public HighlightService(FilterHelper filter, HighlightJs highlightJs,
 	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
+		this.filter = filter;
 		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
@@ -47,14 +50,23 @@ public class HighlightService {
 		final Map<Options, String> optionsMap = new HashMap<>();
 		optionsMap.put(Options.lang, options);
 
+		final String renderedCode;
+
 		switch (mode) {
 			default:
-			case HighlightPygments:
-				return highlightPygments.renderHtmlFromCode(optionsMap, code);
-			case HighlightJs:
-				return highlightJs.renderHtmlFromCode(optionsMap, code);
-			case HighlightRouge:
-				return highlightRouge.renderHtmlFromCode(optionsMap, code);
+			case HighlightPygments: {
+				renderedCode = highlightPygments.renderHtmlFromCode(optionsMap, code);
+				break;
+			}
+			case HighlightJs: {
+				renderedCode = highlightJs.renderHtmlFromCode(optionsMap, code);
+				break;
+			}
+			case HighlightRouge: {
+				renderedCode = highlightRouge.renderHtmlFromCode(optionsMap, code);
+			}
 		}
+
+		return renderedCode;
 	}
 }

@@ -16,7 +16,7 @@ import ru.exlmoto.code.form.CodeForm;
 import ru.exlmoto.code.highlight.HighlightService;
 import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.service.DatabaseService;
-import ru.exlmoto.code.util.FilterHelper;
+import ru.exlmoto.code.helper.FilterHelper;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;

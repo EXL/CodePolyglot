@@ -1,4 +1,4 @@
-package ru.exlmoto.code.util;
+package ru.exlmoto.code.helper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

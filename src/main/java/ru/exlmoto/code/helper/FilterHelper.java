@@ -1,4 +1,4 @@
-package ru.exlmoto.code.util;
+package ru.exlmoto.code.helper;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -22,4 +22,6 @@ public class FilterHelper {
 			} catch (NumberFormatException ignored) { }
 		return Optional.empty();
 	}
+
+
 }
