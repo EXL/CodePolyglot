@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.highlight.enumeration.Options;
+import ru.exlmoto.code.highlight.filter.HighlightFilter;
 import ru.exlmoto.code.highlight.implementation.HighlightJs;
 import ru.exlmoto.code.highlight.implementation.HighlightPygments;
 import ru.exlmoto.code.highlight.implementation.HighlightRouge;
-import ru.exlmoto.code.helper.FilterHelper;
 
 import javax.annotation.PostConstruct;
 
@@ -21,15 +21,16 @@ import java.util.Map;
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
-	private final FilterHelper filter;
+	private final HighlightFilter highlightFilter;
 	private final HighlightJs highlightJs;
 	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
-	public HighlightService(FilterHelper filter, HighlightJs highlightJs,
+	public HighlightService(HighlightFilter highlightFilter,
+	                        HighlightJs highlightJs,
 	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
-		this.filter = filter;
+		this.highlightFilter = highlightFilter;
 		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
@@ -50,23 +51,23 @@ public class HighlightService {
 		final Map<Options, String> optionsMap = new HashMap<>();
 		optionsMap.put(Options.lang, options);
 
+		final String filteredCode = highlightFilter.filterCarriageReturn(code);
 		final String renderedCode;
-
 		switch (mode) {
 			default:
 			case HighlightPygments: {
-				renderedCode = highlightPygments.renderHtmlFromCode(optionsMap, code);
+				renderedCode = highlightPygments.renderHtmlFromCode(optionsMap, filteredCode);
 				break;
 			}
 			case HighlightJs: {
-				renderedCode = highlightJs.renderHtmlFromCode(optionsMap, code);
+				renderedCode = highlightJs.renderHtmlFromCode(optionsMap, filteredCode);
 				break;
 			}
 			case HighlightRouge: {
-				renderedCode = highlightRouge.renderHtmlFromCode(optionsMap, code);
+				renderedCode = highlightRouge.renderHtmlFromCode(optionsMap, filteredCode);
 			}
 		}
 
-		return renderedCode;
+		return highlightFilter.tableCodeHighlight(renderedCode, 10, 10);
 	}
 }

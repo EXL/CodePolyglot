@@ -48,8 +48,7 @@ public class CodeController {
 	                    @CookieValue(value = "highlight", defaultValue = "Highlight.js") String highlight,
 	                    Model model, CodeForm form) {
 		readCookies(form, options, highlight);
-		id.flatMap(idString ->
-			filter.getLong(idString).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
+		id.flatMap(sId -> filter.getLong(sId).flatMap(databaseService::getCodeSnippet)).ifPresent((snippet) -> {
 				Optional.of(snippet.getTitle()).ifPresent(form::setTitle);
 				Optional.of(snippet.getOptions()).ifPresent(form::setOptions);
 				form.setHighlight(Mode.getMode(snippet.getHighlight()));
@@ -70,8 +69,7 @@ public class CodeController {
 			form.getOptions(),
 			Mode.getName(form.getHighlight()),
 			form.getCode(),
-			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(),
-				filter.filterCarriageReturn(form.getCode()))).map((id) -> {
+			highlightService.renderHtmlFromCode(form.getHighlight(), form.getOptions(), form.getCode())).map((id) -> {
 			response.addCookie(new Cookie("options", form.getOptions()));
 			response.addCookie(new Cookie("highlight", Mode.getName(form.getHighlight())));
 			return String.format("redirect:/%d", id);

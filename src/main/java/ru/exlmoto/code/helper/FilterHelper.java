@@ -11,10 +11,6 @@ public class FilterHelper {
 		return System.currentTimeMillis() / 1000L;
 	}
 
-	public String filterCarriageReturn(String source) {
-		return source.replaceAll("\r", "");
-	}
-
 	public Optional<Long> getLong(String number) {
 		if (StringUtils.hasText(number))
 			try {
@@ -22,6 +18,4 @@ public class FilterHelper {
 			} catch (NumberFormatException ignored) { }
 		return Optional.empty();
 	}
-
-
 }

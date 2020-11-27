@@ -8,9 +8,7 @@
 </head>
 <body>
 	<div class="page">
-		<div th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'">
-			<pre><code th:utext="${code}">Code Container</code></pre>
-		</div>
+		<div th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
 		<br/>
 		<br/>
 		<div class="edit">

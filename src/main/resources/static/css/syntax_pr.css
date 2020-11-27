@@ -1,5 +1,9 @@
 .highlight table td { padding: 0; }
 .highlight table pre { margin: 0; }
+.hll {
+	background: khaki;
+	outline: 2px khaki solid;
+}
 .highlight, .highlight .w {
 	color: #303030;
 }
