@@ -15,6 +15,8 @@ public class CodeForm {
 	@NotNull
 	private Mode highlight;
 
+	private Long renderTime;
+
 	public String getTitle() {
 		return title;
 	}
@@ -45,5 +47,24 @@ public class CodeForm {
 
 	public void setHighlight(Mode highlight) {
 		this.highlight = highlight;
+	}
+
+	public Long getRenderTime() {
+		return renderTime;
+	}
+
+	public void setRenderTime(Long renderTime) {
+		this.renderTime = renderTime;
+	}
+
+	@Override
+	public String toString() {
+		return "CodeForm{" +
+			"title='" + title + '\'' +
+			", options='" + options + '\'' +
+			", code='" + "<skipped>" + '\'' +
+			", highlight=" + highlight +
+			", renderTime=" + renderTime +
+			'}';
 	}
 }

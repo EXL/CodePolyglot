@@ -21,19 +21,13 @@ public class DatabaseService {
 		this.codeRepository = codeRepository;
 	}
 
-	public Optional<Long> saveCodeSnippet(long timestamp,
-	                                      String title,
-	                                      String options,
-	                                      String highlight,
-	                                      String codeRaw,
-	                                      String codeHtml) {
+	public Optional<Long> saveCodeSnippet(CodeEntity snippet) {
 		try {
-			final CodeEntity snippet = new CodeEntity(timestamp, title, options, highlight, codeRaw, codeHtml);
 			final CodeEntity savedSnippet = codeRepository.saveAndFlush(snippet);
 			return Optional.of(savedSnippet.getId());
 		} catch (DataAccessException dae) {
 			log.error(String.format("Cannot save Code Snippet (timestamp: '%d') to database: '%s'.",
-				timestamp, dae.getLocalizedMessage()), dae);
+				snippet.getTimestamp(), dae.getLocalizedMessage()), dae);
 		}
 		return Optional.empty();
 	}

@@ -17,7 +17,7 @@
 					<label for="title">Title:</label>
 					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
 					<label for="options">Options:</label>
-					<input id="options" type="text" th:field="*{options}" placeholder="auto" value="auto" size="35"/>
+					<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
 				</div>
 				<div>
 					<span>Server-side syntax code highlighting:</span>
@@ -32,6 +32,9 @@
 					<textarea id="code-area" maxlength="262144" rows="20" cols="120" th:field="*{code}">Source</textarea>
 				</div>
 				<p><input class="button" type="submit" value="Render"/></p>
+				<div th:if="*{renderTime}" class="form-render">
+					Render: <span th:utext="*{renderTime}"></span>ms.
+				</div>
 			</form>
 		</div>
 	</div>

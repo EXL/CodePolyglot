@@ -32,18 +32,8 @@ public class CodeEntity {
 	@Column(nullable = false, length = 524288)
 	private String codeHtml;
 
-	public CodeEntity() {
-
-	}
-
-	public CodeEntity(Long timestamp, String title, String options, String highlight, String codeRaw, String codeHtml) {
-		this.timestamp = timestamp;
-		this.title = title;
-		this.options = options;
-		this.highlight = highlight;
-		this.codeRaw = codeRaw;
-		this.codeHtml = codeHtml;
-	}
+	@Column(nullable = false)
+	private Long renderTime;
 
 	public Long getId() {
 		return id;
@@ -101,6 +91,14 @@ public class CodeEntity {
 		this.codeHtml = codeHtml;
 	}
 
+	public Long getRenderTime() {
+		return renderTime;
+	}
+
+	public void setRenderTime(Long renderTime) {
+		this.renderTime = renderTime;
+	}
+
 	@Override
 	public String toString() {
 		return "CodeEntity{" +
@@ -111,6 +109,7 @@ public class CodeEntity {
 			", highlight='" + highlight + '\'' +
 			", codeRaw='" + "<skipped>" + '\'' +
 			", codeHtml='" + "<skipped>" + '\'' +
+			", renderTime=" + renderTime +
 			'}';
 	}
 }
