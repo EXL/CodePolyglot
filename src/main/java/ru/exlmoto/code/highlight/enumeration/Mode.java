@@ -18,14 +18,10 @@ public enum Mode {
 	}
 
 	public static Mode getMode(String name) {
-		switch (name) {
-			default:
-			case "Highlight.js":
-				return HighlightJs;
-			case "Pygments":
-				return HighlightPygments;
-			case "Rouge":
-				return HighlightRouge;
+		try {
+			return Mode.valueOf(name);
+		} catch (IllegalArgumentException ignored) {
+			return HighlightJs;
 		}
 	}
 }

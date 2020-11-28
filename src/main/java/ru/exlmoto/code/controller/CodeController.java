@@ -66,7 +66,7 @@ public class CodeController {
 			snippet.setTimestamp(util.getCurrentUnixTime());
 			snippet.setTitle(form.getTitle());
 			snippet.setOptions(filteredOptions);
-			snippet.setHighlight(Mode.getName(form.getHighlight()));
+			snippet.setHighlight(form.getHighlight().name());
 			snippet.setCodeRaw(form.getCode());
 			final long start = System.currentTimeMillis();
 			snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));

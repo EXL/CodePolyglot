@@ -46,7 +46,7 @@ public class CookieHelper {
 	}
 
 	public void setHighlight(HttpServletResponse response, Mode highlight) {
-		response.addCookie(new Cookie(HIGHLIGHT, Mode.getName(highlight)));
+		response.addCookie(new Cookie(HIGHLIGHT, highlight.name()));
 	}
 
 	public void setSkin(HttpServletResponse response, String skin) {
