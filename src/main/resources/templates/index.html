@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
-	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_js.css}"/>
-	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" rel="stylesheet" type="text/css" th:href="@{/css/syntax_pr.css}"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/syntax_js.css}" rel="stylesheet" type="text/css"/>
+	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/syntax_pr.css}" rel="stylesheet" type="text/css"/>
+	<script defer th:src="@{/js/code.js}" type="text/javascript"></script>
 </head>
 <body>
 	<div class="page">
@@ -12,7 +13,7 @@
 		<br/>
 		<br/>
 		<div class="edit">
-			<form th:action="@{/edit}" th:object="${form}" method="post">
+			<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
 				<div>
 					<label for="title">Title:</label>
 					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
@@ -22,8 +23,10 @@
 				<div>
 					<span>Server-side syntax code highlighting:</span>
 					<span th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
-						<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
-						<label th:for="${mode}" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></label>
+						<label>
+							<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+							<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></span>
+						</label>
 					</span>
 				</div>
 				<div class="form-block">
