@@ -30,7 +30,7 @@ public abstract class Highlight {
 		return Optional.empty();
 	}
 
-	public void importValue(String name, String value) {
+	protected void importValue(String name, String value) {
 		try {
 			polyglot.getBindings(language()).putMember(name, value);
 		} catch (RuntimeException re) {
