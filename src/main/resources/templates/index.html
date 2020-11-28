@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
-	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/syntax_js.css}" rel="stylesheet" type="text/css"/>
-	<link th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/syntax_pr.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/__${skin}__/code.css}" rel="stylesheet" type="text/css"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/hjs.css}" rel="stylesheet" type="text/css"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightRouge}" th:href="@{/css/__${skin}__/pygments.css}" rel="stylesheet" type="text/css"/>
+	<link th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightPygments}" th:href="@{/css/__${skin}__/rouge.css}" rel="stylesheet" type="text/css"/>
 	<script defer th:src="@{/js/code.js}" type="text/javascript"></script>
 </head>
 <body>

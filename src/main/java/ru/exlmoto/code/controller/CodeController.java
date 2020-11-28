@@ -94,6 +94,7 @@ public class CodeController {
 	}
 
 	private void readCookies(Model model, CodeForm form, HttpServletRequest request) {
+		model.addAttribute(CookieHelper.SKIN, cookies.getSkin(request));
 		form.setOptions(cookies.getOptions(request));
 		form.setHighlight(cookies.getHighlight(request));
 	}
