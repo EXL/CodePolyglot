@@ -33,6 +33,14 @@ public class HighlightRouge extends Highlight {
 	}
 
 	@Override
+	public Optional<String> generateCssStyle(String theme) {
+		final String styleSnippet =
+			"Rouge::Theme.find('" + theme + "').render(scope: '.highlight')";
+
+		return execute(styleSnippet);
+	}
+
+	@Override
 	protected Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("$source", code);
 

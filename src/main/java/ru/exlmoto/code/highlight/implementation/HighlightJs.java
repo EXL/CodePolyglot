@@ -50,6 +50,11 @@ public class HighlightJs extends Highlight {
 	}
 
 	@Override
+	public Optional<String> generateCssStyle(String theme) {
+		return Optional.of("Error: CSS style generation isn't available in Highlight.js, sorry.");
+	}
+
+	@Override
 	protected Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 

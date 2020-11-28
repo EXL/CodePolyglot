@@ -78,6 +78,21 @@ public class HighlightService {
 			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
 		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
 			versions.get(HighlightPygmentsJython).getFirst(), versions.get(HighlightPygmentsJython).getSecond()));
+
+		// checkCssStyles();
+	}
+
+	private void checkCssStyles() {
+		highlightJs.generateCssStyle("tomorrow")
+			.ifPresent((css) -> log.info(HighlightJs.name() + ":\n" + css + "\n---\n"));
+		highlightRouge.generateCssStyle("base16")
+			.ifPresent((css) -> log.info(HighlightRouge.name() + ":\n" + css + "\n---\n"));
+		highlightPygments.setUseJython(false);
+		highlightPygments.generateCssStyle("vs")
+			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
+		highlightPygments.setUseJython(true);
+		highlightPygments.generateCssStyle("vim")
+			.ifPresent((css) -> log.info(HighlightPygmentsJython.name() + ":\n" + css + "\n---\n"));
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {

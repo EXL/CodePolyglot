@@ -51,6 +51,14 @@ public class HighlightPygments extends Highlight {
 	}
 
 	@Override
+	public Optional<String> generateCssStyle(String theme) {
+		final String styleSnippet =
+			"HtmlFormatter(style='" + theme + "').get_style_defs('.highlight')";
+
+		return execute(styleSnippet);
+	}
+
+	@Override
 	protected Optional<String> renderHtmlFromCodeLanguage(String language, String code) {
 		importValue("source", code);
 

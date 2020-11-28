@@ -54,5 +54,5 @@ public abstract class Highlight {
 			renderHtmlFromCodeAuto(code) : renderHtmlFromCodeLanguage(language, code);
 	}
 
-	// TODO: CSS string?
+	public abstract Optional<String> generateCssStyle(String theme);
 }
