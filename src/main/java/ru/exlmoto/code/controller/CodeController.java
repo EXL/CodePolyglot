@@ -58,11 +58,9 @@ public class CodeController {
 	}
 
 	@PostMapping(path = "/edit")
-	public String edit(@Valid CodeForm form,
-	                   BindingResult bindingResult,
-	                   HttpServletResponse response) {
+	public String edit(@Valid CodeForm form, BindingResult bindingResult, HttpServletResponse response) {
 		if (!bindingResult.hasErrors()) {
-			final String filteredOptions = util.getCorrectCookie(form.getOptions());
+			final String filteredOptions = util.getCorrectOptions(form.getOptions());
 
 			final CodeEntity snippet = new CodeEntity();
 			snippet.setTimestamp(util.getCurrentUnixTime());

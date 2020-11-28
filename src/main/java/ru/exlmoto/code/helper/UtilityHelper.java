@@ -19,8 +19,8 @@ public class UtilityHelper {
 		return Optional.empty();
 	}
 
-	public String getCorrectCookie(String cookie) {
-		return StringUtils.hasText(cookie) ?
-			cookie.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : cookie;
+	public String getCorrectOptions(String options) {
+		return StringUtils.hasText(options) ?
+			options.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : options;
 	}
 }
