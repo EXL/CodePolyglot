@@ -42,8 +42,7 @@ public class HighlightJs extends Highlight {
 
 	@Override
 	public String getLibraryVersion() {
-		String librarySnippet = null;
-		librarySnippet += resourceHelper.readFileToString("classpath:highlight/highlight.pack.js");
+		String librarySnippet = resourceHelper.readFileToString("classpath:highlight/highlight.pack.js");
 		librarySnippet += "\n";
 		librarySnippet += "hljs.versionString";
 
