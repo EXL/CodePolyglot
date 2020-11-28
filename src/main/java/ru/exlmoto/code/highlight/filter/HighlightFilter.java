@@ -80,9 +80,9 @@ public class HighlightFilter {
 				String id = (i % 10 == 0) ? "<strong>" + i + "</strong>" : String.valueOf(i);
 				stringBuilder.append("<tr id=\"line-").append(i);
 				stringBuilder.append(((i >= hStart) && (i <= hEnd)) ? "\" class=\"hll\">" : "\">");
-				stringBuilder.append("<td class=\"code-table gl\"><pre>");
+				stringBuilder.append("<td class=\"code-table-line\"><pre>");
 				stringBuilder.append("<a href=\"#line-").append(i).append("\">").append(id).append("</a></pre></td>");
-				stringBuilder.append("<td class=\"code-table code\"><pre>").append(codeLine).append("</pre></td></tr>");
+				stringBuilder.append("<td class=\"code-table-code\"><pre>").append(codeLine).append("</pre></td></tr>");
 				break;
 			}
 			case simple:

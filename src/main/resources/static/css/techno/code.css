@@ -1,3 +1,4 @@
-.highlight table td { padding: 0; }
-.highlight table pre { margin: 0; }
-.highlight .hll { background-color: #ffffcc }
+.code-table .hll { background-color: #ffffcc }
+.code-table pre { margin: 0; }
+.code-table-line a { text-decoration: none; color: maroon; }
+.code-table-line { text-align: right; -moz-user-select: none; -ms-user-select: none; -webkit-user-select: none; user-select: none; }
