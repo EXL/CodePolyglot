@@ -21,6 +21,6 @@ public class FilterHelper {
 
 	public String getCorrectCookie(String cookie) {
 		return StringUtils.hasText(cookie) ?
-			cookie.replaceAll(";", "").replaceAll(",", "").replaceAll(" ", "") : cookie;
+			cookie.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : cookie;
 	}
 }

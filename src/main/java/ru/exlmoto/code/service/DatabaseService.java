@@ -34,8 +34,8 @@ public class DatabaseService {
 		} catch (DataAccessException dae) {
 			log.error(String.format("Cannot save Code Snippet (timestamp: '%d') to database: '%s'.",
 				timestamp, dae.getLocalizedMessage()), dae);
-			return Optional.empty();
 		}
+		return Optional.empty();
 	}
 
 	public Optional<CodeEntity> getCodeSnippet(long id) {
