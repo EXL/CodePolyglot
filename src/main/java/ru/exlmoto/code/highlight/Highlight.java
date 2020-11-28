@@ -53,4 +53,6 @@ public abstract class Highlight {
 		return (language.equals(Options.GUESS_LEXER_OPTION)) ?
 			renderHtmlFromCodeAuto(code) : renderHtmlFromCodeLanguage(language, code);
 	}
+
+	// TODO: CSS string?
 }

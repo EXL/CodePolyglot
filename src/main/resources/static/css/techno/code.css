@@ -2,5 +2,6 @@
 .code-table .hll { background-color: #ffffcc }
 .code-table pre { margin: 0; }
 .code-table-line a { text-decoration: none; color: maroon; }
-.code-table-line { white-space: nowrap; text-align: right; user-select: none; }
-.code-table-code { white-space: pre; text-align: left; }
+.code-table-line { padding-right: 5px; white-space: nowrap; text-align: right; user-select: none; border-right: 1px solid green; }
+.code-table-code { padding-left: 5px; white-space: pre; text-align: left; }
+.code-table-code:hover { background: lightgoldenrodyellow; }
