@@ -3,17 +3,20 @@ package ru.exlmoto.code.highlight.enumeration;
 public enum Mode {
 	HighlightJs,
 	HighlightRouge,
+	HighlightPygmentsJython,
 	HighlightPygments;
 
 	public static String getName(Mode mode) {
 		switch (mode) {
 			default:
 			case HighlightJs:
-				return "Highlight.js";
-			case HighlightPygments:
-				return "Pygments";
+				return "Highlight.js/GraalVM (fast)";
 			case HighlightRouge:
-				return "Rouge";
+				return "Rouge/GraalVM (moderate)";
+			case HighlightPygmentsJython:
+				return "Pygments/Jython (slow)";
+			case HighlightPygments:
+				return "Pygments/GraalVM (very slow)";
 		}
 	}
 

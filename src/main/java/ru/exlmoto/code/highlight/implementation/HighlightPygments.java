@@ -1,7 +1,10 @@
 package ru.exlmoto.code.highlight.implementation;
 
+import org.python.util.PythonInterpreter;
+
 import org.springframework.stereotype.Component;
 
+import ru.exlmoto.code.helper.UtilityHelper;
 import ru.exlmoto.code.highlight.Highlight;
 import ru.exlmoto.code.highlight.enumeration.Language;
 
@@ -9,6 +12,15 @@ import java.util.Optional;
 
 @Component
 public class HighlightPygments extends Highlight {
+	private final UtilityHelper util;
+
+	private boolean useJython = false;
+	private PythonInterpreter jython = new PythonInterpreter();
+
+	public HighlightPygments(UtilityHelper util) {
+		this.util = util;
+	}
+
 	@Override
 	protected String language() {
 		return Language.python.name();
@@ -64,5 +76,26 @@ public class HighlightPygments extends Highlight {
 			"highlight(str(source), lexer, formatter)";
 
 		return execute(renderAutoSnippet);
+	}
+
+	@Override
+	protected void importValue(String name, String value) {
+		if (useJython)
+			jython.set(name, value);
+		else
+			super.importValue(name, value);
+	}
+
+	@Override
+	protected Optional<String> execute(String sourceCode) {
+		if (useJython) {
+			jython.exec(util.injectChunkToLastLineStart(sourceCode, "result="));
+			return Optional.ofNullable(jython.get("result", String.class));
+		} else
+			return super.execute(sourceCode);
+	}
+
+	public void setUseJython(boolean useJython) {
+		this.useJython = useJython;
 	}
 }

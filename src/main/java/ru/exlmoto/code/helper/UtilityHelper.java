@@ -23,4 +23,9 @@ public class UtilityHelper {
 		return StringUtils.hasText(options) ?
 			options.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : options;
 	}
+
+	public String injectChunkToLastLineStart(String lines, String inject) {
+		final int index = lines.lastIndexOf("\n");
+		return (index > 0) ? lines.substring(0, index) + "\n" + inject + lines.substring(index + 1) : inject + lines;
+	}
 }

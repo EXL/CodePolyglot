@@ -44,7 +44,11 @@ public class HighlightService {
 	private void getVersions() {
 		log.info(String.format("GraalVM JavaScript version '%s' and Highlight.js version '%s' loaded.",
 			highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
+		highlightPygments.setUseJython(false);
 		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
+			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+		highlightPygments.setUseJython(true);
+		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
 			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
 		log.info(String.format("GraalVM Ruby version '%s' and Rouge version '%s' loaded.",
 			highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
@@ -77,6 +81,12 @@ public class HighlightService {
 					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
 			}
 			case HighlightPygments: {
+				highlightPygments.setUseJython(false);
+				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code)
+					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+			}
+			case HighlightPygmentsJython: {
+				highlightPygments.setUseJython(true);
 				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code)
 					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
 			}
