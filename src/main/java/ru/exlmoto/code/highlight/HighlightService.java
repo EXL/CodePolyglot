@@ -5,6 +5,7 @@ import org.graalvm.home.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import ru.exlmoto.code.highlight.enumeration.Mode;
@@ -17,6 +18,14 @@ import ru.exlmoto.code.highlight.parser.OptionsParser;
 
 import javax.annotation.PostConstruct;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
+import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
+import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
+import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
+
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
@@ -28,6 +37,8 @@ public class HighlightService {
 	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
+	private final Map<Mode, Pair<String, String>> versions;
+
 	public HighlightService(OptionsParser optionsParser,
 	                        HighlightFilter highlightFilter,
 	                        HighlightJs highlightJs,
@@ -38,21 +49,35 @@ public class HighlightService {
 		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
+
+		versions = new HashMap<>();
 	}
 
 	@PostConstruct
-	private void getVersions() {
+	private void getAllVersions() {
+		log.info(String.format("GraalVM version '%s'.", getGraalVMVersion()));
+
+		versions.put(HighlightJs,
+			Pair.of(highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
 		log.info(String.format("GraalVM JavaScript version '%s' and Highlight.js version '%s' loaded.",
-			highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
-		highlightPygments.setUseJython(false);
-		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
-			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
-		highlightPygments.setUseJython(true);
-		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
-			highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+			versions.get(HighlightJs).getFirst(), versions.get(HighlightJs).getSecond()));
+
+		versions.put(HighlightRouge,
+			Pair.of(highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
 		log.info(String.format("GraalVM Ruby version '%s' and Rouge version '%s' loaded.",
-			highlightRouge.getLanguageVersion(), highlightRouge.getLibraryVersion()));
-		log.info(String.format("GraalVM version '%s'.", Version.getCurrent().toString()));
+			versions.get(HighlightRouge).getFirst(), versions.get(HighlightRouge).getSecond()));
+
+		highlightPygments.setUseJython(false);
+		versions.put(HighlightPygments,
+			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
+			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
+
+		highlightPygments.setUseJython(true);
+		versions.put(HighlightPygmentsJython,
+			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
+			versions.get(HighlightPygmentsJython).getFirst(), versions.get(HighlightPygmentsJython).getSecond()));
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {
@@ -67,6 +92,14 @@ public class HighlightService {
 			(settings.isTable()) ?
 				highlightFilter.tableCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd) :
 				highlightFilter.simpleCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd);
+	}
+
+	public String getGraalVMVersion() {
+		return Version.getCurrent().toString();
+	}
+
+	public Map<Mode, Pair<String, String>> getVersions() {
+		return versions;
 	}
 
 	private String highlightCodeAux(Mode mode, String code, Options options) {
