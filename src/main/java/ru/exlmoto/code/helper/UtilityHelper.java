@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 import java.util.Optional;
 
 @Component
-public class FilterHelper {
+public class UtilityHelper {
 	public long getCurrentUnixTime() {
 		return System.currentTimeMillis() / 1000L;
 	}

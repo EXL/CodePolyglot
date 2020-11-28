@@ -14,7 +14,7 @@ import ru.exlmoto.code.highlight.HighlightService;
 import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.helper.CookieHelper;
 import ru.exlmoto.code.service.DatabaseService;
-import ru.exlmoto.code.helper.FilterHelper;
+import ru.exlmoto.code.helper.UtilityHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,16 +25,14 @@ import java.util.Optional;
 
 @Controller
 public class CodeController {
-	private final FilterHelper filter;
+	private final UtilityHelper util;
 	private final CookieHelper cookies;
 	private final DatabaseService database;
 	private final HighlightService highlight;
 
-	public CodeController(FilterHelper filter,
-	                      CookieHelper cookies,
-	                      DatabaseService database,
-	                      HighlightService highlight) {
-		this.filter = filter;
+	public CodeController(UtilityHelper util, CookieHelper cookies,
+	                      DatabaseService database, HighlightService highlight) {
+		this.util = util;
 		this.cookies = cookies;
 		this.database = database;
 		this.highlight = highlight;
@@ -45,7 +43,7 @@ public class CodeController {
 	                    @RequestParam(name = "info", required = false) Optional<String> info,
 	                    HttpServletRequest request, Model model, CodeForm form) {
 		readCookies(model, form, request);
-		id.flatMap(sId -> filter.getLong(sId).flatMap(database::getCodeSnippet)).ifPresent((snippet) -> {
+		id.flatMap(sId -> util.getLong(sId).flatMap(database::getCodeSnippet)).ifPresent((snippet) -> {
 				Optional.ofNullable(snippet.getTitle()).ifPresent(form::setTitle);
 				Optional.ofNullable(snippet.getOptions()).ifPresent(form::setOptions);
 				form.setHighlight(Mode.getMode(snippet.getHighlight()));
@@ -64,10 +62,10 @@ public class CodeController {
 	                   BindingResult bindingResult,
 	                   HttpServletResponse response) {
 		if (!bindingResult.hasErrors()) {
-			final String filteredOptions = filter.getCorrectCookie(form.getOptions());
+			final String filteredOptions = util.getCorrectCookie(form.getOptions());
 
 			final CodeEntity snippet = new CodeEntity();
-			snippet.setTimestamp(filter.getCurrentUnixTime());
+			snippet.setTimestamp(util.getCurrentUnixTime());
 			snippet.setTitle(form.getTitle());
 			snippet.setOptions(filteredOptions);
 			snippet.setHighlight(Mode.getName(form.getHighlight()));
@@ -87,7 +85,7 @@ public class CodeController {
 
 	@RequestMapping(path = "/delete/{id}")
 	public String delete(@PathVariable(name = "id", required = false) Optional<String> id) {
-		Optional<Long> deleteId = id.flatMap(filter::getLong);
+		Optional<Long> deleteId = id.flatMap(util::getLong);
 		if (deleteId.isPresent() && database.deleteCodeSnippet(deleteId.get()))
 			return "redirect:/?info=deleteOk";
 		return "redirect:/?info=deleteError";

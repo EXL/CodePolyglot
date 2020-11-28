@@ -3,16 +3,16 @@ package ru.exlmoto.code.highlight.parser;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import ru.exlmoto.code.helper.FilterHelper;
+import ru.exlmoto.code.helper.UtilityHelper;
 
 import java.util.Optional;
 
 @Component
 public class OptionsParser {
-	private final FilterHelper filter;
+	private final UtilityHelper util;
 
-	public OptionsParser(FilterHelper filter) {
-		this.filter = filter;
+	public OptionsParser(UtilityHelper util) {
+		this.util = util;
 	}
 
 	public Options parseOptions(String options) {
@@ -34,7 +34,7 @@ public class OptionsParser {
 	private String scanOptionsForLanguage(String firstToken) {
 		if (firstToken.equals(Options.DISABLE_TABLE_OPTION) || firstToken.contains(":"))
 			return Options.DISABLE_HIGHLIGHT_OPTION;
-		return filter.getLong(firstToken).map((value) -> "").orElse(firstToken);
+		return util.getLong(firstToken).map((value) -> "").orElse(firstToken);
 	}
 
 	private boolean scanOptionsForTable(String[] options) {
@@ -49,8 +49,8 @@ public class OptionsParser {
 			if (option.contains(":")) {
 				String[] tokens = option.split(":");
 				if (tokens.length == 2) {
-					Optional<Long> first = filter.getLong(tokens[0]);
-					Optional<Long> second = filter.getLong(tokens[1]);
+					Optional<Long> first = util.getLong(tokens[0]);
+					Optional<Long> second = util.getLong(tokens[1]);
 					if (first.isPresent() && second.isPresent())
 						if (first.get() > 0L && second.get() > 0L && first.get() <= second.get()) {
 							settings.sethStart(first.get());
@@ -59,7 +59,7 @@ public class OptionsParser {
 						}
 				}
 			} else {
-				Optional<Long> first = filter.getLong(option);
+				Optional<Long> first = util.getLong(option);
 				if (first.isPresent()) {
 					settings.sethStart(first.get());
 					settings.sethEnd(first.get());
