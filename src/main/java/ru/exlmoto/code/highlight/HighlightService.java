@@ -26,7 +26,7 @@ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
 
-@Service
+//@Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${lang}" lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
@@ -47,6 +47,12 @@
 					Render: <span th:utext="*{renderTime}"></span>ms.
 				</div>
 			</form>
+		</div>
+		<div class="options">
+			<a th:href="${'/opts/?lang=ru'}">Русский</a>
+			<a th:href="${'/opts/?lang=en'}">English</a>
+			<a th:href="${'/opts/?skin=techno'}">Techno</a>
+			<a th:href="${'/opts/?skin=pastorg'}">Pastorg</a>
 		</div>
 	</div>
 </body>

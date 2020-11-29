@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.WebUtils;
 
+import ru.exlmoto.code.controller.enumeration.Lang;
+import ru.exlmoto.code.controller.enumeration.Skin;
 import ru.exlmoto.code.highlight.enumeration.Mode;
 
 import javax.servlet.http.Cookie;
@@ -25,11 +27,11 @@ public class CookieHelper {
 	public static final Mode DEFAULT_HIGHLIGHT   = Mode.HighlightJs;
 
 	public String getLang(HttpServletRequest request) {
-		return getCookieValue(request, LANG).orElse(DEFAULT_LANG);
+		return getCookieValue(request, LANG).map(Lang::checkLang).orElse(Lang.checkLang(DEFAULT_LANG)).name();
 	}
 
 	public String getSkin(HttpServletRequest request) {
-		return getCookieValue(request, SKIN).orElse(DEFAULT_SKIN);
+		return getCookieValue(request, SKIN).map(Skin::checkSkin).orElse(Skin.checkSkin(DEFAULT_SKIN)).name();
 	}
 
 	public String getOptions(HttpServletRequest request) {
@@ -42,22 +44,28 @@ public class CookieHelper {
 
 	public void setOptions(HttpServletResponse response, String options) {
 		if (StringUtils.hasText(options))
-			response.addCookie(new Cookie(OPTIONS, options));
+			response.addCookie(globalCookie(OPTIONS, options));
 	}
 
 	public void setHighlight(HttpServletResponse response, Mode highlight) {
-		response.addCookie(new Cookie(HIGHLIGHT, highlight.name()));
+		response.addCookie(globalCookie(HIGHLIGHT, highlight.name()));
 	}
 
-	public void setSkin(HttpServletResponse response, String skin) {
-		response.addCookie(new Cookie(SKIN, skin));
+	public void setSkin(HttpServletResponse response, Skin skin) {
+		response.addCookie(globalCookie(SKIN, skin.name()));
 	}
 
-	public void setLang(HttpServletResponse response, String lang) {
-		response.addCookie(new Cookie(LANG, lang));
+	public void setLang(HttpServletResponse response, Lang lang) {
+		response.addCookie(globalCookie(LANG, lang.name()));
 	}
 
 	private Optional<String> getCookieValue(HttpServletRequest request, String name) {
 		return Optional.ofNullable(WebUtils.getCookie(request, name)).map(Cookie::getValue);
+	}
+
+	private Cookie globalCookie(String name, String value) {
+		final Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		return cookie;
 	}
 }

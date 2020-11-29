@@ -1,5 +1,6 @@
 package ru.exlmoto.code.controller;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.exlmoto.code.configuration.CodeConfiguration;
+import ru.exlmoto.code.controller.enumeration.Lang;
+import ru.exlmoto.code.controller.enumeration.Skin;
 import ru.exlmoto.code.entity.CodeEntity;
 import ru.exlmoto.code.form.CodeForm;
 import ru.exlmoto.code.highlight.HighlightService;
@@ -29,15 +32,15 @@ public class CodeController {
 	private final UtilityHelper util;
 	private final CookieHelper cookies;
 	private final DatabaseService database;
-	private final HighlightService highlight;
+//	private final HighlightService highlight;
 	private final CodeConfiguration config;
 
 	public CodeController(UtilityHelper util, CookieHelper cookies, DatabaseService database,
-	                      HighlightService highlight, CodeConfiguration config) {
+	                      /*HighlightService highlight,*/ CodeConfiguration config) {
 		this.util = util;
 		this.cookies = cookies;
 		this.database = database;
-		this.highlight = highlight;
+//		this.highlight = highlight;
 		this.config = config;
 	}
 
@@ -74,7 +77,8 @@ public class CodeController {
 			snippet.setHighlight(form.getHighlight().name());
 			snippet.setCodeRaw(form.getCode());
 			final long start = System.currentTimeMillis();
-			snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));
+			//snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));
+			snippet.setCodeHtml(form.getCode());
 			snippet.setRenderTime(System.currentTimeMillis() - start);
 
 			return database.saveCodeSnippet(snippet).map((id) -> {
@@ -92,6 +96,19 @@ public class CodeController {
 		if (deleteId.isPresent() && database.deleteCodeSnippet(deleteId.get()))
 			return "redirect:/?info=deleteOk";
 		return "redirect:/?info=deleteError";
+	}
+
+	@RequestMapping(path = "/opts")
+	public String skin(@RequestParam(name = "skin", required = false) Optional<String> theme,
+	                   @RequestParam(name = "lang", required = false) Optional<String> lang,
+	                   HttpServletRequest request, HttpServletResponse response) {
+		theme.ifPresent((skin) -> cookies.setSkin(response, Skin.checkSkin(skin)));
+		lang.ifPresent((language) -> cookies.setLang(response, Lang.checkLang(language)));
+
+		// TODO: check this in the real world.
+		return "redirect:" + Optional.ofNullable(request.getHeader(HttpHeaders.HOST)).map((host) ->
+			Optional.ofNullable(request.getHeader(HttpHeaders.REFERER)).map((referer) ->
+				referer.substring(referer.lastIndexOf(host) + host.length()))).map(Optional::get).orElse("/");
 	}
 
 	private void readCookies(Model model, CodeForm form, HttpServletRequest request) {
