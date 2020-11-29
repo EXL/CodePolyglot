@@ -2,6 +2,9 @@ package ru.exlmoto.code.highlight.implementation;
 
 import org.python.util.PythonInterpreter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Component;
 
 import ru.exlmoto.code.helper.UtilityHelper;
@@ -12,6 +15,8 @@ import java.util.Optional;
 
 @Component
 public class HighlightPygments extends Highlight {
+	private final Logger log = LoggerFactory.getLogger(HighlightPygments.class);
+
 	private final UtilityHelper util;
 
 	private boolean useJython = false;
@@ -67,7 +72,7 @@ public class HighlightPygments extends Highlight {
 			"formatter = HtmlFormatter(nowrap=True)" + "\n" +
 			"lexer = get_lexer_by_name('" + language + "')" + "\n" +
 			"\n" +
-			"highlight(str(source), lexer, formatter)";
+			"highlight(source, lexer, formatter)";
 
 		return execute(renderLanguageSnippet);
 	}
@@ -79,9 +84,9 @@ public class HighlightPygments extends Highlight {
 		final String renderAutoSnippet =
 //			"source = \"\"\"\n" + StringUtils.escapeJava(code) + "\n\"\"\"" + "\n" +
 			"formatter = HtmlFormatter(nowrap=True)" + "\n" +
-			"lexer = guess_lexer(str(source))" + "\n" +
+			"lexer = guess_lexer(source)" + "\n" +
 			"\n" +
-			"highlight(str(source), lexer, formatter)";
+			"highlight(source, lexer, formatter)";
 
 		return execute(renderAutoSnippet);
 	}
@@ -89,7 +94,12 @@ public class HighlightPygments extends Highlight {
 	@Override
 	protected void importValue(String name, String value) {
 		if (useJython)
-			jython.set(name, value);
+			try {
+				jython.set(name, value);
+			} catch (RuntimeException re) {
+				log.error(String.format("Cannot import '%s' value to Jython context: '%s'.",
+					name, re.getLocalizedMessage()), re);
+			}
 		else
 			super.importValue(name, value);
 	}
@@ -97,8 +107,13 @@ public class HighlightPygments extends Highlight {
 	@Override
 	protected Optional<String> execute(String sourceCode) {
 		if (useJython) {
-			jython.exec(util.injectChunkToLastLineStart(sourceCode, "result="));
-			return Optional.ofNullable(jython.get("result", String.class));
+			try {
+				jython.exec(util.injectChunkToLastLineStart(sourceCode, "result="));
+				return Optional.ofNullable(jython.get("result", String.class));
+			} catch (RuntimeException re) {
+				log.error(String.format("Cannot execute code with Jython: '%s'.", re.getLocalizedMessage()), re);
+				return Optional.empty();
+			}
 		} else
 			return super.execute(sourceCode);
 	}
