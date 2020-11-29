@@ -10,13 +10,51 @@ public enum Mode {
 		switch (mode) {
 			default:
 			case HighlightJs:
-				return "Highlight.js/GraalVM (fast)";
+				return "Highlight.js";
 			case HighlightRouge:
-				return "Rouge/GraalVM (moderate)";
-			case HighlightPygmentsJython:
-				return "Pygments/Jython (slow)";
+				return "Rouge";
 			case HighlightPygments:
-				return "Pygments/GraalVM (very slow)";
+			case HighlightPygmentsJython:
+				return "Pygments";
+		}
+	}
+
+	public static String getVm(Mode mode) {
+		switch (mode) {
+			default:
+			case HighlightJs:
+			case HighlightRouge:
+			case HighlightPygments:
+				return "GraalVM";
+			case HighlightPygmentsJython:
+				return "Jython";
+		}
+	}
+
+	public static String getSpeed(Mode mode) {
+		switch (mode) {
+			default:
+			case HighlightJs:
+				return "code.fast";
+			case HighlightRouge:
+				return "code.moderate";
+			case HighlightPygmentsJython:
+				return "code.slow";
+			case HighlightPygments:
+				return "code.very_slow";
+		}
+	}
+
+	public static String getLang(Mode mode) {
+		switch (mode) {
+			default:
+			case HighlightJs:
+				return "JavaScript";
+			case HighlightRouge:
+				return "Ruby";
+			case HighlightPygments:
+			case HighlightPygmentsJython:
+				return "Python";
 		}
 	}
 

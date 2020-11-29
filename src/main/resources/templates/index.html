@@ -18,13 +18,7 @@
 					<h1>Code Polyglot</h1>
 				</div>
 				<div class="options">
-					<span>Server-side syntax code highlighting:</span>
-					<div th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
-						<label>
-							<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
-							<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></span>
-						</label>
-					</div>
+
 				</div>
 				<div class="recent">
 					<h4 th:text="#{code.recent}">Recent</h4>
@@ -37,16 +31,51 @@
 			</div>
 			<div class="content">
 				<div>
-					<label for="title">Title:</label>
-					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
-					<label for="options">Options:</label>
-					<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
+					<div class="code-highlight">
+						<span>Server-side syntax code highlighting:</span>
+						<table>
+							<tr>
+								<td><span></span></td>
+								<td><span>Library</span></td>
+								<td><span>VM</span></td>
+								<td><span>Speed</span></td>
+							</tr>
+							<tr th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
+								<td>
+									<label>
+										<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+									</label>
+								</td>
+								<td>
+									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></span>
+								</td>
+								<td>
+									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></span>
+								</td>
+								<td>
+									<span th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+				<div class="code-title">
+					<label>
+						<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
+					</label>
 				</div>
-				<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
-				<div class="form-block">
-					<label for="code-area">Code:</label>
-					<br/>
-					<textarea id="code-area" maxlength="262144" rows="20" cols="120" th:field="*{code}">Source</textarea>
+				<div class="code-options">
+					<label>
+						<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
+					</label>
+				</div>
+				</div>
+				<div th:if="${code}" th:utext="${code}" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" id="code">Code Container</div>
+				<div>
+					<div class="form-block">
+						<label>
+							<textarea id="code-area" maxlength="262144" rows="20" cols="120" th:field="*{code}">Source</textarea>
+						</label>
+					</div>
 				</div>
 				<p><input class="button" type="submit" value="Render"/></p>
 				<div th:if="*{renderTime}" class="form-render">
