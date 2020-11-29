@@ -1,3 +1,6 @@
+.sidebar { float: left; width: 200px; }
+.content { margin-left: 210px; }
+.footer { clear: both; }
 .code-table { font-family: monospace; border-spacing: 0; border-collapse: collapse; }
 .code-table .hll { background-color: #ffffcc }
 .code-table pre { margin: 0; }

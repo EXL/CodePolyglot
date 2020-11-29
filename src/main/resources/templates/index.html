@@ -12,15 +12,23 @@
 </head>
 <body>
 	<div class="page">
-		<div th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
-		<br/>
-		<br/>
-		<div th:if="${!snippets.isEmpty()}" class="last">
-			<div th:each="snippet : ${snippets}">
-				<a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
+		<div class="sidebar">
+			<div class="header">
+
+			</div>
+			<div class="options">
+
+			</div>
+			<div class="recent">
+				<div th:if="${!snippets.isEmpty()}" class="last">
+					<div th:each="snippet : ${snippets}">
+						<a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="edit">
+		<div class="content">
+			<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
 			<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
 				<div>
 					<label for="title">Title:</label>
@@ -48,7 +56,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="options">
+		<div class="footer">
 			<a th:href="${'/opts/?lang=ru'}">Русский</a>
 			<a th:href="${'/opts/?lang=en'}">English</a>
 			<a th:href="${'/opts/?skin=techno'}">Techno</a>
