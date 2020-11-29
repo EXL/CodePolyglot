@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ru.exlmoto.code.configuration.CodeConfiguration;
 import ru.exlmoto.code.entity.CodeEntity;
 import ru.exlmoto.code.form.CodeForm;
 import ru.exlmoto.code.highlight.HighlightService;
@@ -29,13 +30,15 @@ public class CodeController {
 	private final CookieHelper cookies;
 	private final DatabaseService database;
 	private final HighlightService highlight;
+	private final CodeConfiguration config;
 
-	public CodeController(UtilityHelper util, CookieHelper cookies,
-	                      DatabaseService database, HighlightService highlight) {
+	public CodeController(UtilityHelper util, CookieHelper cookies, DatabaseService database,
+	                      HighlightService highlight, CodeConfiguration config) {
 		this.util = util;
 		this.cookies = cookies;
 		this.database = database;
 		this.highlight = highlight;
+		this.config = config;
 	}
 
 	@RequestMapping(path = { "/", "/{id}" })
@@ -44,14 +47,16 @@ public class CodeController {
 	                    HttpServletRequest request, Model model, CodeForm form) {
 		readCookies(model, form, request);
 		id.flatMap(sId -> util.getLong(sId).flatMap(database::getCodeSnippet)).ifPresent((snippet) -> {
-				Optional.ofNullable(snippet.getTitle()).ifPresent(form::setTitle);
-				Optional.ofNullable(snippet.getOptions()).ifPresent(form::setOptions);
-				form.setHighlight(Mode.getMode(snippet.getHighlight()));
-				form.setCode(snippet.getCodeRaw());
-				form.setRenderTime(snippet.getRenderTime());
-				model.addAttribute("code", snippet.getCodeHtml());
-				model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
+			Optional.ofNullable(snippet.getTitle()).ifPresent(form::setTitle);
+			Optional.ofNullable(snippet.getOptions()).ifPresent(form::setOptions);
+			form.setHighlight(Mode.getMode(snippet.getHighlight()));
+			form.setCode(snippet.getCodeRaw());
+			form.setRenderTime(snippet.getRenderTime());
+			model.addAttribute("code", snippet.getCodeHtml());
+			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
+		model.addAttribute("snippets",
+			util.generateSnippetLinks(database.getCodeSnippets(config.getSnippetCount()), cookies.getLang(request)));
 		model.addAttribute("form", form);
 
 		return "index";
@@ -91,6 +96,7 @@ public class CodeController {
 
 	private void readCookies(Model model, CodeForm form, HttpServletRequest request) {
 		model.addAttribute(CookieHelper.SKIN, cookies.getSkin(request));
+		model.addAttribute(CookieHelper.LANG, cookies.getLang(request));
 		form.setOptions(cookies.getOptions(request));
 		form.setHighlight(cookies.getHighlight(request));
 	}

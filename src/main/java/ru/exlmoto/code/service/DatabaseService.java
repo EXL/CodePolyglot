@@ -4,11 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import ru.exlmoto.code.entity.CodeEntity;
 import ru.exlmoto.code.repository.CodeRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +55,15 @@ public class DatabaseService {
 				id, dae.getLocalizedMessage()), dae);
 		}
 		return false;
+	}
+
+	public List<CodeEntity> getCodeSnippets(int count) {
+		try {
+			return codeRepository.findAllByOrderByIdDesc(PageRequest.of(0, count));
+		} catch (DataAccessException dae) {
+			log.error(String.format("Cannot get page with Code Snippets (count: '%d') from database: '%s'.",
+				count, dae.getLocalizedMessage()), dae);
+		}
+		return new ArrayList<>();
 	}
 }
