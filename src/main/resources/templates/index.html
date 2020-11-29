@@ -20,6 +20,7 @@
 
 			</div>
 			<div class="recent">
+				<h4 th:text="#{code.recent}">Recent</h4>
 				<div th:if="${!snippets.isEmpty()}" class="last">
 					<div th:each="snippet : ${snippets}">
 						<a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
