@@ -1,3 +1,4 @@
+#code { overflow-x: auto; }
 .sidebar { float: left; width: 200px; }
 .content { margin-left: 210px; }
 .footer { clear: both; }

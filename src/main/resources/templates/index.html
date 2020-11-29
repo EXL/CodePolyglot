@@ -12,32 +12,12 @@
 </head>
 <body>
 	<div class="page">
-		<div class="sidebar">
-			<div class="header">
-
-			</div>
-			<div class="options">
-
-			</div>
-			<div class="recent">
-				<h4 th:text="#{code.recent}">Recent</h4>
-				<div th:if="${!snippets.isEmpty()}" class="last">
-					<div th:each="snippet : ${snippets}">
-						<a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
-					</div>
+		<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
+			<div class="sidebar">
+				<div class="header">
+					<h1>Code Polyglot</h1>
 				</div>
-			</div>
-		</div>
-		<div class="content">
-			<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
-			<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
-				<div>
-					<label for="title">Title:</label>
-					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
-					<label for="options">Options:</label>
-					<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
-				</div>
-				<div>
+				<div class="options">
 					<span>Server-side syntax code highlighting:</span>
 					<div th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
 						<label>
@@ -46,6 +26,23 @@
 						</label>
 					</div>
 				</div>
+				<div class="recent">
+					<h4 th:text="#{code.recent}">Recent</h4>
+					<div th:if="${!snippets.isEmpty()}" class="last">
+						<div th:each="snippet : ${snippets}">
+							<a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div>
+					<label for="title">Title:</label>
+					<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
+					<label for="options">Options:</label>
+					<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
+				</div>
+				<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
 				<div class="form-block">
 					<label for="code-area">Code:</label>
 					<br/>
@@ -55,8 +52,8 @@
 				<div th:if="*{renderTime}" class="form-render">
 					Render: <span th:utext="*{renderTime}"></span>ms.
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 		<div class="footer">
 			<a th:href="${'/opts/?lang=ru'}">Русский</a>
 			<a th:href="${'/opts/?lang=en'}">English</a>
