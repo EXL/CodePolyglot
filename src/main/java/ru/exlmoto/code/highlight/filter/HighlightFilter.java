@@ -22,24 +22,19 @@ public class HighlightFilter {
 	}
 
 	public String tableCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table), Filter.table);
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table));
 	}
 
 	public String tableCodePlain(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(filterLines(codeLines, 0, 0, Filter.plain), hStart, hEnd, Filter.table),
-			Filter.table);
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table_plain));
 	}
 
 	public String simpleCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.simple), Filter.simple);
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.simple));
 	}
 
 	public String plainCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain), Filter.plain);
-	}
-
-	public String plainCodeLines(String codeLines, long hStart, long hEnd) {
-		return filterLines(codeLines, hStart, hEnd, Filter.plain);
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain));
 	}
 
 	protected String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
@@ -59,39 +54,25 @@ public class HighlightFilter {
 		return sb.toString();
 	}
 
-	protected String filterBlock(String codeLines, Filter filter) {
-		switch (filter) {
-			default:
-			case table:
-				return "<table class=\"code-table\">" + codeLines + "</table>";
-			case simple:
-			case plain:
-				return "<pre><code>" + codeLines + "</pre></code>";
-		}
+	private String filterBlock(String codeLines) {
+		return "<table class=\"code-table\">" + codeLines + "</table>";
 	}
 
 	private void filterLinesAux(StringBuilder stringBuilder,
 	                            long i, long hStart, long hEnd,
 	                            String line, Filter filter) {
-		final String codeLine = (filter == Filter.plain) ? Encode.forHtml(line) : line;
-		switch (filter) {
-			default:
-			case table: {
-				String id = (i % 10 == 0) ? "<strong>" + i + "</strong>" : String.valueOf(i);
-				stringBuilder.append("<tr id=\"line-").append(i);
-				stringBuilder.append(((i >= hStart) && (i <= hEnd)) ? "\" class=\"hll\">" : "\">");
-				stringBuilder.append("<td class=\"code-table-line\">");
-				stringBuilder.append("<a href=\"#line-").append(i).append("\">").append(id).append("</a></td>");
-				stringBuilder.append("<td class=\"code-table-code\">").append(codeLine).append("\n</td></tr>");
-				break;
-			}
-			case simple:
-			case plain: {
-				stringBuilder.append(((i >= hStart) && (i <= hEnd)) ?
-					"<span class=\"hll\">" + codeLine : "<span>" + codeLine);
-				stringBuilder.append("</span>\n");
-				break;
-			}
+		final String codeLine = (filter == Filter.plain || filter == Filter.table_plain) ? Encode.forHtml(line) : line;
+		final String codeLineClass = (i % 2 == 0) ? "l-code" : "d-code";
+		final String tableLineClass = (i % 2 == 0) ? "l-table" : "d-table";
+		final boolean hll = ((i >= hStart) && (i <= hEnd));
+		final String id = (i % 10 == 0) ? "<strong>" + i + "</strong>" : String.valueOf(i);
+		stringBuilder.append("<tr id=\"line-").append(i);
+		stringBuilder.append(hll ? "\" class=\"hll\">" : "\">");
+		if (filter == Filter.table || filter == Filter.table_plain) {
+			stringBuilder.append("<td class=\"table-line").append(hll ? "" : " " + tableLineClass).append("\">");
+			stringBuilder.append("<a href=\"#line-").append(i).append("\">").append(id).append("</a></td>");
 		}
+		stringBuilder.append("<td class=\"code-line").append(hll ? "" : " " + codeLineClass).append("\">");
+		stringBuilder.append(codeLine).append("\n</td></tr>");
 	}
 }

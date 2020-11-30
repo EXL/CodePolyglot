@@ -121,22 +121,18 @@ public class HighlightService {
 		switch (mode) {
 			default:
 			case HighlightJs: {
-				return highlightJs.renderHtmlFromCode(options.getLanguage(), code)
-					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+				return highlightJs.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
 			}
 			case HighlightRouge: {
-				return highlightRouge.renderHtmlFromCode(options.getLanguage(), code)
-					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+				return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
 			}
 			case HighlightPygments: {
 				highlightPygments.setUseJython(false);
-				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code)
-					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
 			}
 			case HighlightPygmentsJython: {
 				highlightPygments.setUseJython(true);
-				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code)
-					.orElse(highlightFilter.plainCodeLines(code, options.gethStart(), options.gethEnd()));
+				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
 			}
 		}
 	}
