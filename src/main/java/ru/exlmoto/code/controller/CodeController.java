@@ -32,15 +32,15 @@ public class CodeController {
 	private final UtilityHelper util;
 	private final CookieHelper cookies;
 	private final DatabaseService database;
-//	private final HighlightService highlight;
+	private final HighlightService highlight;
 	private final CodeConfiguration config;
 
 	public CodeController(UtilityHelper util, CookieHelper cookies, DatabaseService database,
-	                      /*HighlightService highlight,*/ CodeConfiguration config) {
+	                      HighlightService highlight, CodeConfiguration config) {
 		this.util = util;
 		this.cookies = cookies;
 		this.database = database;
-//		this.highlight = highlight;
+		this.highlight = highlight;
 		this.config = config;
 	}
 
@@ -77,8 +77,8 @@ public class CodeController {
 			snippet.setHighlight(form.getHighlight().name());
 			snippet.setCodeRaw(form.getCode());
 			final long start = System.currentTimeMillis();
-			//snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));
-			snippet.setCodeHtml(form.getCode());
+			snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));
+//			snippet.setCodeHtml(form.getCode());
 			snippet.setRenderTime(System.currentTimeMillis() - start);
 
 			return database.saveCodeSnippet(snippet).map((id) -> {
