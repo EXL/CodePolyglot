@@ -30,8 +30,8 @@
 				</div>
 			</div>
 			<div class="content">
-				<h2>
-					<span th:if="*{title}" th:text="*{title}"></span> <span th:if="*{date}" th:text="*{date}"></span>
+				<h2 th:with="head=*{title}">
+					<span th:if="${head}" th:text="${head} + ' |'"></span> <span th:if="*{date}" th:text="*{date}"></span>
 				</h2>
 				<div class="code-highlight">
 					<span>Server-side syntax code highlighting:</span>

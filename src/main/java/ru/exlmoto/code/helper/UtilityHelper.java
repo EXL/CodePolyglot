@@ -61,7 +61,7 @@ public class UtilityHelper {
 
 	public String getSimpleSnippetName(String title, String language, long timestamp) {
 		if (StringUtils.hasText(title))
-			return (title.length() > 10) ? title.substring(0, 10) + "…" : title;
+			return (title.length() > 20) ? title.substring(0, 20) + "…" : title;
 		else
 			return getDateFromTimeStamp(config.getDateFormat(), Locale.forLanguageTag(language), timestamp);
 	}
