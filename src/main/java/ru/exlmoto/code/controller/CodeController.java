@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.validation.Valid;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -55,11 +56,15 @@ public class CodeController {
 			form.setHighlight(Mode.getMode(snippet.getHighlight()));
 			form.setCode(snippet.getCodeRaw());
 			form.setRenderTime(snippet.getRenderTime());
+			form.setDate(util.getDateFromTimeStamp(config.getDateFormatFull(),
+				Locale.forLanguageTag(cookies.getLang(request)), snippet.getTimestamp()));
 			model.addAttribute("code", snippet.getCodeHtml());
 			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
 		model.addAttribute("snippets",
 			util.generateSnippetLinks(database.getCodeSnippets(config.getSnippetCount()), cookies.getLang(request)));
+		model.addAttribute("versions", highlight.getVersions());
+		model.addAttribute("version", highlight.getGraalVMVersion());
 		model.addAttribute("form", form);
 
 		return "index";

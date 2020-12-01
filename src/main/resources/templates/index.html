@@ -30,34 +30,40 @@
 				</div>
 			</div>
 			<div class="content">
-				<div>
-					<div class="code-highlight">
-						<span>Server-side syntax code highlighting:</span>
-						<table>
-							<tr>
-								<td><span></span></td>
-								<td><span>Library</span></td>
-								<td><span>VM</span></td>
-								<td><span>Speed</span></td>
-							</tr>
-							<tr th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
-								<td>
-									<label>
-										<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
-									</label>
-								</td>
-								<td>
-									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode)}"></span>
-								</td>
-								<td>
-									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></span>
-								</td>
-								<td>
-									<span th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></span>
-								</td>
-							</tr>
-						</table>
-					</div>
+				<h2>
+					<span th:if="*{title}" th:text="*{title}"></span> <span th:if="*{date}" th:text="*{date}"></span>
+				</h2>
+				<div class="code-highlight">
+					<span>Server-side syntax code highlighting:</span>
+					<table>
+						<tr>
+							<td><span></span></td>
+							<td><span>Language version</span></td>
+							<td><span>Library version</span></td>
+							<td><span>VM</span></td>
+							<td><span>Speed</span></td>
+						</tr>
+						<tr th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
+							<td>
+								<label>
+									<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+								</label>
+							</td>
+							<td>
+								<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></span>
+							</td>
+							<td>
+								<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + versions.get(mode).getSecond()}"></span>
+							</td>
+							<td>
+								<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></span>
+							</td>
+							<td>
+								<span th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
 				<div class="code-title">
 					<label>
 						<input id="title" type="text" th:field="*{title}" placeholder="(Optional)" size="35"/>
@@ -67,7 +73,6 @@
 					<label>
 						<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
 					</label>
-				</div>
 				</div>
 				<div th:if="${code}" th:utext="${code}" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" id="code">Code Container</div>
 				<div>
@@ -88,6 +93,7 @@
 			<a th:href="${'/opts/?lang=en'}">English</a>
 			<a th:href="${'/opts/?skin=techno'}">Techno</a>
 			<a th:href="${'/opts/?skin=pastorg'}">Pastorg</a>
+			<span th:text="${version}"></span>
 		</div>
 	</div>
 </body>

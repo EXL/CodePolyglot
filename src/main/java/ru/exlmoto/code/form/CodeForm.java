@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CodeForm {
+	private String date;
 	private String title;
 	private String options;
 
@@ -16,6 +17,14 @@ public class CodeForm {
 	private Mode highlight;
 
 	private Long renderTime;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getTitle() {
 		return title;
@@ -60,7 +69,8 @@ public class CodeForm {
 	@Override
 	public String toString() {
 		return "CodeForm{" +
-			"title='" + title + '\'' +
+			"date='" + date + '\'' +
+			", title='" + title + '\'' +
 			", options='" + options + '\'' +
 			", code='" + "<skipped>" + '\'' +
 			", highlight=" + highlight +
