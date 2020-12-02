@@ -109,10 +109,7 @@ public class CodeController {
 		theme.ifPresent((skin) -> cookies.setSkin(response, Skin.checkSkin(skin)));
 		lang.ifPresent((language) -> cookies.setLang(response, Lang.checkLang(language)));
 
-		// TODO: check this in the real world.
-		return "redirect:" + Optional.ofNullable(request.getHeader(HttpHeaders.HOST)).map((host) ->
-			Optional.ofNullable(request.getHeader(HttpHeaders.REFERER)).map((referer) ->
-				referer.substring(referer.lastIndexOf(host) + host.length()))).map(Optional::get).orElse("/");
+		return "redirect:" + Optional.ofNullable(request.getHeader(HttpHeaders.REFERER)).orElse("/");
 	}
 
 	private void readCookies(Model model, CodeForm form, HttpServletRequest request) {
