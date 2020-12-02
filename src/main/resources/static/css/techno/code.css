@@ -1,6 +1,12 @@
-.page { font-size: 12px; }
-.sidebar { float: left; width: 200px; }
-.content { margin-left: 210px; }
+textarea, input, button, body { background: #CCC; color: #000; }
+textarea, button, input { border: 1px #777 solid; font-family: monospace; }
+.block { background: #FFF; padding: 5px; border: 1px #777 solid; }
+.head { text-align: center; }
+.md { font-size: 20px; }
+.code-highlight { float: right; }
+.page { font: 11px sans-serif; }
+.sidebar { float: left; width: 160px; margin-bottom: 5px; }
+.content { margin-left: 170px; }
 .footer { clear: both; }
 #code { overflow-x: auto; }
 .code-table { font-family: monospace; border-spacing: 0; border-collapse: collapse; }
