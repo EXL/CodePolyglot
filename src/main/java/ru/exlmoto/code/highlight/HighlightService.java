@@ -26,6 +26,7 @@ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
 
+/*
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
@@ -135,5 +136,32 @@ public class HighlightService {
 				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
 			}
 		}
+	}
+}
+*/
+
+// Stub service class.
+@Service
+public class HighlightService {
+	private final Map<Mode, Pair<String, String>> versions;
+
+	public HighlightService() {
+		this.versions = new HashMap<>();
+		versions.put(HighlightJs, Pair.of("20.3.0", "10.0.1"));
+		versions.put(HighlightRouge, Pair.of("2.6.6.", "3.1.0"));
+		versions.put(HighlightPygments, Pair.of("3.8.0", "2.7.2"));
+		versions.put(HighlightPygmentsJython, Pair.of("2.7.2", "2.6.2"));
+	}
+
+	public Map<Mode, Pair<String, String>> getVersions() {
+		return versions;
+	}
+
+	public String getGraalVMVersion() {
+		return Version.getCurrent().toString();
+	}
+
+	public String highlightCode(Mode mode, String options, String code) {
+		return code;
 	}
 }
