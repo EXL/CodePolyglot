@@ -62,8 +62,8 @@ public class HighlightFilter {
 	                            long i, long hStart, long hEnd,
 	                            String line, Filter filter) {
 		final String codeLine = (filter == Filter.plain || filter == Filter.table_plain) ? Encode.forHtml(line) : line;
-		final String codeLineClass = (i % 2 == 0) ? "l-code" : "d-code";
-		final String tableLineClass = (i % 2 == 0) ? "l-table" : "d-table";
+		final String codeLineClass = (i % 2 == 0) ? "d-code" : "l-code";
+		final String tableLineClass = (i % 2 == 0) ? "d-table" : "l-table";
 		final boolean hll = ((i >= hStart) && (i <= hEnd));
 		final String id = (i % 10 == 0) ? "<strong>" + i + "</strong>" : String.valueOf(i);
 		stringBuilder.append("<tr id=\"line-").append(i);
