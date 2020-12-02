@@ -83,7 +83,6 @@ public class CodeController {
 			snippet.setCodeRaw(form.getCode());
 			final long start = System.currentTimeMillis();
 			snippet.setCodeHtml(highlight.highlightCode(form.getHighlight(), filteredOptions, form.getCode()));
-//			snippet.setCodeHtml(form.getCode());
 			snippet.setRenderTime(System.currentTimeMillis() - start);
 
 			return database.saveCodeSnippet(snippet).map((id) -> {

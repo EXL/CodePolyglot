@@ -50,7 +50,7 @@ public class HighlightService {
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
 
-		versions = new HashMap<>();
+		this.versions = new HashMap<>();
 	}
 
 	@PostConstruct
