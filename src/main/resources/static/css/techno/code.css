@@ -1,15 +1,23 @@
-textarea, input, button, body { background: #CCC; color: #000; }
-textarea, button, input { border: 1px #777 solid; font-family: monospace; }
+a { color: darkred; text-decoration: none; }
+a:visited { color: gray; }
+a:hover { color: darkorange; }
+h2, h4 { margin-top: 0; margin-bottom: 10px; }
+textarea, input, body { background: #CCC; color: #000; }
+textarea, input { border: 1px #777 solid; font-family: monospace; }
+input { margin-bottom: 5px; padding: 2px; }
+textarea { padding: 2px; resize: none; white-space: pre; }
+.button { padding: 2px; width: 77px; }
 .block { background: #FFF; padding: 5px; border: 1px #777 solid; }
-.head { text-align: center; }
-.md { font-size: 20px; }
-.code-highlight { float: right; }
-.page { font: 11px sans-serif; }
-.sidebar { float: left; width: 160px; margin-bottom: 5px; }
-.content { margin-left: 170px; }
+.head-site { text-align: center; }
+.head-code { margin-bottom: 0; }
+.md { font-size: 16px; }
+.code-highlight { width: 405px; }
+.page { font: 11px "DejaVu Sans", sans-serif; border: 1px #777 solid; max-width: 1360px; min-width: 1260px; position: relative; margin-left: auto; margin-right: auto; padding: 5px; }
+.sidebar { float: left; width: 160px; margin-bottom: 5px; min-height: 700px; }
+.content { margin-left: 170px; margin-bottom: 10px; }
 .footer { clear: both; }
 #code { overflow-x: auto; }
-.code-table { font-family: monospace; border-spacing: 0; border-collapse: collapse; }
+.code-table { width: 100%; font: 12px monospace; border-spacing: 0; border-collapse: collapse; }
 .code-table .hll { background-color: #ffffcc }
 .code-table pre { margin: 0; }
 .table-line a { text-decoration: none; color: maroon; }
@@ -20,3 +28,12 @@ textarea, button, input { border: 1px #777 solid; font-family: monospace; }
 .l-table { background: aliceblue; }
 .d-code { background: lightgray; }
 .d-table { background: lightblue; }
+#options { width: 520px; }
+#code-area { width: 630px; height: 240px; }
+.grid { display: grid; grid-template-columns: 645px 400px; }
+.first { display: inline-block; width: 26px; }
+#title { width: 100%; }
+.table { display: table; border-collapse: collapse; width: 100%; margin-bottom: 10px; }
+.table-row  { display: table-row; }
+.table-cell { display: table-cell; border: 1px solid #777; text-align: center; vertical-align: middle; padding: 2px; }
+/*.form-render {  }*/

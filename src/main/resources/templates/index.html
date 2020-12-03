@@ -12,80 +12,71 @@
 </head>
 <body>
 	<div class="page">
-		<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
-			<div class="sidebar">
-				<div class="header">
-					<a href="/"><h3 class="head block">Code Polyglot</h3></a>
-				</div>
-				<div class="recent block">
-					<h4 class="head" th:text="#{code.recent}">Recent Snippets</h4>
-					<div th:if="${!snippets.isEmpty()}" class="last">
-						<div th:each="snippet : ${snippets}">
-							- <a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
-						</div>
+		<div class="sidebar">
+			<a href="/"><h2 class="head-site block">Code Polyglot</h2></a>
+			<div class="recent block">
+				<h4 class="head-site" th:text="#{code.recent}">Recent Snippets</h4>
+				<div th:if="${!snippets.isEmpty()}" class="last">
+					<div th:each="snippet : ${snippets}">
+						- <a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
 					</div>
 				</div>
 			</div>
-			<div class="content">
-				<h2 th:with="head=*{title}">
-					<span th:if="${head}" th:text="${head} + ' |'"></span> <span th:if="*{date}" th:text="*{date}"></span>
+		</div>
+		<form id="code-form" th:action="@{/edit}" th:object="${form}" method="post">
+			<div th:if="${code}" class="content block">
+				<h2 class="head-code" th:if="*{title}" th:with="head=*{title}">
+					<span th:text="${head} + ' |'"></span> <span th:if="*{date}" th:text="*{date}"></span>
 				</h2>
+			</div>
+			<div th:if="${code}" class="content block">
+				<div th:utext="${code}" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" id="code">Code Container</div>
+			</div>
+			<div class="content block grid">
 				<div class="code-options">
+					<div class="md first">```</div>
 					<label>
-						<span class="md">```</span>
-						<input id="options" type="text" th:field="*{options}" placeholder="java" size="35"/>
+						<input id="options" type="text" th:field="*{options}" placeholder="java"/>
+					</label>
+					<input class="button" type="submit" value="Render!"/>
+				</div>
+				<div class="code-title">
+					<label>
+						<input id="title" type="text" th:field="*{title}" placeholder="(Optional Title)" size="35"/>
 					</label>
 				</div>
-				<div th:if="${code}" th:utext="${code}" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" id="code">Code Container</div>
 				<div class="form-block">
 					<label>
-						<textarea id="code-area" maxlength="262144" rows="20" cols="120" th:field="*{code}">Source</textarea>
+						<textarea id="code-area" maxlength="262144" th:field="*{code}" autofocus placeholder="Please paste code here and click Render! button...">Source</textarea>
 					</label>
-					<div class="code-highlight">
-						<div class="code-title">
-							<label>
-								<input id="title" type="text" th:field="*{title}" placeholder="(Optional Title)" size="35"/>
-							</label>
+				</div>
+				<div class="code-highlight">
+					<div class="table">
+						<div class="table-row">
+							<div class="table-cell"></div>
+							<div class="table-cell">Language</div>
+							<div class="table-cell">Library</div>
+							<div class="table-cell">VM</div>
+							<div class="table-cell">Speed</div>
 						</div>
-						<span>Server-side syntax code highlighting:</span>
-						<table>
-							<tr>
-								<td><span></span></td>
-								<td><span>Language version</span></td>
-								<td><span>Library version</span></td>
-								<td><span>VM</span></td>
-								<td><span>Speed</span></td>
-							</tr>
-							<tr th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
-								<td>
-									<label>
-										<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
-									</label>
-								</td>
-								<td>
-									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></span>
-								</td>
-								<td>
-									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + versions.get(mode).getSecond()}"></span>
-								</td>
-								<td>
-									<span th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></span>
-								</td>
-								<td>
-									<span th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></span>
-								</td>
-							</tr>
-						</table>
-						<p><input class="button" type="submit" value="Render"/></p>
-						<div th:if="*{renderTime}" class="form-render">
-							Render: <span th:utext="*{renderTime}"></span>ms.
+						<div th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}" class="table-row">
+							<div class="table-cell">
+								<label>
+									<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+								</label>
+							</div>
+							<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></div>
+							<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + versions.get(mode).getSecond()}"></div>
+							<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></div>
+							<div class="table-cell" th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></div>
 						</div>
 					</div>
-					<div class="md">```</div>
+					<div class="form-render" th:if="*{renderTime}">Server-side Syntax Highlighting Render Time: <span th:utext="*{renderTime}"></span>ms.</div>
 				</div>
+				<div class="md">```</div>
 			</div>
 		</form>
-		<div class="footer head block">
+		<div class="footer head-site block">
 			<a th:href="${'/opts/?lang=ru'}">Русский</a>
 			<a th:href="${'/opts/?lang=en'}">English</a>
 			<a th:href="${'/opts/?skin=techno'}">Techno</a>
