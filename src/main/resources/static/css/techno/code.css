@@ -44,3 +44,8 @@ textarea { padding: 2px; resize: none; white-space: pre; }
 .radio-mark { position: absolute; top: 0; left: 0; height: 10px; width: 10px; background-color: grey; }
 .radio-container:hover input ~ .radio-mark { background-color: orangered; }
 .radio-container input:checked ~ .radio-mark { background-color: darkred; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: silver; }
+::-webkit-scrollbar-thumb { background: grey; }
+:root { scrollbar-color: grey silver !important; scrollbar-width: 10px !important; }
+textarea:focus, input:focus { outline: none; }
