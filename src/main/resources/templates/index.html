@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="${lang}" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" th:lang="${lang}" lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>Code Polyglot</title>
@@ -18,7 +18,7 @@
 				<h4 class="head-site" th:text="#{code.recent}">Recent Snippets</h4>
 				<div th:if="${!snippets.isEmpty()}" class="last">
 					<div th:each="snippet : ${snippets}">
-						- <a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a>
+						🡒 <a th:href="${'/' + snippet.getSecond()}" th:text="${snippet.getFirst()}"></a> <a class="right" sec:authorize="isAuthenticated()" th:href="${'/delete/' + snippet.getSecond()}">❌</a>
 					</div>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="form-block">
 					<label>
-						<textarea id="code-area" maxlength="262144" th:field="*{code}" autofocus placeholder="Please paste code here and click Render! button...">Source</textarea>
+						<textarea id="code-area" maxlength="262144" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" placeholder="Please paste code here and click Render! button...">Source</textarea>
 					</label>
 				</div>
 				<div class="code-highlight">
@@ -61,8 +61,9 @@
 						</div>
 						<div th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}" class="table-row">
 							<div class="table-cell">
-								<label>
+								<label class="radio-container">
 									<input type="radio" th:id="${mode}" th:value="${mode}" th:field="*{highlight}" name="syntax"/>
+									<span class="radio-mark"></span>
 								</label>
 							</div>
 							<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></div>
@@ -77,11 +78,9 @@
 			</div>
 		</form>
 		<div class="footer head-site block">
-			<a th:href="${'/opts/?lang=ru'}">Русский</a>
-			<a th:href="${'/opts/?lang=en'}">English</a>
-			<a th:href="${'/opts/?skin=techno'}">Techno</a>
-			<a th:href="${'/opts/?skin=pastorg'}">Pastorg</a>
-			<span th:text="${version}"></span>
+			<span class="left">Language: <a th:href="${'/opts/?lang=ru'}">Русский</a> | <a th:href="${'/opts/?lang=en'}">English</a></span>
+			<span class="center">© EXL, 2020 | Source Code: <a href="https://github.com/EXL/CodePolyglot">CodePolyglot</a> | Powered by GraalVM v<span th:text="${version}"></span></span>
+			<span class="right">Skin: <a th:href="${'/opts/?skin=techno'}">Techno</a> | <a th:href="${'/opts/?skin=pastorg'}">Pastorg</a></span>
 		</div>
 	</div>
 </body>
