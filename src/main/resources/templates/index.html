@@ -18,7 +18,7 @@
 					<h4 class="center header" th:text="#{code.recent}">Recent Snippets</h4>
 					<div th:if="${!snippets.isEmpty()}">
 						<div th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
-							🡒 <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">❌</a>
+							🡒 <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
 						</div>
 					</div>
 				</div>
@@ -82,6 +82,7 @@
 			</form>
 			<div class="footer block center">
 				<span class="left">
+					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:title="#{code.logout}">×</a>
 					<span th:text="#{code.lang}">Language:</span>
 					<a th:href="${'/opts/?lang=techno'}" th:text="#{code.lang.ru}" th:title="#{code.lang.ru}">Русский</a>
 					|
