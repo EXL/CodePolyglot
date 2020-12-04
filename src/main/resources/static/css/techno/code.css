@@ -57,7 +57,6 @@ textarea {
 .sidebar {
 	float: left;
 	width: 165px;
-	min-height: 700px;
 	margin-bottom: 5px;
 }
 .recent a:visited {
@@ -128,6 +127,7 @@ textarea {
 	width: 405px;
 }
 #code-form {
+	min-height: 700px;
 	margin-left: 175px;
 }
 #copy-label {
