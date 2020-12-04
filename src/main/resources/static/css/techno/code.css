@@ -64,7 +64,6 @@ textarea {
 	color: grey;
 }
 .content {
-	margin-left: 175px;
 	margin-bottom: 10px;
 }
 .grid {
@@ -107,6 +106,18 @@ textarea {
 .right {
 	float: right;
 }
+.buttons {
+	text-align: right;
+}
+.img-button {
+	border: 1px solid #777;
+}
+.img-button:hover {
+	background: orangered;
+}
+.hide {
+	display: none;
+}
 #options {
 	width: 520px;
 }
@@ -115,6 +126,12 @@ textarea {
 }
 #highlight {
 	width: 405px;
+}
+#code-form {
+	margin-left: 175px;
+}
+#copy-label {
+	vertical-align: super;
 }
 
 /* Code Block */
@@ -165,6 +182,7 @@ textarea {
 	background: darkgray;
 }
 #code {
+	border: 1px solid #777;
 	overflow-x: auto;
 }
 

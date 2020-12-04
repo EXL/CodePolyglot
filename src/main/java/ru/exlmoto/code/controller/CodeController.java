@@ -59,6 +59,7 @@ public class CodeController {
 			form.setDate(util.getDateFromTimeStamp(config.getDateFormatFull(),
 				Locale.forLanguageTag(cookies.getLang(request)), snippet.getTimestamp()));
 			model.addAttribute("code", snippet.getCodeHtml());
+			model.addAttribute("id", snippet.getId());
 			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
 		model.addAttribute("snippets",

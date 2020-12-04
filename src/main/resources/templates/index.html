@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="page">
-			<div class="sidebar">
+			<div id="panel" class="sidebar">
 				<a href="/" th:title="#{code.title}"><h2 class="block center header" th:text="#{code.title}">Code Polyglot!</h2></a>
 				<div class="block recent">
 					<h4 class="center header" th:text="#{code.recent}">Recent Snippets</h4>
@@ -23,13 +23,22 @@
 					</div>
 				</div>
 			</div>
-			<form method="post" th:action="@{/edit}" th:object="${form}">
+			<form id="code-form" method="post" th:action="@{/edit}" th:object="${form}">
 				<div class="content block" th:if="${code}">
 					<h2 th:if="*{title}" th:with="head=*{title}">
 						<span th:text="${head} + ' |'"></span> <span th:text="*{date}"></span>
 					</h2>
 				</div>
 				<div class="content block" th:if="${code}">
+					<div class="buttons">
+						<span id="copy-label" class="hide" th:text="#{code.toolbar.copied}"></span>
+						<img id="button-copy" class="img-button" width="20" height="16" src="../static/img/techno/copy.png" th:src="@{/img/__${skin}__/copy.png}" alt="Copy" th:alt="#{code.toolbar.copy}" th:title="#{code.toolbar.copy}"/>
+						<img id="button-wide" class="img-button" width="20" height="16" src="../static/img/techno/wide.png" th:src="@{/img/__${skin}__/wide.png}" alt="Toggle Sidebar" th:alt="#{code.toolbar.wide}" th:title="#{code.toolbar.wide}"/>
+						<img id="button-wrap" class="img-button" width="20" height="16" src="../static/img/techno/wrap.png" th:src="@{/img/__${skin}__/wrap.png}" alt="Toggle Wrap" th:alt="#{code.toolbar.wrap}" th:title="#{code.toolbar.wrap}"/>
+						<a target="_blank" th:href="@{/api/raw/__${id}__}">
+							<img id="button-raw" class="img-button" width="20" height="16" src="../static/img/techno/raw.png" th:src="@{/img/__${skin}__/raw.png}" alt="Raw" th:alt="#{code.toolbar.raw}" th:title="#{code.toolbar.raw}"/>
+						</a>
+					</div>
 					<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
 				</div>
 				<div class="content block grid">
@@ -47,7 +56,7 @@
 					</div>
 					<div>
 						<label>
-							<textarea maxlength="262144" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" th:placeholder="#{code.area.placeholder}"></textarea>
+							<textarea id="code-area" maxlength="262144" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" th:placeholder="#{code.area.placeholder}"></textarea>
 						</label>
 					</div>
 					<div id="highlight">

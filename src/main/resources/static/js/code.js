@@ -2,10 +2,35 @@ document.getElementById('code-area').onkeydown = function (event) {
 	if ((event.ctrlKey || event.metaKey) && (event.key === 'Enter')) {
 		document.getElementById('code-form').submit();
 	}
-	if ((event.key === 'l')) {
-		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre-wrap')
+}
+document.getElementById('button-copy').onclick = function () {
+	// document.querySelector('#code-area').focus();
+	document.querySelector('#code-area').select();
+	try {
+		document.execCommand('copy');
+		document.getElementById('copy-label').classList.remove('hide');
+		setTimeout(function () {
+			document.getElementById('copy-label').classList.add('hide');
+		}, 3000); // 3 seconds.
+	} catch (error) {
+		console.error('Unable to copy content from ".code-area" class to clipboard: "' + error + '".');
 	}
-	if ((event.key === 'r')) {
-		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre')
+}
+document.getElementById('button-wide').onclick = function () {
+	if (document.getElementById('panel').classList.toggle('hide')) {
+		document.getElementById('code-form').style.marginLeft = '0';
+		document.getElementById('button-wide').style.outline = '1px solid darkred';
+	} else {
+		document.getElementById('code-form').style.marginLeft = '175px';
+		document.getElementById('button-wide').style.outline = '';
+	}
+}
+document.getElementById('button-wrap').onclick = function () {
+	if (document.getElementById('panel').classList.toggle('toggle')) {
+		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre-wrap');
+		document.getElementById('button-wrap').style.outline = '1px solid darkred';
+	} else {
+		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre');
+		document.getElementById('button-wrap').style.outline = '';
 	}
 }
