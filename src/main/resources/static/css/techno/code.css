@@ -11,7 +11,7 @@ h2, h4 {
 	margin-bottom: 0;
 }
 textarea, input, body {
-	color: #000;
+	color: black;
 	background: #CCC;
 }
 textarea, input {
@@ -46,7 +46,7 @@ textarea {
 .block {
 	padding: 5px;
 	border: 1px #777 solid;
-	background: #FFF;
+	background: white;
 }
 .center {
 	text-align: center;
@@ -139,7 +139,10 @@ textarea {
 }
 .table-line a {
 	text-decoration: none;
-	color: darkblue;
+	color: black;
+}
+.table-line a:hover {
+	color: orangered;
 }
 .code-line {
 	padding-left: 5px;
@@ -147,19 +150,19 @@ textarea {
 	white-space: pre;
 }
 .code-line:hover {
-	background: lightgrey;
+	background: #EEE;
 }
 .l-code {
-	background: snow;
+	background: white;
 }
 .l-table {
-	background: aliceblue;
+	background: lightgray;
 }
 .d-code {
 	background: whitesmoke;
 }
 .d-table {
-	background: lightblue;
+	background: darkgray;
 }
 #code {
 	overflow-x: auto;
