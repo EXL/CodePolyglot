@@ -35,13 +35,13 @@ public enum Mode {
 		switch (mode) {
 			default:
 			case HighlightJs:
-				return "code.fast";
+				return "code.table.fast";
 			case HighlightRouge:
-				return "code.moderate";
+				return "code.table.moderate";
 			case HighlightPygmentsJython:
-				return "code.slow";
+				return "code.table.slow";
 			case HighlightPygments:
-				return "code.very_slow";
+				return "code.table.very.slow";
 		}
 	}
 

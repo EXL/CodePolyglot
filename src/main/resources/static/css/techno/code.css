@@ -1,51 +1,213 @@
-a { color: darkred; text-decoration: none; }
-a:visited { color: darkred; }
-a:hover { color: orangered; }
-h2, h4 { margin-top: 0; margin-bottom: 10px; }
-textarea, input, body { background: #CCC; color: #000; }
-textarea, input { border: 1px #777 solid; font-family: monospace; }
-input { margin-bottom: 5px; padding: 2px; }
-textarea { padding: 2px; resize: none; white-space: pre; }
-.button { padding: 2px; width: 77px; }
-.block { background: #FFF; padding: 5px; border: 1px #777 solid; }
-.head-site { text-align: center; }
-.head-code { margin-bottom: 0; }
-.md { font-size: 16px; }
-.code-highlight { width: 405px; }
-.page { font: 11px "DejaVu Sans", sans-serif; border: 1px #777 solid; max-width: 1360px; min-width: 1260px; position: relative; margin-left: auto; margin-right: auto; padding: 5px; }
-.sidebar { float: left; width: 165px; margin-bottom: 5px; min-height: 700px; }
-.content { margin-left: 175px; margin-bottom: 10px; }
-.footer { clear: both; }
-#code { overflow-x: auto; }
-.code-table { width: 100%; font: 12px monospace; border-spacing: 0; border-collapse: collapse; }
-.code-table .hll { background-color: #ffffcc }
-.code-table pre { margin: 0; }
-.table-line a { text-decoration: none; color: maroon; }
-.table-line { padding-right: 5px; white-space: nowrap; text-align: right; user-select: none; border-right: 1px solid green; }
-.code-line { padding-left: 5px; white-space: pre; text-align: left; }
-.code-line:hover { background: lightgoldenrodyellow; }
-.l-code { background: lavenderblush; }
-.l-table { background: aliceblue; }
-.d-code { background: lightgray; }
-.d-table { background: lightblue; }
-#options { width: 520px; }
-#code-area { width: 630px; height: 240px; }
-.grid { display: grid; grid-template-columns: 645px 400px; }
-.first { display: inline-block; width: 26px; }
-#title { width: 100%; }
-.table { display: table; border-collapse: collapse; width: 100%; margin-bottom: 10px; }
-.table-row  { display: table-row; }
-.table-cell { display: table-cell; border: 1px solid #777; text-align: center; vertical-align: middle; padding: 2px; }
-.left { float: left; }
-.right { float: right; }
-.recent a:visited { color: grey; }
-.radio-container { display: block; position: relative; padding-left: 9px; margin-bottom: 10px; cursor: pointer; user-select: none; }
-.radio-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
-.radio-mark { position: absolute; top: 0; left: 0; height: 10px; width: 10px; background-color: grey; }
-.radio-container:hover input ~ .radio-mark { background-color: orangered; }
-.radio-container input:checked ~ .radio-mark { background-color: darkred; }
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: silver; }
-::-webkit-scrollbar-thumb { background: grey; }
-:root { scrollbar-color: grey silver !important; scrollbar-width: 10px !important; }
-textarea:focus, input:focus { outline: none; }
+/* Tags */
+a, a:visited {
+	text-decoration: none;
+	color: darkred;
+}
+a:hover {
+	color: orangered;
+}
+h2, h4 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+textarea, input, body {
+	color: #000;
+	background: #CCC;
+}
+textarea, input {
+	padding: 2px;
+	font-family: monospace;
+	border: 1px #777 solid;
+}
+textarea:focus, input:focus {
+	outline: none;
+}
+input {
+	margin-bottom: 5px;
+}
+textarea {
+	width: 630px;
+	height: 240px;
+	resize: none;
+	white-space: pre;
+}
+
+/* Classes */
+.page {
+	position: relative;
+	max-width: 1360px;
+	min-width: 1260px;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	font: 11px "DejaVu Sans", sans-serif;
+	border: 1px #777 solid;
+}
+.block {
+	padding: 5px;
+	border: 1px #777 solid;
+	background: #FFF;
+}
+.center {
+	text-align: center;
+}
+.header {
+	margin-bottom: 10px;
+}
+.sidebar {
+	float: left;
+	width: 165px;
+	min-height: 700px;
+	margin-bottom: 5px;
+}
+.recent a:visited {
+	color: grey;
+}
+.content {
+	margin-left: 175px;
+	margin-bottom: 10px;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 645px 400px;
+}
+.markdown {
+	font-size: 16px;
+}
+.inline {
+	display: inline-block;
+	width: 26px;
+}
+.button {
+	width: 77px;
+	padding: 2px;
+}
+.table {
+	display: table;
+	width: 100%;
+	margin-bottom: 10px;
+	border-collapse: collapse;
+}
+.table-row  {
+	display: table-row;
+}
+.table-cell {
+	display: table-cell;
+	padding: 2px;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid #777;
+}
+.footer {
+	clear: both;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+#options {
+	width: 520px;
+}
+#title {
+	width: 100%;
+}
+#highlight {
+	width: 405px;
+}
+
+/* Code Block */
+.code-table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	font: 12px monospace;
+}
+.code-table .hll {
+	background-color: #FFFFBB;
+}
+.code-table pre {
+	margin: 0;
+}
+.table-line {
+	padding-right: 5px;
+	text-align: right;
+	white-space: nowrap;
+	user-select: none;
+	border-right: 1px solid #777;
+}
+.table-line a {
+	text-decoration: none;
+	color: darkblue;
+}
+.code-line {
+	padding-left: 5px;
+	text-align: left;
+	white-space: pre;
+}
+.code-line:hover {
+	background: lightgrey;
+}
+.l-code {
+	background: snow;
+}
+.l-table {
+	background: aliceblue;
+}
+.d-code {
+	background: whitesmoke;
+}
+.d-table {
+	background: lightblue;
+}
+#code {
+	overflow-x: auto;
+}
+
+/* Custom Radio */
+.radio-container {
+	display: block;
+	position: relative;
+	padding-left: 9px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+.radio-container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+.radio-mark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 10px;
+	width: 10px;
+	background-color: grey;
+}
+.radio-container:hover input ~ .radio-mark {
+	background-color: orangered;
+}
+.radio-container input:checked ~ .radio-mark {
+	background-color: darkred;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: whitesmoke;
+}
+::-webkit-scrollbar-thumb {
+	background: grey;
+}
+:root {
+	scrollbar-color: grey whitesmoke !important;
+	scrollbar-width: 10px !important;
+}
