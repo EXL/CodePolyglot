@@ -18,7 +18,7 @@
 					<h4 class="center header" th:text="#{code.recent}">Recent Snippets</h4>
 					<div th:if="${!snippets.isEmpty()}">
 						<div th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
-							🡒 <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
+							🡒 <a th:href="${address}" th:text="${name}" th:title="${form.getDate()}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
 						</div>
 					</div>
 				</div>
