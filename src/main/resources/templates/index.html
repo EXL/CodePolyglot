@@ -59,7 +59,7 @@
 					</div>
 					<div>
 						<label>
-							<textarea id="code-area" maxlength="262144" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" th:placeholder="#{code.area.placeholder}"></textarea>
+							<textarea id="code-area" th:maxlength="${length}" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" th:placeholder="#{code.area.placeholder}"></textarea>
 						</label>
 					</div>
 					<div id="highlight">

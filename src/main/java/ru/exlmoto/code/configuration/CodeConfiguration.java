@@ -7,6 +7,7 @@ public class CodeConfiguration {
 	private String dateFormat;
 	private String dateFormatFull;
 	private Integer snippetCount;
+	private Integer snippetMaxLength;
 	private String adminUsername;
 	private String adminPassword;
 
@@ -32,6 +33,14 @@ public class CodeConfiguration {
 
 	public void setSnippetCount(Integer snippetCount) {
 		this.snippetCount = snippetCount;
+	}
+
+	public Integer getSnippetMaxLength() {
+		return snippetMaxLength;
+	}
+
+	public void setSnippetMaxLength(Integer snippetMaxLength) {
+		this.snippetMaxLength = snippetMaxLength;
 	}
 
 	public String getAdminUsername() {

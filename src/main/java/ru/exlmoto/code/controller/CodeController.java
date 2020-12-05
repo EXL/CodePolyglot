@@ -51,6 +51,7 @@ public class CodeController {
 	                    @RequestParam(name = "info", required = false) Optional<String> info,
 	                    HttpServletRequest request, Model model, CodeForm form) {
 		readCookies(model, form, request);
+		model.addAttribute("length", config.getSnippetMaxLength());
 		id.flatMap(sId -> util.getLong(sId).flatMap(database::getCodeSnippet)).ifPresent((snippet) -> {
 			Optional.ofNullable(snippet.getTitle()).ifPresent(form::setTitle);
 			Optional.ofNullable(snippet.getOptions()).ifPresent(form::setOptions);

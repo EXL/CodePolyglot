@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ru.exlmoto.code.configuration.CodeConfiguration;
 import ru.exlmoto.code.controller.enumeration.Skin;
 import ru.exlmoto.code.entity.CodeEntity;
 import ru.exlmoto.code.helper.ResourceHelper;
@@ -31,15 +32,18 @@ import java.util.Scanner;
 public class ApiController {
 	private final Logger log = LoggerFactory.getLogger(ApiController.class);
 
+	private final CodeConfiguration config;
 	private final DatabaseService database;
 	private final HighlightService highlight;
 	private final ResourceHelper resource;
 	private final UtilityHelper util;
 
-	public ApiController(DatabaseService database,
+	public ApiController(CodeConfiguration config,
+	                     DatabaseService database,
 	                     HighlightService highlight,
 	                     ResourceHelper resource,
 	                     UtilityHelper util) {
+		this.config = config;
 		this.database = database;
 		this.highlight = highlight;
 		this.resource = resource;
@@ -79,7 +83,7 @@ public class ApiController {
 		Scanner scanner = new Scanner(inputDataStream).useDelimiter("\\A");
 		if (scanner.hasNext()) {
 			String code = scanner.next();
-			if (StringUtils.hasText(code) && code.length() < 262144) {
+			if (StringUtils.hasText(code) && code.length() < config.getSnippetMaxLength()) {
 				return highlight.highlightCode(Mode.getMode(mode), util.getCorrectOptions(options), code);
 			}
 		}
