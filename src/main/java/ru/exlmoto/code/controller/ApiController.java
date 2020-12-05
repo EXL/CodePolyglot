@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ru.exlmoto.code.controller.enumeration.Skin;
 import ru.exlmoto.code.entity.CodeEntity;
 import ru.exlmoto.code.helper.ResourceHelper;
 import ru.exlmoto.code.helper.UtilityHelper;
@@ -15,6 +16,7 @@ import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.service.DatabaseService;
 
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 
 import java.util.Scanner;
 
@@ -22,13 +24,16 @@ import java.util.Scanner;
 public class ApiController {
 	private final DatabaseService database;
 	private final HighlightService highlight;
+	private final ResourceHelper resource;
 	private final UtilityHelper util;
 
 	public ApiController(DatabaseService database,
 	                     HighlightService highlight,
+	                     ResourceHelper resource,
 	                     UtilityHelper util) {
 		this.database = database;
 		this.highlight = highlight;
+		this.resource = resource;
 		this.util = util;
 	}
 
@@ -72,6 +77,21 @@ public class ApiController {
 		return "Error: Cannot highlight code snippet.";
 	}
 
-	// TODO: CSS
+	/*
+	 * Highlight CSS usage examples:
+	 * $ curl "https://code.exlmoto.ru/api/css"
+	 * $ curl "https://code.exlmoto.ru/api/css?skin=pastorg"
+	 * $ curl "https://code.exlmoto.ru/api/css?skin=pastorg&mode=HighlightRouge"
+	 * $ curl "https://code.exlmoto.ru/api/css?skin=techno&mode=HighlightPygments"
+	 */
+	@GetMapping(path = "/api/css", produces = "text/css;charset=UTF-8")
+	public String css(@RequestParam(name = "skin", required = false, defaultValue = "techno") String skin,
+	                  @RequestParam(name = "mode", required = false, defaultValue = "HighlightJs") String mode) {
+		try {
+			return resource.readFileToString("classpath:" + Mode.getCss(Mode.valueOf(mode), Skin.valueOf(skin)));
+		} catch (IllegalArgumentException | UncheckedIOException ignored) { }
+		return "Error: Cannot get CSS from resources.";
+	}
+
 	// TODO: Versions Json
 }

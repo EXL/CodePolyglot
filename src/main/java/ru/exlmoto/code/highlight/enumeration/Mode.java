@@ -1,5 +1,7 @@
 package ru.exlmoto.code.highlight.enumeration;
 
+import ru.exlmoto.code.controller.enumeration.Skin;
+
 public enum Mode {
 	HighlightJs,
 	HighlightRouge,
@@ -64,5 +66,16 @@ public enum Mode {
 		} catch (IllegalArgumentException ignored) {
 			return HighlightJs;
 		}
+	}
+
+	public static String getCss(Mode mode, Skin theme) {
+		switch (mode) {
+			case HighlightRouge:
+				return "static/css/" + theme.name() + "/rouge.css";
+			case HighlightPygments:
+			case HighlightPygmentsJython:
+				return "static/css/" + theme.name() + "/pygments.css";
+		}
+		return "static/css/" + theme.name() + "/hjs.css";
 	}
 }
