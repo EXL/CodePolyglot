@@ -42,7 +42,7 @@
 							<img id="button-raw" class="img-button" width="20" height="16" src="../static/img/techno/raw.png" th:src="@{/img/__${skin}__/raw.png}" alt="Raw" th:alt="#{code.toolbar.raw}" th:title="#{code.toolbar.raw}"/>
 						</a>
 					</div>
-					<div id="code" th:class="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs} ? 'hljs' : 'highlight'" th:utext="${code}">Code Container</div>
+					<div id="code" class="highlight hljs" th:utext="${code}">Code Container</div>
 				</div>
 				<div class="content block grid">
 					<div>
