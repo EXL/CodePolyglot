@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan(basePackageClasses = CodeServiceApplication.class)
-public class CodeServiceApplication {
+@ConfigurationPropertiesScan(basePackageClasses = CodePolyglotApplication.class)
+public class CodePolyglotApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(CodeServiceApplication.class, args);
+		SpringApplication.run(CodePolyglotApplication.class, args);
 	}
 }

@@ -8,12 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-class CodeServiceApplicationTests {
+class CodePolyglotApplicationTests {
 	@Autowired
-	private CodeServiceApplication codeServiceApplication;
+	private CodePolyglotApplication codePolyglotApplication;
 
 	@Test
 	void contextLoads() {
-		assertNotNull(codeServiceApplication);
+		assertNotNull(codePolyglotApplication);
 	}
 }
