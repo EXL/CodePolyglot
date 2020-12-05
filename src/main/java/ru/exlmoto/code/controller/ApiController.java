@@ -80,7 +80,7 @@ public class ApiController {
 	public String highlight(InputStream inputDataStream,
 	                        @RequestParam(name = "o", required = false, defaultValue = "") String options,
 	                        @RequestParam(name = "h", required = false, defaultValue = "HighlightJs") String mode) {
-		Scanner scanner = new Scanner(inputDataStream).useDelimiter("\\A");
+		Scanner scanner = new Scanner(inputDataStream).useDelimiter("\\A"); // TODO:
 		if (scanner.hasNext()) {
 			String code = scanner.next();
 			if (StringUtils.hasText(code) && code.length() < config.getSnippetMaxLength()) {
