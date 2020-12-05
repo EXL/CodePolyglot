@@ -26,19 +26,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/delete/**", "/logout/**")
-				.authenticated()
-			.anyRequest()
-				.permitAll()
+		http.csrf().ignoringAntMatchers("/api/**")
+			.and()
+				.authorizeRequests()
+					.antMatchers("/delete/**", "/logout/**")
+						.authenticated()
+					.anyRequest()
+						.permitAll()
 			.and()
 				.formLogin()
-				.defaultSuccessUrl("/")
+					.defaultSuccessUrl("/")
 			.and()
 				.logout()
-				.logoutSuccessUrl("/")
-				.clearAuthentication(true)
-				.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID");
+					.logoutSuccessUrl("/")
+					.clearAuthentication(true)
+					.invalidateHttpSession(true)
+					.deleteCookies("JSESSIONID");
 	}
 }
