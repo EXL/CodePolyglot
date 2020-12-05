@@ -5,9 +5,7 @@
 		<title th:text="#{code.title}">Code Polyglot!</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/__${skin}__/code.css}"/>
 		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/hjs.css}"/>
-		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightRouge}" th:href="@{/css/__${skin}__/rouge.css}"/>
-		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightPygments}" th:href="@{/css/__${skin}__/pygments.css}"/>
-		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightPygmentsJython}" th:href="@{/css/__${skin}__/pygments.css}"/>
+		<link rel="stylesheet" type="text/css" th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/merged.css}"/>
 		<script defer type="text/javascript" th:src="@{/js/code.js}"></script>
 	</head>
 	<body>

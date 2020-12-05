@@ -9,7 +9,7 @@
 .highlight .cpf { color: #067D17; font-style: italic }                            /* Comment.PreprocFile */
 .highlight .c1 { color: #8C8C8C; font-style: italic }                             /* Comment.Single */
 .highlight .cs { color: #8C8C8C; font-style: italic; text-decoration: underline } /* Comment.Special */
-.highlight .cd { color: #8C8C8C; font-style: italic; text-decoration: underline } /* Comment.Special */
+.highlight .cd { color: #8C8C8C; font-style: italic; text-decoration: underline } /* Comment.Documentation */
 .highlight .gd { color: #A00000 }                                                 /* Generic.Deleted */
 .highlight .ge { font-style: italic }                                             /* Generic.Emph */
 .highlight .gr { color: #F50000 }                                                 /* Generic.Error */

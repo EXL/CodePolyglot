@@ -71,10 +71,9 @@ public enum Mode {
 	public static String getCss(Mode mode, Skin theme) {
 		switch (mode) {
 			case HighlightRouge:
-				return "static/css/" + theme.name() + "/rouge.css";
 			case HighlightPygments:
 			case HighlightPygmentsJython:
-				return "static/css/" + theme.name() + "/pygments.css";
+				return "static/css/" + theme.name() + "/merged.css";
 		}
 		return "static/css/" + theme.name() + "/hjs.css";
 	}
