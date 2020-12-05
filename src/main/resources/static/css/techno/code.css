@@ -168,6 +168,7 @@ textarea {
 	padding-left: 5px;
 	text-align: left;
 	white-space: pre;
+	width: 100%;
 }
 .code-line:hover {
 	background: #EEE;
@@ -179,7 +180,7 @@ textarea {
 	background: lightgray;
 }
 .d-code {
-	background: whitesmoke;
+	background: #FBFBFB;
 }
 .d-table {
 	background: darkgray;
