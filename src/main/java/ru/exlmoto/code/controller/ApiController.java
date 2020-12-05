@@ -1,5 +1,12 @@
 package ru.exlmoto.code.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +29,8 @@ import java.util.Scanner;
 
 @RestController
 public class ApiController {
+	private final Logger log = LoggerFactory.getLogger(ApiController.class);
+
 	private final DatabaseService database;
 	private final HighlightService highlight;
 	private final ResourceHelper resource;
@@ -93,5 +102,24 @@ public class ApiController {
 		return "Error: Cannot get CSS from resources.";
 	}
 
-	// TODO: Versions Json
+	@GetMapping(path = "/api/versions", produces = "application/json;charset=UTF-8")
+	public String versions() {
+		final ObjectMapper mapper = new ObjectMapper();
+		final ObjectNode root = mapper.createObjectNode();
+		highlight.getVersions().forEach((k, v) -> {
+			final ObjectNode child = mapper.createObjectNode();
+			child.put("language", v.getFirst());
+			child.put("library", v.getSecond());
+			root.set(k.name(), child);
+		});
+		root.put("GraalVM", highlight.getGraalVMVersion());
+
+		try {
+			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+		} catch (JsonProcessingException jpe) {
+			final String error = String.format("Cannot generate JSON version information: '%s'.", jpe.getMessage());
+			log.error(error, jpe);
+			return "{ \"error\" : \"" + error + "\" }";
+		}
+	}
 }
