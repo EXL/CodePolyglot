@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.exlmoto.code.configuration.CodeConfiguration;
+import ru.exlmoto.code.controller.enumeration.Info;
 import ru.exlmoto.code.controller.enumeration.Lang;
 import ru.exlmoto.code.controller.enumeration.Skin;
 import ru.exlmoto.code.entity.CodeEntity;
@@ -62,6 +63,7 @@ public class CodeController {
 			model.addAttribute("id", snippet.getId());
 			model.addAttribute("highlight", Mode.getMode(snippet.getHighlight()));
 		});
+		info.ifPresent((sInfo) -> model.addAttribute("info", Info.getDescription(sInfo)));
 		model.addAttribute("snippets",
 			util.generateSnippetLinks(database.getCodeSnippets(config.getSnippetCount()), cookies.getLang(request)));
 		model.addAttribute("versions", highlight.getVersions());
@@ -90,7 +92,7 @@ public class CodeController {
 				cookies.setOptions(response, filteredOptions);
 				cookies.setHighlight(response, form.getHighlight());
 				return String.format("redirect:/%d", id);
-			}).orElse("redirect:/?info=database");
+			}).orElse("redirect:/?info=databaseError");
 		}
 		return "redirect:/?info=empty";
 	}

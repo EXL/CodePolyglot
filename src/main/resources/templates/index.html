@@ -24,6 +24,9 @@
 				</div>
 			</div>
 			<form id="code-form" method="post" th:action="@{/edit}" th:object="${form}">
+				<div class="content block" th:if="${info}">
+					<h2 class="info" th:text="#{__${info}__}"></h2>
+				</div>
 				<div class="content block" th:if="${code}">
 					<h2 th:if="*{title}" th:with="head=*{title}">
 						<span th:text="${head} + ' |'"></span> <span th:text="*{date}"></span>

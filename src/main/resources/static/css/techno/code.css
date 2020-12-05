@@ -117,6 +117,9 @@ textarea {
 .hide {
 	display: none;
 }
+.info {
+	color: red;
+}
 #options {
 	width: 520px;
 }
