@@ -1,4 +1,6 @@
-.highlight { background: #FFFFFF }
+/* IntelliJ IDEA-like CSS for Pygments and Rouge, (c) EXL <exlmotodev@gmail.com> <exl@bk.ru>, 2020 */
+
+.highlight { background: #FFFFFF }                                                /* General.Background */
 .highlight .c { color: #8C8C8C; font-style: italic }                              /* Comment */
 .highlight .err { color: #F50000 }                                                /* Error */
 .highlight .k { color: #0033B3 }                                                  /* Keyword */
@@ -10,11 +12,11 @@
 .highlight .c1 { color: #8C8C8C; font-style: italic }                             /* Comment.Single */
 .highlight .cs { color: #8C8C8C; font-style: italic; text-decoration: underline } /* Comment.Special */
 .highlight .cd { color: #8C8C8C; font-style: italic; text-decoration: underline } /* Comment.Documentation */
-.highlight .gd { color: #A00000 }                                                 /* Generic.Deleted */
+.highlight .gd { color: #D02B0A }                                                 /* Generic.Deleted */
 .highlight .ge { font-style: italic }                                             /* Generic.Emph */
 .highlight .gr { color: #F50000 }                                                 /* Generic.Error */
 .highlight .gh { color: #000080; font-weight: bold }                              /* Generic.Heading */
-.highlight .gi { color: #00A000 }                                                 /* Generic.Inserted */
+.highlight .gi { color: #0F770F }                                                 /* Generic.Inserted */
 .highlight .go { color: #000000 }                                                 /* Generic.Output */
 .highlight .gp { color: #000000 }                                                 /* Generic.Prompt */
 .highlight .gs { font-weight: bold }                                              /* Generic.Strong */
