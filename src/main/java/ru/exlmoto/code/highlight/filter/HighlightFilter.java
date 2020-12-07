@@ -17,6 +17,12 @@ import java.io.StringReader;
 public class HighlightFilter {
 	private final Logger log = LoggerFactory.getLogger(HighlightFilter.class);
 
+	private final TagCompensator tagCompensator;
+
+	public HighlightFilter(TagCompensator tagCompensator) {
+		this.tagCompensator = tagCompensator;
+	}
+
 	public String filterCarriageReturn(String source) {
 		return source.replaceAll("\r", "");
 	}
@@ -38,9 +44,10 @@ public class HighlightFilter {
 	}
 
 	protected String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
+		final String compensatedCodeLines = tagCompensator.compensateTags(codeLines).orElse(codeLines);
 		StringBuilder sb = new StringBuilder();
 		try {
-			BufferedReader reader = new BufferedReader(new StringReader(codeLines));
+			BufferedReader reader = new BufferedReader(new StringReader(compensatedCodeLines));
 			String line = reader.readLine();
 			int i = 1;
 			while (line != null) {
