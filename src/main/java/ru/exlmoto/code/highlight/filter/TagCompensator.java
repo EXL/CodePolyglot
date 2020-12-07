@@ -65,7 +65,7 @@ public class TagCompensator {
 
 			for (String line : lines) {
 				if (StringUtils.hasText(className)) {
-					stringBuilder.append(String.format("<span class\"%s\">%s</span>\n", className, line));
+					stringBuilder.append(String.format("<span class=\"%s\">%s</span>\n", className, line));
 				} else {
 					stringBuilder.append(String.format("<span>%s</span>\n", line));
 				}
