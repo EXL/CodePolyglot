@@ -34,7 +34,7 @@ public class TagCompensator {
 
 				Element element = document.getElementsByTag("body").first();
 				compensateTagsOnHtmlNodes(element.childNodes());
-				return Optional.ofNullable(element.outerHtml());
+				return Optional.ofNullable(element.html());
 			} catch (RuntimeException re) {
 				log.error(String.format("HTML Tag Compensator error: '%s'.", re.getLocalizedMessage()), re);
 			}
@@ -70,7 +70,7 @@ public class TagCompensator {
 					stringBuilder.append(String.format("<span>%s</span>\n", line));
 				}
 			}
-			node.replaceWith(new DataNode(stringBuilder.toString()));
+			node.replaceWith(new DataNode(stringBuilder.toString().trim()));
 		}
 	}
 
