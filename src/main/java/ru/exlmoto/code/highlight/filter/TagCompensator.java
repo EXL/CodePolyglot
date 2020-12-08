@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
+import org.owasp.encoder.Encode;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +67,8 @@ public class TagCompensator {
 
 			for (String line : lines) {
 				if (StringUtils.hasText(className)) {
-					stringBuilder.append(String.format("<span class=\"%s\">%s</span>\n", className, line));
+					stringBuilder.append(String.format("<span class=\"%s\">%s</span>\n",
+						className, Encode.forHtml(line)));
 				} else {
 					stringBuilder.append(String.format("<span>%s</span>\n", line));
 				}
