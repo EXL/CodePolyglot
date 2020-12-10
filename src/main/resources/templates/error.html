@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:lang="${#locale}">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="#{code.server.error.title}">Server Error</title>
+	</head>
+	<body>
+		<!--/*@thymesVar id="timestamp" type="java.lang.String"*/-->
+		<!--/*@thymesVar id="status" type="java.lang.Integer"*/-->
+		<!--/*@thymesVar id="error" type="java.lang.String"*/-->
+		<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+		<h1 th:text="#{code.server.error}">Server Error</h1>
+		<p>
+			<span th:text="#{code.server.error.timestamp}">Timestamp:</span>
+			<span th:text="${timestamp}"></span>
+		</p>
+		<p>
+			<span th:text="#{code.server.error.status}">Status:</span>
+			<span th:text="${status}"></span>
+			<span th:text="${error}"></span>
+		</p>
+		<p th:if="${T(org.springframework.util.StringUtils).hasText(message)}">
+			<span th:text="#{code.server.error.message}">Message:</span>
+			<span th:text="${message}"></span>
+		</p>
+		<p>
+			🡐 <a href="/" th:title="#{code.server.error.home}" th:text="#{code.server.error.home}"></a>
+		</p>
+	</body>
+</html>
