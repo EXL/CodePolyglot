@@ -80,13 +80,14 @@ public class ApiController {
 	public String highlight(InputStream inputDataStream,
 	                        @RequestParam(name = "o", required = false, defaultValue = "") String options,
 	                        @RequestParam(name = "h", required = false, defaultValue = "HighlightJs") String mode) {
-		Scanner scanner = new Scanner(inputDataStream).useDelimiter("\\A"); // TODO:
+		Scanner scanner = new Scanner(inputDataStream).useDelimiter("\\A"); // https://stackoverflow.com/a/5445161
 		if (scanner.hasNext()) {
 			String code = scanner.next();
 			if (StringUtils.hasText(code) && code.length() < config.getSnippetMaxLength()) {
 				return highlight.highlightCode(Mode.getMode(mode), util.getCorrectOptions(options), code);
 			}
 		}
+		scanner.close();
 		return "Error: Cannot highlight code snippet.";
 	}
 
