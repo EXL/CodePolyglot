@@ -33,7 +33,6 @@ dependencies {
 
 	implementation 'org.graalvm.sdk:graal-sdk:20.3.0'
 	implementation 'org.owasp.encoder:encoder:1.2.3'
-	implementation 'org.jsoup:jsoup:1.13.1'
 	implementation 'org.python:jython-standalone:2.7.2'
 	runtimeOnly 'org.pygments:pygments:2.5.2'
 

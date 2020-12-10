@@ -1,5 +1,25 @@
 package ru.exlmoto.code.highlight.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+
+@Component
+public class TagCompensator {
+	private final Logger log = LoggerFactory.getLogger(TagCompensator.class);
+
+	public Optional<String> compensateTags(String htmlChunk) {
+		return Optional.empty();
+	}
+}
+
+
+
+/*
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -24,6 +44,7 @@ import java.util.Optional;
  *  https://www.baeldung.com/jsoup-line-breaks
  *  https://github.com/wcoder/highlightjs-line-numbers.js/blob/40eff67eb7349d8c008e0b49f4f7e74688522c36/src/highlightjs-line-numbers.js#L278-L325
  */
+/*
 @Component
 public class TagCompensator {
 	private final Logger log = LoggerFactory.getLogger(TagCompensator.class);
@@ -81,3 +102,4 @@ public class TagCompensator {
 		return (entity.contains("\n")) ? entity.trim().split("\n").length - 1 : 0;
 	}
 }
+*/
