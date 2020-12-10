@@ -4,102 +4,142 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
-
-@Component
-public class TagCompensator {
-	private final Logger log = LoggerFactory.getLogger(TagCompensator.class);
-
-	public Optional<String> compensateTags(String htmlChunk) {
-		return Optional.empty();
-	}
-}
-
-
-
-/*
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.DataNode;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-
-import org.owasp.encoder.Encode;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
-/*
- * Useful information:
- *  https://www.baeldung.com/jsoup-line-breaks
- *  https://github.com/wcoder/highlightjs-line-numbers.js/blob/40eff67eb7349d8c008e0b49f4f7e74688522c36/src/highlightjs-line-numbers.js#L278-L325
- */
-/*
 @Component
 public class TagCompensator {
 	private final Logger log = LoggerFactory.getLogger(TagCompensator.class);
+
+	private final String TAG_START_MARKER = "\">";
+	private final String TAG_START_CHUNK  = "<span";
+	private final String TAG_END_MARKER   = "</";
+	private final String TAG_END_CHUNK    = "span>";
+
+	private final Stack<String> tagStack;
+	private final List<String> tagBuffer;
+
+	private abstract class TagWorker {
+		protected void stepTagStack(String line) {
+			if (line.contains(TAG_START_MARKER)) {
+				String[] tokens = line.split(TAG_START_MARKER);
+				for (String token : tokens) {
+					if (token.contains(TAG_START_CHUNK)) {
+						tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);
+					}
+				}
+			}
+			if (line.contains(TAG_END_MARKER)) {
+				String[] tokens = line.split(TAG_END_MARKER);
+				for (String token : tokens) {
+					if (token.contains(TAG_END_CHUNK)) {
+						tagStack.pop();
+					}
+				}
+			}
+		}
+
+		protected void stepTagBuffer(StringBuilder res) {
+			if (!tagBuffer.isEmpty()) {
+				for (String tag : tagBuffer) {
+					res.append(tag);
+				}
+				tagBuffer.clear();
+			}
+		}
+
+		protected void fillHtmlChunk(String line, StringBuilder res) {
+			final int size = tagStack.size();
+			res.append(line);
+			if (size > 0) {
+				for (int i = 0; i < size; ++i) {
+					res.append(TAG_END_MARKER + TAG_END_CHUNK);
+				}
+			}
+			res.append("\n");
+		}
+
+		protected boolean checkHtmlTags() {
+			return tagStack.isEmpty();
+		}
+
+		protected void fillTagBuffer() {
+			tagBuffer.addAll(tagStack);
+		}
+
+		public abstract void doWork(String line, StringBuilder res);
+	}
+
+	private class TagFixer extends TagWorker {
+		@Override
+		public void doWork(String line, StringBuilder res) {
+			stepTagStack(line);
+			stepTagBuffer(res);
+			fillHtmlChunk(line, res);
+			fillTagBuffer();
+		}
+	}
+
+	private class TagChecker extends TagWorker {
+		@Override
+		public void doWork(String line, StringBuilder res) {
+			stepTagStack(line);
+			if (!checkHtmlTags()) {
+				log.error(String.format("Inconsistent HTML tags on line: '%s'.", line));
+				log.error(String.format("Tag Stack: '%s'.", tagStack.toString()));
+				log.error(String.format("Tag Buffer: '%s'.", tagBuffer.toString()));
+			}
+		}
+	}
+
+	public TagCompensator() {
+		this.tagStack = new Stack<>();
+		this.tagBuffer = new ArrayList<>();
+	}
 
 	public Optional<String> compensateTags(String htmlChunk) {
 		if (StringUtils.hasText(htmlChunk)) {
-			try {
-				Document document = Jsoup.parse(htmlChunk);
-				document.outputSettings().prettyPrint(false);
+			System.out.println(htmlChunk);
 
-				Element element = document.getElementsByTag("body").first();
-				compensateTagsOnHtmlNodes(element.childNodes());
-				return Optional.ofNullable(element.html());
-			} catch (RuntimeException re) {
-				log.error(String.format("HTML Tag Compensator error: '%s'.", re.getLocalizedMessage()), re);
-			}
+			String compensatedHtml = workOnLines(htmlChunk, new TagFixer());
+			clear();
+
+			workOnLines(compensatedHtml, new TagChecker());
+			clear();
+
+
+			System.out.println("---");
+			System.out.println(compensatedHtml);
+			return Optional.ofNullable(compensatedHtml);
 		}
 		return Optional.empty();
 	}
 
-	protected void compensateTagsOnHtmlNodes(List<Node> nodes) {
-		for (Node child : nodes) {
-			if (getLinesCount(child.outerHtml()) > 0) {
-				if (child.childNodeSize() > 0) {
-					compensateTagsOnHtmlNodes(child.childNodes());
-				} else {
-					compensateTagsOnHtmlLastNode(child.parentNode());
-				}
+	protected String workOnLines(String lines, TagWorker worker) {
+		StringBuilder res = new StringBuilder();
+		try {
+			BufferedReader reader = new BufferedReader(new StringReader(lines));
+			String line = reader.readLine();
+			while (line != null) {
+				worker.doWork(line, res);
+				line = reader.readLine();
 			}
+		} catch (IOException ioe) {
+			log.error(String.format("Error in Buffered Reader for lines: '%s'.", ioe.getLocalizedMessage()), ioe);
 		}
+		return res.toString();
 	}
 
-	protected void compensateTagsOnHtmlLastNode(Node node) {
-		final String tagName = node.nodeName();
-		if (tagName != null && tagName.startsWith("span")) {
-			final String className = node.attr("class");
-			final StringBuilder stringBuilder = new StringBuilder();
-
-			List<String> lines = new ArrayList<>();
-			node.childNodes().forEach((child) -> lines.addAll(Arrays.asList(child.outerHtml().split("\n"))));
-
-			for (String line : lines) {
-				if (StringUtils.hasText(className)) {
-					stringBuilder.append(String.format("<span class=\"%s\">%s</span>\n",
-						className, Encode.forHtml(line)));
-				} else {
-					stringBuilder.append(String.format("<span>%s</span>\n", line));
-				}
-			}
-			node.replaceWith(new DataNode(stringBuilder.toString().trim()));
-		}
-	}
-
-	protected int getLinesCount(String entity) {
-		return (entity.contains("\n")) ? entity.trim().split("\n").length - 1 : 0;
+	private void clear() {
+		tagStack.clear();
+		tagBuffer.clear();
 	}
 }
-*/
