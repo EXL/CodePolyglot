@@ -107,17 +107,10 @@ public class TagCompensator {
 
 	public Optional<String> compensateTags(String htmlChunk) {
 		if (StringUtils.hasText(htmlChunk)) {
-			System.out.println(htmlChunk);
-
 			String compensatedHtml = workOnLines(htmlChunk, new TagFixer());
 			clear();
-
 			workOnLines(compensatedHtml, new TagChecker());
 			clear();
-
-
-			System.out.println("---");
-			System.out.println(compensatedHtml);
 			return Optional.ofNullable(compensatedHtml);
 		}
 		return Optional.empty();
