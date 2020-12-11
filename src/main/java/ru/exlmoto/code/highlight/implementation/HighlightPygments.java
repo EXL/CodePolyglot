@@ -20,7 +20,7 @@ public class HighlightPygments extends Highlight {
 	private final UtilityHelper util;
 
 	private boolean useJython = false;
-	private PythonInterpreter jython = new PythonInterpreter();
+	private final PythonInterpreter jython = new PythonInterpreter();
 
 	public HighlightPygments(UtilityHelper util) {
 		this.util = util;
