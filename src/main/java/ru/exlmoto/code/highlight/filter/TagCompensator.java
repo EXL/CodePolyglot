@@ -29,19 +29,14 @@ public class TagCompensator {
 
 	private abstract class TagWorker {
 		protected void stepTagStack(String line) {
-			if (line.contains(TAG_START_MARKER)) {
-				String[] tokens = line.split(TAG_START_MARKER);
-				for (String token : tokens) {
-					if (token.contains(TAG_START_CHUNK)) {
-						tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);
-					}
-				}
-			}
-			if (line.contains(TAG_END_MARKER)) {
-				String[] tokens = line.split(TAG_END_MARKER);
+			if (line.contains(TAG_START_MARKER) || line.contains(TAG_END_MARKER)) {
+				String[] tokens = line.split(TAG_START_MARKER + "|" + TAG_END_MARKER);
 				for (String token : tokens) {
 					if (token.contains(TAG_END_CHUNK)) {
 						tagStack.pop();
+					}
+					if (token.contains(TAG_START_CHUNK)) {
+						tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);
 					}
 				}
 			}
