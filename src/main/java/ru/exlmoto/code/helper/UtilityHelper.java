@@ -28,7 +28,7 @@ public class UtilityHelper {
 		return System.currentTimeMillis() / 1000L;
 	}
 
-	public String getDateFromTimeStamp(String dateFormat, Locale dateLocale, long timestamp) {
+	public String getDateFromTimestamp(String dateFormat, Locale dateLocale, long timestamp) {
 		return DateTimeFormatter.ofPattern(dateFormat)
 			.withLocale(dateLocale).withZone(ZoneId.systemDefault()).format(Instant.ofEpochSecond(timestamp));
 	}
@@ -46,11 +46,6 @@ public class UtilityHelper {
 			options.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : options;
 	}
 
-	public String injectChunkToLastLineStart(String lines, String inject) {
-		final int index = lines.lastIndexOf("\n");
-		return (index > 0) ? lines.substring(0, index) + "\n" + inject + lines.substring(index + 1) : inject + lines;
-	}
-
 	public List<Pair<String, String>> generateSnippetLinks(List<CodeEntity> snippets, String language) {
 		List<Pair<String, String>> links = new ArrayList<>();
 		snippets.forEach((snippet) ->
@@ -63,6 +58,6 @@ public class UtilityHelper {
 		if (StringUtils.hasText(title))
 			return (title.length() > 20) ? title.substring(0, 20) + "…" : title;
 		else
-			return getDateFromTimeStamp(config.getDateFormat(), Locale.forLanguageTag(language), timestamp);
+			return getDateFromTimestamp(config.getDateFormat(), Locale.forLanguageTag(language), timestamp);
 	}
 }
