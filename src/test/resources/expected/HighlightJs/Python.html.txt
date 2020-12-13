@@ -1,0 +1,209 @@
+<table class="code-table"><tr id="line-1"><td class="table-line l-table"><a href="#line-1">1</a></td><td class="code-line l-code"><span class="hljs-comment">#!/usr/bin/env python3</span>
+</td></tr><tr id="line-2"><td class="table-line d-table"><a href="#line-2">2</a></td><td class="code-line d-code"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+</td></tr><tr id="line-3"><td class="table-line l-table"><a href="#line-3">3</a></td><td class="code-line l-code">
+</td></tr><tr id="line-4"><td class="table-line d-table"><a href="#line-4">4</a></td><td class="code-line d-code"><span class="hljs-comment">#  The MIT License (MIT)</span>
+</td></tr><tr id="line-5"><td class="table-line l-table"><a href="#line-5">5</a></td><td class="code-line l-code"><span class="hljs-comment">#</span>
+</td></tr><tr id="line-6"><td class="table-line d-table"><a href="#line-6">6</a></td><td class="code-line d-code"><span class="hljs-comment">#  Copyright (c) 2015-2020 EXL &lt;exlmotodev@gmail.com&gt;</span>
+</td></tr><tr id="line-7"><td class="table-line l-table"><a href="#line-7">7</a></td><td class="code-line l-code"><span class="hljs-comment">#</span>
+</td></tr><tr id="line-8"><td class="table-line d-table"><a href="#line-8">8</a></td><td class="code-line d-code"><span class="hljs-comment">#  Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+</td></tr><tr id="line-9"><td class="table-line l-table"><a href="#line-9">9</a></td><td class="code-line l-code"><span class="hljs-comment">#  of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+</td></tr><tr id="line-10"><td class="table-line d-table"><a href="#line-10"><strong>10</strong></a></td><td class="code-line d-code"><span class="hljs-comment">#  in the Software without restriction, including without limitation the rights</span>
+</td></tr><tr id="line-11"><td class="table-line l-table"><a href="#line-11">11</a></td><td class="code-line l-code"><span class="hljs-comment">#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+</td></tr><tr id="line-12"><td class="table-line d-table"><a href="#line-12">12</a></td><td class="code-line d-code"><span class="hljs-comment">#  copies of the Software, and to permit persons to whom the Software is</span>
+</td></tr><tr id="line-13"><td class="table-line l-table"><a href="#line-13">13</a></td><td class="code-line l-code"><span class="hljs-comment">#  furnished to do so, subject to the following conditions:</span>
+</td></tr><tr id="line-14"><td class="table-line d-table"><a href="#line-14">14</a></td><td class="code-line d-code"><span class="hljs-comment">#</span>
+</td></tr><tr id="line-15"><td class="table-line l-table"><a href="#line-15">15</a></td><td class="code-line l-code"><span class="hljs-comment">#  The above copyright notice and this permission notice shall be included in all</span>
+</td></tr><tr id="line-16"><td class="table-line d-table"><a href="#line-16">16</a></td><td class="code-line d-code"><span class="hljs-comment">#  copies or substantial portions of the Software.</span>
+</td></tr><tr id="line-17"><td class="table-line l-table"><a href="#line-17">17</a></td><td class="code-line l-code"><span class="hljs-comment">#</span>
+</td></tr><tr id="line-18"><td class="table-line d-table"><a href="#line-18">18</a></td><td class="code-line d-code"><span class="hljs-comment">#  THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+</td></tr><tr id="line-19"><td class="table-line l-table"><a href="#line-19">19</a></td><td class="code-line l-code"><span class="hljs-comment">#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+</td></tr><tr id="line-20"><td class="table-line d-table"><a href="#line-20"><strong>20</strong></a></td><td class="code-line d-code"><span class="hljs-comment">#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+</td></tr><tr id="line-21"><td class="table-line l-table"><a href="#line-21">21</a></td><td class="code-line l-code"><span class="hljs-comment">#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+</td></tr><tr id="line-22"><td class="table-line d-table"><a href="#line-22">22</a></td><td class="code-line d-code"><span class="hljs-comment">#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+</td></tr><tr id="line-23"><td class="table-line l-table"><a href="#line-23">23</a></td><td class="code-line l-code"><span class="hljs-comment">#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+</td></tr><tr id="line-24"><td class="table-line d-table"><a href="#line-24">24</a></td><td class="code-line d-code"><span class="hljs-comment">#  SOFTWARE.</span>
+</td></tr><tr id="line-25"><td class="table-line l-table"><a href="#line-25">25</a></td><td class="code-line l-code">
+</td></tr><tr id="line-26"><td class="table-line d-table"><a href="#line-26">26</a></td><td class="code-line d-code"><span class="hljs-string">&quot;&quot;&quot;</span>
+</td></tr><tr id="line-27"><td class="table-line l-table"><a href="#line-27">27</a></td><td class="code-line l-code"><span class="hljs-string">Install necessary PIP packages:</span>
+</td></tr><tr id="line-28"><td class="table-line d-table"><a href="#line-28">28</a></td><td class="code-line d-code"><span class="hljs-string">	$ pip3 install psycopg2</span>
+</td></tr><tr id="line-29"><td class="table-line l-table"><a href="#line-29">29</a></td><td class="code-line l-code"><span class="hljs-string">	$ pip3 install telethon</span>
+</td></tr><tr id="line-30"><td class="table-line d-table"><a href="#line-30"><strong>30</strong></a></td><td class="code-line d-code"><span class="hljs-string">	$ pip3 install mysql-connector-python</span>
+</td></tr><tr id="line-31"><td class="table-line l-table"><a href="#line-31">31</a></td><td class="code-line l-code"><span class="hljs-string"></span>
+</td></tr><tr id="line-32"><td class="table-line d-table"><a href="#line-32">32</a></td><td class="code-line d-code"><span class="hljs-string">Run as:</span>
+</td></tr><tr id="line-33"><td class="table-line l-table"><a href="#line-33">33</a></td><td class="code-line l-code"><span class="hljs-string">	$ cd db_import/</span>
+</td></tr><tr id="line-34"><td class="table-line d-table"><a href="#line-34">34</a></td><td class="code-line d-code"><span class="hljs-string">	$ TG_API_ID=&lt;id&gt; TG_API_HASH=&lt;hash&gt; MF_CHAT_ID=&lt;id&gt; \</span>
+</td></tr><tr id="line-35"><td class="table-line l-table"><a href="#line-35">35</a></td><td class="code-line l-code"><span class="hljs-string">	DB_USER_1=&lt;user&gt; DB_PASS_1=&lt;password&gt; DB_NAME_1=&lt;database&gt; DB_HOST_1=&lt;host&gt; \</span>
+</td></tr><tr id="line-36"><td class="table-line d-table"><a href="#line-36">36</a></td><td class="code-line d-code"><span class="hljs-string">	DB_USER_2=&lt;user&gt; DB_PASS_2=&lt;password&gt; DB_NAME_2=&lt;database&gt; DB_HOST_2=&lt;host&gt; \</span>
+</td></tr><tr id="line-37"><td class="table-line l-table"><a href="#line-37">37</a></td><td class="code-line l-code"><span class="hljs-string">	./db_import.py</span>
+</td></tr><tr id="line-38"><td class="table-line d-table"><a href="#line-38">38</a></td><td class="code-line d-code"><span class="hljs-string"></span>
+</td></tr><tr id="line-39"><td class="table-line l-table"><a href="#line-39">39</a></td><td class="code-line l-code"><span class="hljs-string">Do not forget to create tables before running the import script. After execution, user avatars should be updated.</span>
+</td></tr><tr id="line-40"><td class="table-line d-table"><a href="#line-40"><strong>40</strong></a></td><td class="code-line d-code"><span class="hljs-string">&quot;&quot;&quot;</span>
+</td></tr><tr id="line-41"><td class="table-line l-table"><a href="#line-41">41</a></td><td class="code-line l-code">
+</td></tr><tr id="line-42"><td class="table-line d-table"><a href="#line-42">42</a></td><td class="code-line d-code"><span class="hljs-keyword">import</span> os
+</td></tr><tr id="line-43"><td class="table-line l-table"><a href="#line-43">43</a></td><td class="code-line l-code"><span class="hljs-keyword">import</span> time
+</td></tr><tr id="line-44"><td class="table-line d-table"><a href="#line-44">44</a></td><td class="code-line d-code">
+</td></tr><tr id="line-45"><td class="table-line l-table"><a href="#line-45">45</a></td><td class="code-line l-code"><span class="hljs-keyword">import</span> mysql.connector
+</td></tr><tr id="line-46"><td class="table-line d-table"><a href="#line-46">46</a></td><td class="code-line d-code"><span class="hljs-keyword">import</span> psycopg2
+</td></tr><tr id="line-47"><td class="table-line l-table"><a href="#line-47">47</a></td><td class="code-line l-code"><span class="hljs-keyword">import</span> telethon.sync
+</td></tr><tr id="line-48"><td class="table-line d-table"><a href="#line-48">48</a></td><td class="code-line d-code">
+</td></tr><tr id="line-49"><td class="table-line l-table"><a href="#line-49">49</a></td><td class="code-line l-code">
+</td></tr><tr id="line-50"><td class="table-line d-table"><a href="#line-50"><strong>50</strong></a></td><td class="code-line d-code"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Logger</span>:</span>
+</td></tr><tr id="line-51"><td class="table-line l-table"><a href="#line-51">51</a></td><td class="code-line l-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-52"><td class="table-line d-table"><a href="#line-52">52</a></td><td class="code-line d-code">		self.log = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;import.log&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)
+</td></tr><tr id="line-53"><td class="table-line l-table"><a href="#line-53">53</a></td><td class="code-line l-code">
+</td></tr><tr id="line-54"><td class="table-line d-table"><a href="#line-54">54</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">debug</span>(<span class="hljs-params">self, output</span>):</span>
+</td></tr><tr id="line-55"><td class="table-line l-table"><a href="#line-55">55</a></td><td class="code-line l-code">		print(output)
+</td></tr><tr id="line-56"><td class="table-line d-table"><a href="#line-56">56</a></td><td class="code-line d-code">		print(output, file=self.log)
+</td></tr><tr id="line-57"><td class="table-line l-table"><a href="#line-57">57</a></td><td class="code-line l-code">
+</td></tr><tr id="line-58"><td class="table-line d-table"><a href="#line-58">58</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">error</span>(<span class="hljs-params">self, output</span>):</span>
+</td></tr><tr id="line-59"><td class="table-line l-table"><a href="#line-59">59</a></td><td class="code-line l-code">		self.debug(output)
+</td></tr><tr id="line-60"><td class="table-line d-table"><a href="#line-60"><strong>60</strong></a></td><td class="code-line d-code">		self.close()
+</td></tr><tr id="line-61"><td class="table-line l-table"><a href="#line-61">61</a></td><td class="code-line l-code">		exit(<span class="hljs-number">1</span>)
+</td></tr><tr id="line-62"><td class="table-line d-table"><a href="#line-62">62</a></td><td class="code-line d-code">
+</td></tr><tr id="line-63"><td class="table-line l-table"><a href="#line-63">63</a></td><td class="code-line l-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">close</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-64"><td class="table-line d-table"><a href="#line-64">64</a></td><td class="code-line d-code">		self.debug(<span class="hljs-string">&#x27;Exiting...&#x27;</span>)
+</td></tr><tr id="line-65"><td class="table-line l-table"><a href="#line-65">65</a></td><td class="code-line l-code">		self.log.close()
+</td></tr><tr id="line-66"><td class="table-line d-table"><a href="#line-66">66</a></td><td class="code-line d-code">
+</td></tr><tr id="line-67"><td class="table-line l-table"><a href="#line-67">67</a></td><td class="code-line l-code">
+</td></tr><tr id="line-68"><td class="table-line d-table"><a href="#line-68">68</a></td><td class="code-line d-code"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Config</span>:</span>
+</td></tr><tr id="line-69"><td class="table-line l-table"><a href="#line-69">69</a></td><td class="code-line l-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, log</span>):</span>
+</td></tr><tr id="line-70"><td class="table-line d-table"><a href="#line-70"><strong>70</strong></a></td><td class="code-line d-code">		<span class="hljs-keyword">try</span>:
+</td></tr><tr id="line-71"><td class="table-line l-table"><a href="#line-71">71</a></td><td class="code-line l-code">			self.cfg = <span class="hljs-built_in">dict</span>(
+</td></tr><tr id="line-72"><td class="table-line d-table"><a href="#line-72">72</a></td><td class="code-line d-code">				TG_API_ID=os.environ[<span class="hljs-string">&#x27;TG_API_ID&#x27;</span>],
+</td></tr><tr id="line-73"><td class="table-line l-table"><a href="#line-73">73</a></td><td class="code-line l-code">				TG_API_HASH=os.environ[<span class="hljs-string">&#x27;TG_API_HASH&#x27;</span>],
+</td></tr><tr id="line-74"><td class="table-line d-table"><a href="#line-74">74</a></td><td class="code-line d-code">				DB_USER_1=os.environ[<span class="hljs-string">&#x27;DB_USER_1&#x27;</span>],
+</td></tr><tr id="line-75"><td class="table-line l-table"><a href="#line-75">75</a></td><td class="code-line l-code">				DB_USER_2=os.environ[<span class="hljs-string">&#x27;DB_USER_2&#x27;</span>],
+</td></tr><tr id="line-76"><td class="table-line d-table"><a href="#line-76">76</a></td><td class="code-line d-code">				DB_PASS_1=os.environ[<span class="hljs-string">&#x27;DB_PASS_1&#x27;</span>],
+</td></tr><tr id="line-77"><td class="table-line l-table"><a href="#line-77">77</a></td><td class="code-line l-code">				DB_PASS_2=os.environ[<span class="hljs-string">&#x27;DB_PASS_2&#x27;</span>],
+</td></tr><tr id="line-78"><td class="table-line d-table"><a href="#line-78">78</a></td><td class="code-line d-code">				DB_NAME_1=os.environ[<span class="hljs-string">&#x27;DB_NAME_1&#x27;</span>],
+</td></tr><tr id="line-79"><td class="table-line l-table"><a href="#line-79">79</a></td><td class="code-line l-code">				DB_NAME_2=os.environ[<span class="hljs-string">&#x27;DB_NAME_2&#x27;</span>],
+</td></tr><tr id="line-80"><td class="table-line d-table"><a href="#line-80"><strong>80</strong></a></td><td class="code-line d-code">				DB_HOST_1=os.environ[<span class="hljs-string">&#x27;DB_HOST_1&#x27;</span>],
+</td></tr><tr id="line-81"><td class="table-line l-table"><a href="#line-81">81</a></td><td class="code-line l-code">				DB_HOST_2=os.environ[<span class="hljs-string">&#x27;DB_HOST_2&#x27;</span>],
+</td></tr><tr id="line-82"><td class="table-line d-table"><a href="#line-82">82</a></td><td class="code-line d-code">				MF_CHAT_ID=os.environ[<span class="hljs-string">&#x27;MF_CHAT_ID&#x27;</span>]
+</td></tr><tr id="line-83"><td class="table-line l-table"><a href="#line-83">83</a></td><td class="code-line l-code">			)
+</td></tr><tr id="line-84"><td class="table-line d-table"><a href="#line-84">84</a></td><td class="code-line d-code">		<span class="hljs-keyword">except</span> KeyError <span class="hljs-keyword">as</span> ke:
+</td></tr><tr id="line-85"><td class="table-line l-table"><a href="#line-85">85</a></td><td class="code-line l-code">			log.error(
+</td></tr><tr id="line-86"><td class="table-line d-table"><a href="#line-86">86</a></td><td class="code-line d-code">				<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(
+</td></tr><tr id="line-87"><td class="table-line l-table"><a href="#line-87">87</a></td><td class="code-line l-code">					<span class="hljs-string">&#x27;Cannot get {} environment variable.\n\n&#x27;</span>
+</td></tr><tr id="line-88"><td class="table-line d-table"><a href="#line-88">88</a></td><td class="code-line d-code">					<span class="hljs-string">&#x27;Usage:\n&#x27;</span>
+</td></tr><tr id="line-89"><td class="table-line l-table"><a href="#line-89">89</a></td><td class="code-line l-code">					<span class="hljs-string">&#x27;\tTG_API_ID=&lt;id&gt; TG_API_HASH=&lt;hash&gt; MF_CHAT_ID=&lt;id&gt; \\\n&#x27;</span>
+</td></tr><tr id="line-90"><td class="table-line d-table"><a href="#line-90"><strong>90</strong></a></td><td class="code-line d-code">					<span class="hljs-string">&#x27;\tDB_USER_1=&lt;user&gt; DB_PASS_1=&lt;password&gt; DB_NAME_1=&lt;database&gt; DB_HOST_1=&lt;host&gt; \\\n&#x27;</span>
+</td></tr><tr id="line-91"><td class="table-line l-table"><a href="#line-91">91</a></td><td class="code-line l-code">					<span class="hljs-string">&#x27;\tDB_USER_2=&lt;user&gt; DB_PASS_2=&lt;password&gt; DB_NAME_2=&lt;database&gt; DB_HOST_2=&lt;host&gt; \\\n&#x27;</span>
+</td></tr><tr id="line-92"><td class="table-line d-table"><a href="#line-92">92</a></td><td class="code-line d-code">					<span class="hljs-string">&#x27;\t{}&#x27;</span>, ke, __file__
+</td></tr><tr id="line-93"><td class="table-line l-table"><a href="#line-93">93</a></td><td class="code-line l-code">				)
+</td></tr><tr id="line-94"><td class="table-line d-table"><a href="#line-94">94</a></td><td class="code-line d-code">			)
+</td></tr><tr id="line-95"><td class="table-line l-table"><a href="#line-95">95</a></td><td class="code-line l-code">
+</td></tr><tr id="line-96"><td class="table-line d-table"><a href="#line-96">96</a></td><td class="code-line d-code">
+</td></tr><tr id="line-97"><td class="table-line l-table"><a href="#line-97">97</a></td><td class="code-line l-code"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Telegram</span>:</span>
+</td></tr><tr id="line-98"><td class="table-line d-table"><a href="#line-98">98</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, cfg</span>):</span>
+</td></tr><tr id="line-99"><td class="table-line l-table"><a href="#line-99">99</a></td><td class="code-line l-code">		self.client = telethon.TelegramClient(<span class="hljs-string">&#x27;get_ids&#x27;</span>, cfg[<span class="hljs-string">&#x27;TG_API_ID&#x27;</span>], cfg[<span class="hljs-string">&#x27;TG_API_HASH&#x27;</span>])
+</td></tr><tr id="line-100"><td class="table-line d-table"><a href="#line-100"><strong>100</strong></a></td><td class="code-line d-code">		self.client.start()
+</td></tr><tr id="line-101"><td class="table-line l-table"><a href="#line-101">101</a></td><td class="code-line l-code">
+</td></tr><tr id="line-102"><td class="table-line d-table"><a href="#line-102">102</a></td><td class="code-line d-code">
+</td></tr><tr id="line-103"><td class="table-line l-table"><a href="#line-103">103</a></td><td class="code-line l-code"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Importer</span>:</span>
+</td></tr><tr id="line-104"><td class="table-line d-table"><a href="#line-104">104</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, cfg, tg, log</span>):</span>
+</td></tr><tr id="line-105"><td class="table-line l-table"><a href="#line-105">105</a></td><td class="code-line l-code">		self.tg = tg
+</td></tr><tr id="line-106"><td class="table-line d-table"><a href="#line-106">106</a></td><td class="code-line d-code">		self.cfg = cfg
+</td></tr><tr id="line-107"><td class="table-line l-table"><a href="#line-107">107</a></td><td class="code-line l-code">		self.log = log
+</td></tr><tr id="line-108"><td class="table-line d-table"><a href="#line-108">108</a></td><td class="code-line d-code">
+</td></tr><tr id="line-109"><td class="table-line l-table"><a href="#line-109">109</a></td><td class="code-line l-code">		self.conn_db_1 = mysql.connector.connect(
+</td></tr><tr id="line-110"><td class="table-line d-table"><a href="#line-110"><strong>110</strong></a></td><td class="code-line d-code">			user=cfg[<span class="hljs-string">&#x27;DB_USER_1&#x27;</span>], password=cfg[<span class="hljs-string">&#x27;DB_PASS_1&#x27;</span>], database=cfg[<span class="hljs-string">&#x27;DB_NAME_1&#x27;</span>], host=cfg[<span class="hljs-string">&#x27;DB_HOST_1&#x27;</span>]
+</td></tr><tr id="line-111"><td class="table-line l-table"><a href="#line-111">111</a></td><td class="code-line l-code">		)
+</td></tr><tr id="line-112"><td class="table-line d-table"><a href="#line-112">112</a></td><td class="code-line d-code">		self.conn_db_2 = psycopg2.connect(
+</td></tr><tr id="line-113"><td class="table-line l-table"><a href="#line-113">113</a></td><td class="code-line l-code">			user=cfg[<span class="hljs-string">&#x27;DB_USER_2&#x27;</span>], password=cfg[<span class="hljs-string">&#x27;DB_PASS_2&#x27;</span>], database=cfg[<span class="hljs-string">&#x27;DB_NAME_2&#x27;</span>], host=cfg[<span class="hljs-string">&#x27;DB_HOST_2&#x27;</span>]
+</td></tr><tr id="line-114"><td class="table-line d-table"><a href="#line-114">114</a></td><td class="code-line d-code">		)
+</td></tr><tr id="line-115"><td class="table-line l-table"><a href="#line-115">115</a></td><td class="code-line l-code">		<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.conn_db_1:
+</td></tr><tr id="line-116"><td class="table-line d-table"><a href="#line-116">116</a></td><td class="code-line d-code">			self.log.error(<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;Cannot connect to the {} database.&#x27;</span>, cfg[<span class="hljs-string">&#x27;DB_NAME_1&#x27;</span>]))
+</td></tr><tr id="line-117"><td class="table-line l-table"><a href="#line-117">117</a></td><td class="code-line l-code">		<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.conn_db_2:
+</td></tr><tr id="line-118"><td class="table-line d-table"><a href="#line-118">118</a></td><td class="code-line d-code">			self.log.error(<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;Cannot connect to the {} database.&#x27;</span>, cfg[<span class="hljs-string">&#x27;DB_NAME_2&#x27;</span>]))
+</td></tr><tr id="line-119"><td class="table-line l-table"><a href="#line-119">119</a></td><td class="code-line l-code">
+</td></tr><tr id="line-120"><td class="table-line d-table"><a href="#line-120"><strong>120</strong></a></td><td class="code-line d-code">		self.curr_db_1 = self.conn_db_1.cursor()
+</td></tr><tr id="line-121"><td class="table-line l-table"><a href="#line-121">121</a></td><td class="code-line l-code">		self.curr_db_2 = self.conn_db_2.cursor()
+</td></tr><tr id="line-122"><td class="table-line d-table"><a href="#line-122">122</a></td><td class="code-line d-code">
+</td></tr><tr id="line-123"><td class="table-line l-table"><a href="#line-123">123</a></td><td class="code-line l-code"><span class="hljs-meta">	@staticmethod</span>
+</td></tr><tr id="line-124"><td class="table-line d-table"><a href="#line-124">124</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">filter_username</span>(<span class="hljs-params">username</span>):</span>
+</td></tr><tr id="line-125"><td class="table-line l-table"><a href="#line-125">125</a></td><td class="code-line l-code">		patch = {
+</td></tr><tr id="line-126"><td class="table-line d-table"><a href="#line-126">126</a></td><td class="code-line d-code">			<span class="hljs-string">&#x27;a1batross_2&#x27;</span>: <span class="hljs-string">&#x27;a1batross&#x27;</span>,
+</td></tr><tr id="line-127"><td class="table-line l-table"><a href="#line-127">127</a></td><td class="code-line l-code">			<span class="hljs-string">&#x27;mrPazzi&#x27;</span>: <span class="hljs-string">&#x27;drPazzi&#x27;</span>,
+</td></tr><tr id="line-128"><td class="table-line d-table"><a href="#line-128">128</a></td><td class="code-line d-code">			<span class="hljs-string">&#x27;ilikeeatingkids&#x27;</span>: <span class="hljs-string">&#x27;Ilovetoeatchildren&#x27;</span>,
+</td></tr><tr id="line-129"><td class="table-line l-table"><a href="#line-129">129</a></td><td class="code-line l-code">			<span class="hljs-string">&#x27;Igorek_Dim&#x27;</span>: <span class="hljs-string">&#x27;iProcyon&#x27;</span>,
+</td></tr><tr id="line-130"><td class="table-line d-table"><a href="#line-130"><strong>130</strong></a></td><td class="code-line d-code">			<span class="hljs-string">&#x27;ConsleslingDown&#x27;</span>: <span class="hljs-string">&#x27;Conslesling&#x27;</span>
+</td></tr><tr id="line-131"><td class="table-line l-table"><a href="#line-131">131</a></td><td class="code-line l-code">		}
+</td></tr><tr id="line-132"><td class="table-line d-table"><a href="#line-132">132</a></td><td class="code-line d-code">		<span class="hljs-keyword">return</span> patch.get(username, username)
+</td></tr><tr id="line-133"><td class="table-line l-table"><a href="#line-133">133</a></td><td class="code-line l-code">
+</td></tr><tr id="line-134"><td class="table-line d-table"><a href="#line-134">134</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">import_users</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-135"><td class="table-line l-table"><a href="#line-135">135</a></td><td class="code-line l-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; Start commit digest users.&#x27;</span>)
+</td></tr><tr id="line-136"><td class="table-line d-table"><a href="#line-136">136</a></td><td class="code-line d-code">		self.curr_db_2.execute(<span class="hljs-string">&#x27;TRUNCATE TABLE bot_digest_user CASCADE&#x27;</span>)
+</td></tr><tr id="line-137"><td class="table-line l-table"><a href="#line-137">137</a></td><td class="code-line l-code">
+</td></tr><tr id="line-138"><td class="table-line d-table"><a href="#line-138">138</a></td><td class="code-line d-code">		ids = []
+</td></tr><tr id="line-139"><td class="table-line l-table"><a href="#line-139">139</a></td><td class="code-line l-code">		user_without_id = <span class="hljs-number">0</span>
+</td></tr><tr id="line-140"><td class="table-line d-table"><a href="#line-140"><strong>140</strong></a></td><td class="code-line d-code">		self.curr_db_1.execute(<span class="hljs-string">&#x27;SELECT * FROM digests_users&#x27;</span>)
+</td></tr><tr id="line-141"><td class="table-line l-table"><a href="#line-141">141</a></td><td class="code-line l-code">		<span class="hljs-keyword">for</span> (username, avatar) <span class="hljs-keyword">in</span> self.curr_db_1:
+</td></tr><tr id="line-142"><td class="table-line d-table"><a href="#line-142">142</a></td><td class="code-line d-code">			filtered = self.filter_username(username)
+</td></tr><tr id="line-143"><td class="table-line l-table"><a href="#line-143">143</a></td><td class="code-line l-code">			<span class="hljs-keyword">try</span>:
+</td></tr><tr id="line-144"><td class="table-line d-table"><a href="#line-144">144</a></td><td class="code-line d-code">				user_id = self.tg.get_entity(filtered).<span class="hljs-built_in">id</span>
+</td></tr><tr id="line-145"><td class="table-line l-table"><a href="#line-145">145</a></td><td class="code-line l-code">			<span class="hljs-keyword">except</span> ValueError:
+</td></tr><tr id="line-146"><td class="table-line d-table"><a href="#line-146">146</a></td><td class="code-line d-code">				user_id = user_without_id + <span class="hljs-number">1</span>
+</td></tr><tr id="line-147"><td class="table-line l-table"><a href="#line-147">147</a></td><td class="code-line l-code">				user_without_id += <span class="hljs-number">1</span>
+</td></tr><tr id="line-148"><td class="table-line d-table"><a href="#line-148">148</a></td><td class="code-line d-code">			time.sleep(<span class="hljs-number">5</span>)  <span class="hljs-comment"># Without delay, you can run into a ban.</span>
+</td></tr><tr id="line-149"><td class="table-line l-table"><a href="#line-149">149</a></td><td class="code-line l-code">
+</td></tr><tr id="line-150"><td class="table-line d-table"><a href="#line-150"><strong>150</strong></a></td><td class="code-line d-code">			<span class="hljs-keyword">if</span> user_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> ids:
+</td></tr><tr id="line-151"><td class="table-line l-table"><a href="#line-151">151</a></td><td class="code-line l-code">				self.log.debug(<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;Commit user {}: {}.&#x27;</span>, filtered, user_id))
+</td></tr><tr id="line-152"><td class="table-line d-table"><a href="#line-152">152</a></td><td class="code-line d-code">				self.curr_db_2.execute(
+</td></tr><tr id="line-153"><td class="table-line l-table"><a href="#line-153">153</a></td><td class="code-line l-code">					<span class="hljs-string">&#x27;INSERT INTO bot_digest_user (id, avatar, username) VALUES (%s, %s, %s)&#x27;</span>,
+</td></tr><tr id="line-154"><td class="table-line d-table"><a href="#line-154">154</a></td><td class="code-line d-code">					(user_id, avatar, <span class="hljs-string">&#x27;@&#x27;</span> + filtered)
+</td></tr><tr id="line-155"><td class="table-line l-table"><a href="#line-155">155</a></td><td class="code-line l-code">				)
+</td></tr><tr id="line-156"><td class="table-line d-table"><a href="#line-156">156</a></td><td class="code-line d-code">				self.conn_db_2.commit()
+</td></tr><tr id="line-157"><td class="table-line l-table"><a href="#line-157">157</a></td><td class="code-line l-code">				ids.append(user_id)
+</td></tr><tr id="line-158"><td class="table-line d-table"><a href="#line-158">158</a></td><td class="code-line d-code">			<span class="hljs-keyword">else</span>:
+</td></tr><tr id="line-159"><td class="table-line l-table"><a href="#line-159">159</a></td><td class="code-line l-code">				self.log.debug(<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;Ignoring user {}: {} (already in database).&#x27;</span>, filtered, user_id))
+</td></tr><tr id="line-160"><td class="table-line d-table"><a href="#line-160"><strong>160</strong></a></td><td class="code-line d-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; End commit digest users.&#x27;</span>)
+</td></tr><tr id="line-161"><td class="table-line l-table"><a href="#line-161">161</a></td><td class="code-line l-code">
+</td></tr><tr id="line-162"><td class="table-line d-table"><a href="#line-162">162</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">import_digest</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-163"><td class="table-line l-table"><a href="#line-163">163</a></td><td class="code-line l-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; Start commit digests&#x27;</span>)
+</td></tr><tr id="line-164"><td class="table-line d-table"><a href="#line-164">164</a></td><td class="code-line d-code">		self.curr_db_2.execute(<span class="hljs-string">&#x27;TRUNCATE TABLE bot_digest&#x27;</span>)
+</td></tr><tr id="line-165"><td class="table-line l-table"><a href="#line-165">165</a></td><td class="code-line l-code">		self.conn_db_2.commit()
+</td></tr><tr id="line-166"><td class="table-line d-table"><a href="#line-166">166</a></td><td class="code-line d-code">
+</td></tr><tr id="line-167"><td class="table-line l-table"><a href="#line-167">167</a></td><td class="code-line l-code">		self.curr_db_1.execute(<span class="hljs-string">&#x27;SELECT * FROM digests&#x27;</span>)
+</td></tr><tr id="line-168"><td class="table-line d-table"><a href="#line-168">168</a></td><td class="code-line d-code">		digest_id = <span class="hljs-number">1</span>
+</td></tr><tr id="line-169"><td class="table-line l-table"><a href="#line-169">169</a></td><td class="code-line l-code">		<span class="hljs-keyword">for</span> (date, username, msg) <span class="hljs-keyword">in</span> self.curr_db_1:
+</td></tr><tr id="line-170"><td class="table-line d-table"><a href="#line-170"><strong>170</strong></a></td><td class="code-line d-code">			filtered = self.filter_username(username)
+</td></tr><tr id="line-171"><td class="table-line l-table"><a href="#line-171">171</a></td><td class="code-line l-code">			self.curr_db_2.execute(<span class="hljs-string">&#x27;SELECT id FROM bot_digest_user WHERE username LIKE %s&#x27;</span>, (<span class="hljs-string">&#x27;@&#x27;</span> + filtered,))
+</td></tr><tr id="line-172"><td class="table-line d-table"><a href="#line-172">172</a></td><td class="code-line d-code">			user_id = self.curr_db_2.fetchone()[<span class="hljs-number">0</span>]
+</td></tr><tr id="line-173"><td class="table-line l-table"><a href="#line-173">173</a></td><td class="code-line l-code">			self.log.debug(<span class="hljs-built_in">str</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;Commit digest {} from {} at timestamp {}.&#x27;</span>, digest_id, filtered, date))
+</td></tr><tr id="line-174"><td class="table-line d-table"><a href="#line-174">174</a></td><td class="code-line d-code">			self.curr_db_2.execute(
+</td></tr><tr id="line-175"><td class="table-line l-table"><a href="#line-175">175</a></td><td class="code-line l-code">				<span class="hljs-string">&#x27;INSERT INTO bot_digest (id, chat, date, message_id, digest, user_id) VALUES (%s, %s, %s, %s, %s, %s)&#x27;</span>,
+</td></tr><tr id="line-176"><td class="table-line d-table"><a href="#line-176">176</a></td><td class="code-line d-code">				(digest_id, self.cfg[<span class="hljs-string">&#x27;MF_CHAT_ID&#x27;</span>], date, <span class="hljs-literal">None</span>, msg, user_id)
+</td></tr><tr id="line-177"><td class="table-line l-table"><a href="#line-177">177</a></td><td class="code-line l-code">			)
+</td></tr><tr id="line-178"><td class="table-line d-table"><a href="#line-178">178</a></td><td class="code-line d-code">			self.conn_db_2.commit()
+</td></tr><tr id="line-179"><td class="table-line l-table"><a href="#line-179">179</a></td><td class="code-line l-code">			digest_id += <span class="hljs-number">1</span>
+</td></tr><tr id="line-180"><td class="table-line d-table"><a href="#line-180"><strong>180</strong></a></td><td class="code-line d-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; End commit digests&#x27;</span>)
+</td></tr><tr id="line-181"><td class="table-line l-table"><a href="#line-181">181</a></td><td class="code-line l-code">
+</td></tr><tr id="line-182"><td class="table-line d-table"><a href="#line-182">182</a></td><td class="code-line d-code">	<span class="hljs-comment"># In a Spring Boot project, you must use &quot;GenerationType.IDENTITY&quot; for &quot;@Id&quot; column.</span>
+</td></tr><tr id="line-183"><td class="table-line l-table"><a href="#line-183">183</a></td><td class="code-line l-code">	<span class="hljs-comment"># Due to this, a table &quot;bot_digest_id_seq&quot; will appear.</span>
+</td></tr><tr id="line-184"><td class="table-line d-table"><a href="#line-184">184</a></td><td class="code-line d-code">	<span class="hljs-comment"># Additional information: https://hcmc.uvic.ca/blogs/index.php/how_to_fix_postgresql_error_duplicate_ke?blog=22</span>
+</td></tr><tr id="line-185"><td class="table-line l-table"><a href="#line-185">185</a></td><td class="code-line l-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fix_autogenerated_id</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-186"><td class="table-line d-table"><a href="#line-186">186</a></td><td class="code-line d-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; Start fix autogenerated ids.&#x27;</span>)
+</td></tr><tr id="line-187"><td class="table-line l-table"><a href="#line-187">187</a></td><td class="code-line l-code">		self.curr_db_2.execute(
+</td></tr><tr id="line-188"><td class="table-line d-table"><a href="#line-188">188</a></td><td class="code-line d-code">			<span class="hljs-string">&quot;SELECT setval(&#x27;bot_digest_id_seq&#x27;, (SELECT MAX(id) FROM bot_digest) + 1)&quot;</span>
+</td></tr><tr id="line-189"><td class="table-line l-table"><a href="#line-189">189</a></td><td class="code-line l-code">		)
+</td></tr><tr id="line-190"><td class="table-line d-table"><a href="#line-190"><strong>190</strong></a></td><td class="code-line d-code">		self.log.debug(<span class="hljs-string">&#x27;=&gt; End fix autogenerated ids.&#x27;</span>)
+</td></tr><tr id="line-191"><td class="table-line l-table"><a href="#line-191">191</a></td><td class="code-line l-code">
+</td></tr><tr id="line-192"><td class="table-line d-table"><a href="#line-192">192</a></td><td class="code-line d-code">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">close</span>(<span class="hljs-params">self</span>):</span>
+</td></tr><tr id="line-193"><td class="table-line l-table"><a href="#line-193">193</a></td><td class="code-line l-code">		self.curr_db_2.close()
+</td></tr><tr id="line-194"><td class="table-line d-table"><a href="#line-194">194</a></td><td class="code-line d-code">		self.curr_db_1.close()
+</td></tr><tr id="line-195"><td class="table-line l-table"><a href="#line-195">195</a></td><td class="code-line l-code">		self.conn_db_2.close()
+</td></tr><tr id="line-196"><td class="table-line d-table"><a href="#line-196">196</a></td><td class="code-line d-code">		self.conn_db_1.close()
+</td></tr><tr id="line-197"><td class="table-line l-table"><a href="#line-197">197</a></td><td class="code-line l-code">
+</td></tr><tr id="line-198"><td class="table-line d-table"><a href="#line-198">198</a></td><td class="code-line d-code">
+</td></tr><tr id="line-199"><td class="table-line l-table"><a href="#line-199">199</a></td><td class="code-line l-code"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+</td></tr><tr id="line-200"><td class="table-line d-table"><a href="#line-200"><strong>200</strong></a></td><td class="code-line d-code">	logger = Logger()
+</td></tr><tr id="line-201"><td class="table-line l-table"><a href="#line-201">201</a></td><td class="code-line l-code">	config = Config(logger).cfg
+</td></tr><tr id="line-202"><td class="table-line d-table"><a href="#line-202">202</a></td><td class="code-line d-code">	client = Telegram(config).client
+</td></tr><tr id="line-203"><td class="table-line l-table"><a href="#line-203">203</a></td><td class="code-line l-code">	importer = Importer(config, client, logger)
+</td></tr><tr id="line-204"><td class="table-line d-table"><a href="#line-204">204</a></td><td class="code-line d-code">	importer.import_users()
+</td></tr><tr id="line-205"><td class="table-line l-table"><a href="#line-205">205</a></td><td class="code-line l-code">	importer.import_digest()
+</td></tr><tr id="line-206"><td class="table-line d-table"><a href="#line-206">206</a></td><td class="code-line d-code">	importer.fix_autogenerated_id()
+</td></tr><tr id="line-207"><td class="table-line l-table"><a href="#line-207">207</a></td><td class="code-line l-code">	importer.close()
+</td></tr><tr id="line-208"><td class="table-line d-table"><a href="#line-208">208</a></td><td class="code-line d-code">	logger.close()
+</td></tr></table>

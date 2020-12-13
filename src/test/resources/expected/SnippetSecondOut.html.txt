@@ -1,0 +1,14 @@
+	<span class="hljs-meta">@PostMapping(path = &quot;/api&quot;, produces = &quot;text/plain;charset=UTF-8&quot;)</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">highlight</span><span class="hljs-params">(InputStream inputDataStream,</span></span>
+<span class="hljs-function"><span class="hljs-params">	                        <span class="hljs-meta">@RequestParam(name = &quot;o&quot;, required = false, defaultValue = &quot;&quot;)</span> String options,</span></span>
+<span class="hljs-function"><span class="hljs-params">	                        <span class="hljs-meta">@RequestParam(name = &quot;h&quot;, required = false, defaultValue = &quot;HighlightJs&quot;)</span> String mode)</span> </span>{
+		Scanner scanner = <span class="hljs-keyword">new</span> Scanner(inputDataStream).useDelimiter(<span class="hljs-string">&quot;\\A&quot;</span>); <span class="hljs-comment">// https://stackoverflow.com/a/5445161</span>
+		<span class="hljs-keyword">if</span> (scanner.hasNext()) {
+			String code = scanner.next();
+			<span class="hljs-keyword">if</span> (StringUtils.hasText(code) &amp;&amp; code.length() &lt; config.getSnippetMaxLength()) {
+				<span class="hljs-keyword">return</span> highlight.highlightCode(Mode.getMode(mode), util.getCorrectOptions(options), code);
+			}
+		}
+		scanner.close();
+		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Error: Cannot highlight code snippet.&quot;</span>;
+	}

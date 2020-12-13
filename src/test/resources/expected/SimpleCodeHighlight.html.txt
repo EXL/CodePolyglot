@@ -1,0 +1,11 @@
+<table class="code-table"><tr id="line-1"><td class="code-line l-code"><span class="hljs-string">&quot;astring&quot;</span>
+</td></tr><tr id="line-2"><td class="code-line d-code">expression
+</td></tr><tr id="line-3" class="hll"><td class="code-line"><span class="hljs-string">&quot;a <span class="hljs-subst">${  <span class="hljs-string">&quot;string&quot;</span> }</span> <span class="hljs-subst">${<span class="hljs-string">&#x27;c&#x27;</span>}</span> b&quot;</span>
+</td></tr><tr id="line-4" class="hll"><td class="code-line"><span class="hljs-string">&quot;a <span class="hljs-subst">${  <span class="hljs-string">&quot;string <span class="hljs-variable">$var</span> <span class="hljs-subst">${subs}</span>&quot;</span> }</span> b&quot;</span>
+</td></tr><tr id="line-5" class="hll"><td class="code-line"><span class="hljs-string">&quot;&quot;&quot;  <span class="hljs-subst">${</span></span>
+</td></tr><tr id="line-6"><td class="code-line d-code"><span class="hljs-string"><span class="hljs-subst">    ${subst}</span></span>
+</td></tr><tr id="line-7"><td class="code-line l-code"><span class="hljs-string"><span class="hljs-subst">    <span class="hljs-string">${subst}</span></span></span>
+</td></tr><tr id="line-8"><td class="code-line d-code"><span class="hljs-string"><span class="hljs-subst">    ${s<span class="hljs-string">ub</span>st}</span></span>
+</td></tr><tr id="line-9"><td class="code-line l-code"><span class="hljs-string">} &quot;&quot;&quot;</span>
+</td></tr><tr id="line-10"><td class="code-line d-code"><span class="hljs-string">&quot;&quot;&quot;f=&quot;true&quot;&quot;&quot;&quot;</span>
+</td></tr></table>

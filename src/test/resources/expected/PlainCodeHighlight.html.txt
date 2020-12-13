@@ -1,0 +1,11 @@
+<table class="code-table"><tr id="line-1"><td class="code-line l-code">&lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;astring&amp;quot;&lt;/span&gt;
+</td></tr><tr id="line-2"><td class="code-line d-code">expression
+</td></tr><tr id="line-3" class="hll"><td class="code-line">&lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;a &lt;span class=&#34;hljs-subst&#34;&gt;${  &lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;string&amp;quot;&lt;/span&gt; }&lt;/span&gt; &lt;span class=&#34;hljs-subst&#34;&gt;${&lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;c&amp;#x27;&lt;/span&gt;}&lt;/span&gt; b&amp;quot;&lt;/span&gt;
+</td></tr><tr id="line-4" class="hll"><td class="code-line">&lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;a &lt;span class=&#34;hljs-subst&#34;&gt;${  &lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;string &lt;span class=&#34;hljs-variable&#34;&gt;$var&lt;/span&gt; &lt;span class=&#34;hljs-subst&#34;&gt;${subs}&lt;/span&gt;&amp;quot;&lt;/span&gt; }&lt;/span&gt; b&amp;quot;&lt;/span&gt;
+</td></tr><tr id="line-5" class="hll"><td class="code-line">&lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;  &lt;span class=&#34;hljs-subst&#34;&gt;${&lt;/span&gt;&lt;/span&gt;
+</td></tr><tr id="line-6"><td class="code-line d-code">&lt;span class=&#34;hljs-string&#34;&gt;&lt;span class=&#34;hljs-subst&#34;&gt;    ${subst}&lt;/span&gt;&lt;/span&gt;
+</td></tr><tr id="line-7"><td class="code-line l-code">&lt;span class=&#34;hljs-string&#34;&gt;&lt;span class=&#34;hljs-subst&#34;&gt;    &lt;span class=&#34;hljs-string&#34;&gt;${subst}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+</td></tr><tr id="line-8"><td class="code-line d-code">&lt;span class=&#34;hljs-string&#34;&gt;&lt;span class=&#34;hljs-subst&#34;&gt;    ${s&lt;span class=&#34;hljs-string&#34;&gt;ub&lt;/span&gt;st}&lt;/span&gt;&lt;/span&gt;
+</td></tr><tr id="line-9"><td class="code-line l-code">&lt;span class=&#34;hljs-string&#34;&gt;} &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+</td></tr><tr id="line-10"><td class="code-line d-code">&lt;span class=&#34;hljs-string&#34;&gt;&amp;quot;&amp;quot;&amp;quot;f=&amp;quot;true&amp;quot;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+</td></tr></table>

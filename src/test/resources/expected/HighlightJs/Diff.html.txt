@@ -1,0 +1,37 @@
+<table class="code-table"><tr id="line-1"><td class="table-line l-table"><a href="#line-1">1</a></td><td class="code-line l-code">commit 4575376b305cb4fe43949c1ebb33cafc53ce7a84 (HEAD -&gt; master)
+</td></tr><tr id="line-2"><td class="table-line d-table"><a href="#line-2">2</a></td><td class="code-line d-code">Author: EXL &lt;exlmotodev@gmail.com&gt;
+</td></tr><tr id="line-3"><td class="table-line l-table"><a href="#line-3">3</a></td><td class="code-line l-code">Date:   Fri Dec 11 11:10:58 2020 +0700
+</td></tr><tr id="line-4"><td class="table-line d-table"><a href="#line-4">4</a></td><td class="code-line d-code">
+</td></tr><tr id="line-5"><td class="table-line l-table"><a href="#line-5">5</a></td><td class="code-line l-code">    Fix Simple Tag Compensator
+</td></tr><tr id="line-6"><td class="table-line d-table"><a href="#line-6">6</a></td><td class="code-line d-code">
+</td></tr><tr id="line-7"><td class="table-line l-table"><a href="#line-7">7</a></td><td class="code-line l-code"><span class="hljs-comment">diff --git a/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java b/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java</span>
+</td></tr><tr id="line-8"><td class="table-line d-table"><a href="#line-8">8</a></td><td class="code-line d-code"><span class="hljs-comment">index ffbce53..2977b5b 100644</span>
+</td></tr><tr id="line-9"><td class="table-line l-table"><a href="#line-9">9</a></td><td class="code-line l-code"><span class="hljs-comment">--- a/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java</span>
+</td></tr><tr id="line-10"><td class="table-line d-table"><a href="#line-10"><strong>10</strong></a></td><td class="code-line d-code"><span class="hljs-comment">+++ b/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java</span>
+</td></tr><tr id="line-11"><td class="table-line l-table"><a href="#line-11">11</a></td><td class="code-line l-code"><span class="hljs-meta">@@ -29,20 +29,15 @@</span> public class TagCompensator {
+</td></tr><tr id="line-12"><td class="table-line d-table"><a href="#line-12">12</a></td><td class="code-line d-code">
+</td></tr><tr id="line-13"><td class="table-line l-table"><a href="#line-13">13</a></td><td class="code-line l-code">        private abstract class TagWorker {
+</td></tr><tr id="line-14"><td class="table-line d-table"><a href="#line-14">14</a></td><td class="code-line d-code">                protected void stepTagStack(String line) {
+</td></tr><tr id="line-15"><td class="table-line l-table"><a href="#line-15">15</a></td><td class="code-line l-code"><span class="hljs-deletion">-                       if (line.contains(TAG_START_MARKER)) {</span>
+</td></tr><tr id="line-16"><td class="table-line d-table"><a href="#line-16">16</a></td><td class="code-line d-code"><span class="hljs-deletion">-                               String[] tokens = line.split(TAG_START_MARKER);</span>
+</td></tr><tr id="line-17"><td class="table-line l-table"><a href="#line-17">17</a></td><td class="code-line l-code"><span class="hljs-deletion">-                               for (String token : tokens) {</span>
+</td></tr><tr id="line-18"><td class="table-line d-table"><a href="#line-18">18</a></td><td class="code-line d-code"><span class="hljs-deletion">-                                       if (token.contains(TAG_START_CHUNK)) {</span>
+</td></tr><tr id="line-19"><td class="table-line l-table"><a href="#line-19">19</a></td><td class="code-line l-code"><span class="hljs-deletion">-                                               tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);</span>
+</td></tr><tr id="line-20"><td class="table-line d-table"><a href="#line-20"><strong>20</strong></a></td><td class="code-line d-code"><span class="hljs-deletion">-                                       }</span>
+</td></tr><tr id="line-21"><td class="table-line l-table"><a href="#line-21">21</a></td><td class="code-line l-code"><span class="hljs-deletion">-                               }</span>
+</td></tr><tr id="line-22"><td class="table-line d-table"><a href="#line-22">22</a></td><td class="code-line d-code"><span class="hljs-deletion">-                       }</span>
+</td></tr><tr id="line-23"><td class="table-line l-table"><a href="#line-23">23</a></td><td class="code-line l-code"><span class="hljs-deletion">-                       if (line.contains(TAG_END_MARKER)) {</span>
+</td></tr><tr id="line-24"><td class="table-line d-table"><a href="#line-24">24</a></td><td class="code-line d-code"><span class="hljs-deletion">-                               String[] tokens = line.split(TAG_END_MARKER);</span>
+</td></tr><tr id="line-25"><td class="table-line l-table"><a href="#line-25">25</a></td><td class="code-line l-code"><span class="hljs-addition">+                       if (line.contains(TAG_START_MARKER) || line.contains(TAG_END_MARKER)) {</span>
+</td></tr><tr id="line-26"><td class="table-line d-table"><a href="#line-26">26</a></td><td class="code-line d-code"><span class="hljs-addition">+                               String[] tokens = line.split(TAG_START_MARKER + &quot;|&quot; + TAG_END_MARKER);</span>
+</td></tr><tr id="line-27"><td class="table-line l-table"><a href="#line-27">27</a></td><td class="code-line l-code">                                for (String token : tokens) {
+</td></tr><tr id="line-28"><td class="table-line d-table"><a href="#line-28">28</a></td><td class="code-line d-code">                                        if (token.contains(TAG_END_CHUNK)) {
+</td></tr><tr id="line-29"><td class="table-line l-table"><a href="#line-29">29</a></td><td class="code-line l-code">                                                tagStack.pop();
+</td></tr><tr id="line-30"><td class="table-line d-table"><a href="#line-30"><strong>30</strong></a></td><td class="code-line d-code">                                        }
+</td></tr><tr id="line-31"><td class="table-line l-table"><a href="#line-31">31</a></td><td class="code-line l-code"><span class="hljs-addition">+                                       if (token.contains(TAG_START_CHUNK)) {</span>
+</td></tr><tr id="line-32"><td class="table-line d-table"><a href="#line-32">32</a></td><td class="code-line d-code"><span class="hljs-addition">+                                               tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);</span>
+</td></tr><tr id="line-33"><td class="table-line l-table"><a href="#line-33">33</a></td><td class="code-line l-code"><span class="hljs-addition">+                                       }</span>
+</td></tr><tr id="line-34"><td class="table-line d-table"><a href="#line-34">34</a></td><td class="code-line d-code">                                }
+</td></tr><tr id="line-35"><td class="table-line l-table"><a href="#line-35">35</a></td><td class="code-line l-code">                        }
+</td></tr><tr id="line-36"><td class="table-line d-table"><a href="#line-36">36</a></td><td class="code-line d-code">                }
+</td></tr></table>

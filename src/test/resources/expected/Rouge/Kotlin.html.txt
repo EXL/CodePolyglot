@@ -1,0 +1,10 @@
+<table class="code-table"><tr id="line-1"><td class="table-line l-table"><a href="#line-1">1</a></td><td class="code-line l-code"><span class="s">"astring"</span>
+</td></tr><tr id="line-2"><td class="table-line d-table"><a href="#line-2">2</a></td><td class="code-line d-code"><span class="n">expression</span>
+</td></tr><tr id="line-3"><td class="table-line l-table"><a href="#line-3">3</a></td><td class="code-line l-code"><span class="s">"a ${  "</span><span class="n">string</span><span class="s">" } ${'c'} b"</span>
+</td></tr><tr id="line-4"><td class="table-line d-table"><a href="#line-4">4</a></td><td class="code-line d-code"><span class="s">"a ${  "</span><span class="n">string</span> <span class="err">$</span><span class="kd">var</span> <span class="err">${</span><span class="py">subs</span><span class="p">}</span><span class="s">" } b"</span>
+</td></tr><tr id="line-5"><td class="table-line l-table"><a href="#line-5">5</a></td><td class="code-line l-code"><span class="s">"""  ${</span>
+</td></tr><tr id="line-6"><td class="table-line d-table"><a href="#line-6">6</a></td><td class="code-line d-code"><span class="s">    ${subst}</span>
+</td></tr><tr id="line-7"><td class="table-line l-table"><a href="#line-7">7</a></td><td class="code-line l-code"><span class="s">} """</span>
+</td></tr><tr id="line-8"><td class="table-line d-table"><a href="#line-8">8</a></td><td class="code-line d-code"><span class="s">"""f="true""""</span>
+</td></tr><tr id="line-9"><td class="table-line l-table"><a href="#line-9">9</a></td><td class="code-line l-code"><span class="s"></span>
+</td></tr></table>

@@ -1,23 +1,23 @@
-1. Create Icon. -
-2. Create Techno theme. -
+1. Create Icon -
+2. Create Techno theme -
 3. Write Tests: -
     * Info.java +
     * Lang.java +
     * Skin.java +
-    * ApiController -
-    * CodeController -
-    * ResourceHelper +
-    * UtilityHelper +
+    * ApiController.java -
+    * CodeController.java -
+    * ResourceHelper.java +
+    * UtilityHelper.java +
     * Language.java +
     * Mode.java +
-    * HighlightFilter +
-    * TagCompensator +
-    * HighlightPygments +
-    * OptionsParser +
-    * HighlightService -
-    * DatabaseService +
-4. Create Open Graph Meta Links. -
-5. Test Deploy. -
+    * HighlightFilter.java +
+    * TagCompensator.java +
+    * HighlightPygments.java +
+    * OptionsParser.java +
+    * HighlightService.java +
+    * DatabaseService.java +
+4. Create Open Graph Meta Links -
+5. Test Deploy -
 6. Write ChangeLog.md -
 7. Write ReadMe.md -
 8. Add Copyright on all files -

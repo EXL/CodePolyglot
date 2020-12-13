@@ -1,0 +1,36 @@
+commit 4575376b305cb4fe43949c1ebb33cafc53ce7a84 (HEAD -> master)
+Author: EXL <exlmotodev@gmail.com>
+Date:   Fri Dec 11 11:10:58 2020 +0700
+
+    Fix Simple Tag Compensator
+
+diff --git a/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java b/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java
+index ffbce53..2977b5b 100644
+--- a/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java
++++ b/src/main/java/ru/exlmoto/code/highlight/filter/TagCompensator.java
+@@ -29,20 +29,15 @@ public class TagCompensator {
+
+        private abstract class TagWorker {
+                protected void stepTagStack(String line) {
+-                       if (line.contains(TAG_START_MARKER)) {
+-                               String[] tokens = line.split(TAG_START_MARKER);
+-                               for (String token : tokens) {
+-                                       if (token.contains(TAG_START_CHUNK)) {
+-                                               tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);
+-                                       }
+-                               }
+-                       }
+-                       if (line.contains(TAG_END_MARKER)) {
+-                               String[] tokens = line.split(TAG_END_MARKER);
++                       if (line.contains(TAG_START_MARKER) || line.contains(TAG_END_MARKER)) {
++                               String[] tokens = line.split(TAG_START_MARKER + "|" + TAG_END_MARKER);
+                                for (String token : tokens) {
+                                        if (token.contains(TAG_END_CHUNK)) {
+                                                tagStack.pop();
+                                        }
++                                       if (token.contains(TAG_START_CHUNK)) {
++                                               tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);
++                                       }
+                                }
+                        }
+                }
