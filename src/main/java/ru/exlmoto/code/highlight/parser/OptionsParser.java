@@ -21,9 +21,11 @@ public class OptionsParser {
 
 		final Options settings = new Options();
 		String[] optionsArray = options.split("\\|");
-		settings.setLanguage(scanOptionsForLanguage(optionsArray[0]));
-		settings.setTable(scanOptionsForTable(optionsArray));
-		scanOptionsForHighlightString(optionsArray, settings);
+		if (optionsArray.length > 0 && StringUtils.hasText(optionsArray[0])) {
+			settings.setLanguage(scanOptionsForLanguage(optionsArray[0]));
+			settings.setTable(scanOptionsForTable(optionsArray));
+			scanOptionsForHighlightString(optionsArray, settings);
+		}
 		return settings;
 	}
 

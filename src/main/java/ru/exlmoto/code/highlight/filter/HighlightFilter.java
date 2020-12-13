@@ -43,7 +43,7 @@ public class HighlightFilter {
 		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain));
 	}
 
-	protected String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
+	private String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
 		final String compensatedCodeLines = tagCompensator.compensateTags(codeLines).orElse(codeLines);
 		StringBuilder sb = new StringBuilder();
 		try {
