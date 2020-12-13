@@ -10,15 +10,12 @@
     * UtilityHelper +
     * Language.java +
     * Mode.java +
-    * HighlightFilter -
-    * TagCompensator -
-    * HighlightJs -
-    * HighlightPygments -
-    * HighlightRouge -
-    * OptionsParser -
-    * Highlight -
+    * HighlightFilter +
+    * TagCompensator +
+    * HighlightPygments +
+    * OptionsParser +
     * HighlightService -
-    * DatabaseService -
+    * DatabaseService +
 4. Create Open Graph Meta Links. -
 5. Test Deploy. -
 6. Write ChangeLog.md -
