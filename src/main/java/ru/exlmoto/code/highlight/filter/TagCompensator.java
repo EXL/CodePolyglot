@@ -33,7 +33,9 @@ public class TagCompensator {
 				String[] tokens = line.split(TAG_START_MARKER + "|" + TAG_END_MARKER);
 				for (String token : tokens) {
 					if (token.contains(TAG_END_CHUNK)) {
-						tagStack.pop();
+						if (!tagStack.isEmpty()) {
+							tagStack.pop();
+						}
 					}
 					if (token.contains(TAG_START_CHUNK)) {
 						tagStack.push(token.substring(token.indexOf(TAG_START_CHUNK)) + TAG_START_MARKER);

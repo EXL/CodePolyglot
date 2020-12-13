@@ -19,6 +19,8 @@ public class HighlightFilter {
 
 	private final TagCompensator tagCompensator;
 
+	private boolean escape = false;
+
 	public HighlightFilter(TagCompensator tagCompensator) {
 		this.tagCompensator = tagCompensator;
 	}
@@ -68,7 +70,8 @@ public class HighlightFilter {
 	private void filterLinesAux(StringBuilder stringBuilder,
 	                            long i, long hStart, long hEnd,
 	                            String line, Filter filter) {
-		final String codeLine = (filter == Filter.plain || filter == Filter.table_plain) ? Encode.forHtml(line) : line;
+		final String codeLine = (escape || filter == Filter.plain || filter == Filter.table_plain) ?
+			Encode.forHtml(line) : line;
 		final String codeLineClass = (i % 2 == 0) ? "d-code" : "l-code";
 		final String tableLineClass = (i % 2 == 0) ? "d-table" : "l-table";
 		final boolean hll = ((i >= hStart) && (i <= hEnd));
@@ -81,5 +84,9 @@ public class HighlightFilter {
 		}
 		stringBuilder.append("<td class=\"code-line").append(hll ? "" : " " + codeLineClass).append("\">");
 		stringBuilder.append(codeLine).append("\n</td></tr>");
+	}
+
+	public void setEscape(boolean escape) {
+		this.escape = escape;
 	}
 }

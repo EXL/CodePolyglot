@@ -25,7 +25,7 @@ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
-/*
+
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
@@ -100,6 +100,7 @@ public class HighlightService {
 		final long hStart = settings.gethStart();
 		final long hEnd = settings.gethEnd();
 		final String filteredCode = highlightFilter.filterCarriageReturn(code);
+		highlightFilter.setEscape(false);
 		return (settings.isHighlightDisabled()) ?
 			(settings.isTable()) ?
 				highlightFilter.tableCodePlain(filteredCode, hStart, hEnd) :
@@ -118,26 +119,32 @@ public class HighlightService {
 	}
 
 	private String highlightCodeAux(Mode mode, String code, Options options) {
-		switch (mode) {
-			default:
-			case HighlightJs: {
-				return highlightJs.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
+		RuntimeException error = new RuntimeException("Error while highlighting code snippet.");
+		try {
+			switch (mode) {
+				default:
+				case HighlightJs: {
+					return highlightJs.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+				}
+				case HighlightRouge: {
+					return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+				}
+				case HighlightPygments: {
+					highlightPygments.setUseJython(false);
+					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+				}
+				case HighlightPygmentsJython: {
+					highlightPygments.setUseJython(true);
+					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+				}
 			}
-			case HighlightRouge: {
-				return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
-			}
-			case HighlightPygments: {
-				highlightPygments.setUseJython(false);
-				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
-			}
-			case HighlightPygmentsJython: {
-				highlightPygments.setUseJython(true);
-				return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElse(code);
-			}
+		} catch (RuntimeException re) {
+			highlightFilter.setEscape(true);
+			return code;
 		}
 	}
 }
-*/
+/*
 // Stub service class.
 @Service
 public class HighlightService {
@@ -163,3 +170,4 @@ public class HighlightService {
 		return code;
 	}
 }
+*/
