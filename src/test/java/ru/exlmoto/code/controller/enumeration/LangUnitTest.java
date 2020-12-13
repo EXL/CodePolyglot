@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LangUnitTest {
 	@Test
-	public void checkLang() {
+	public void testCheckLang() {
 		assertEquals(Lang.ru, Lang.checkLang(null));
 		assertEquals(Lang.ru, Lang.checkLang(""));
 		assertEquals(Lang.ru, Lang.checkLang(" "));

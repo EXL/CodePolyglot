@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SkinUnitTest {
 	@Test
-	public void testSkin() {
+	public void testCheckSkin() {
 		assertEquals(Skin.techno, Skin.checkSkin(null));
 		assertEquals(Skin.techno, Skin.checkSkin(""));
 		assertEquals(Skin.techno, Skin.checkSkin(" "));
