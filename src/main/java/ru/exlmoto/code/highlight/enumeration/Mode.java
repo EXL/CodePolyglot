@@ -1,5 +1,7 @@
 package ru.exlmoto.code.highlight.enumeration;
 
+import org.springframework.util.StringUtils;
+
 import ru.exlmoto.code.controller.enumeration.Skin;
 
 public enum Mode {
@@ -61,11 +63,12 @@ public enum Mode {
 	}
 
 	public static Mode getMode(String name) {
-		try {
-			return Mode.valueOf(name);
-		} catch (IllegalArgumentException ignored) {
-			return HighlightJs;
+		if (StringUtils.hasText(name)) {
+			try {
+				return Mode.valueOf(name);
+			} catch (IllegalArgumentException ignored) { }
 		}
+		return HighlightJs;
 	}
 
 	public static String getCss(Mode mode, Skin theme) {
