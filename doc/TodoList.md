@@ -6,11 +6,10 @@
     * Skin.java +
     * ApiController -
     * CodeController -
-    * CookieHelper -
-    * ResourceHelper -
-    * UtilityHelper -
-    * Language -
-    * Mode -
+    * ResourceHelper +
+    * UtilityHelper +
+    * Language.java +
+    * Mode.java +
     * HighlightFilter -
     * TagCompensator -
     * HighlightJs -
