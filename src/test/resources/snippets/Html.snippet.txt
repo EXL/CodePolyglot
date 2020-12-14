@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" th:lang="${lang}">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="#{code.title}">Code Polyglot!</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/__${skin}__/code.css}"/>
+		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/hjs.css}"/>
+		<link rel="stylesheet" type="text/css" th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/merged.css}"/>
+		<script defer type="text/javascript" th:src="@{/js/code.js}"></script>
+	</head>
+	<body>
+		<div class="page">
+			<div id="panel" class="sidebar">
+				<a href="/" th:title="#{code.title}"><h2 class="block center header" th:text="#{code.title}">Code Polyglot!</h2></a>
+				<div class="block recent">
+					<h4 class="center header" th:text="#{code.recent}">Recent Snippets</h4>
+					<div th:if="${!snippets.isEmpty()}">
+						<div th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
+							=&rt; <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">[x]</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<form id="code-form" method="post" th:action="@{/edit}" th:object="${form}">
+				<div class="content block" th:if="${info}">
+					<h2 class="info" th:text="#{__${info}__}"></h2>
+				</div>
+				<div class="content block" th:if="${code}">
+					<h2 th:if="*{title}" th:with="head=*{title}">
+						<span th:text="${head} + ' |'"></span> <span th:text="*{date}"></span>
+					</h2>
+				</div>
+				<div class="content block" th:if="${code}">
+					<div class="buttons">
+						<span id="copy-label" class="hide" th:text="#{code.toolbar.copied}"></span>
+						<img id="button-copy" class="img-button" width="20" height="16" src="../static/img/techno/copy.png" th:src="@{/img/__${skin}__/copy.png}" alt="Copy" th:alt="#{code.toolbar.copy}" th:title="#{code.toolbar.copy}"/>
+						<img id="button-wide" class="img-button" width="20" height="16" src="../static/img/techno/wide.png" th:src="@{/img/__${skin}__/wide.png}" alt="Toggle Sidebar" th:alt="#{code.toolbar.wide}" th:title="#{code.toolbar.wide}"/>
+						<img id="button-wrap" class="img-button" width="20" height="16" src="../static/img/techno/wrap.png" th:src="@{/img/__${skin}__/wrap.png}" alt="Toggle Wrap" th:alt="#{code.toolbar.wrap}" th:title="#{code.toolbar.wrap}"/>
+						<a target="_blank" th:href="@{/api/raw/__${id}__}">
+							<img id="button-raw" class="img-button" width="20" height="16" src="../static/img/techno/raw.png" th:src="@{/img/__${skin}__/raw.png}" alt="Raw" th:alt="#{code.toolbar.raw}" th:title="#{code.toolbar.raw}"/>
+						</a>
+					</div>
+					<div id="code" class="highlight hljs" th:utext="${code}">Code Container</div>
+				</div>
+				<div class="content block grid">
+					<div>
+						<div class="markdown inline">```</div>
+						<label>
+							<input id="options" maxlength="64" type="text" th:field="*{options}" th:placeholder="#{code.options.placeholder}" th:title="#{code.options.title}"/>
+						</label>
+						<input class="button" type="submit" th:value="#{code.button}"/>
+					</div>
+					<div>
+						<label>
+							<input id="title" maxlength="64" type="text" th:field="*{title}" th:placeholder="#{code.title.placeholder}"/>
+						</label>
+					</div>
+					<div>
+						<label>
+							<textarea id="code-area" th:maxlength="${length}" th:field="*{code}" th:autofocus="${code} ? 'false' : 'true'" th:placeholder="#{code.area.placeholder}"></textarea>
+						</label>
+					</div>
+					<div id="highlight">
+						<div class="table">
+							<div class="table-row">
+								<div class="table-cell"></div>
+								<div class="table-cell" th:text="#{code.table.lang}">Language</div>
+								<div class="table-cell" th:text="#{code.table.library}">Library</div>
+								<div class="table-cell" th:text="#{code.table.vm}">VM</div>
+								<div class="table-cell" th:text="#{code.table.speed}">Speed</div>
+							</div>
+							<div class="table-row" th:each="mode : ${T(ru.exlmoto.code.highlight.enumeration.Mode).values()}">
+								<div class="table-cell">
+									<label class="radio-container">
+										<input type="radio" name="syntax" th:id="${mode}" th:value="${mode}" th:field="*{highlight}"/>
+										<span class="radio-mark"></span>
+									</label>
+								</div>
+								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></div>
+								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + versions.get(mode).getSecond()}"></div>
+								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></div>
+								<div class="table-cell" th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></div>
+							</div>
+						</div>
+						<div th:if="*{renderTime}">
+							<span th:text="#{code.render.time}"></span>
+							<span th:utext="*{renderTime}"></span>ms.
+						</div>
+					</div>
+					<div class="markdown">```</div>
+				</div>
+			</form>
+			<div class="footer block center">
+				<span class="left">
+					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:title="#{code.logout}">[x]</a>
+					<span th:text="#{code.lang}">Language:</span>
+					<a th:href="${'/opts/?lang=techno'}" th:text="#{code.lang.ru}" th:title="#{code.lang.ru}">Russian</a>
+					|
+					<a th:href="${'/opts/?lang=en'}" th:text="#{code.lang.en}" th:title="#{code.lang.en}">English</a>
+				</span>
+				<span class="center">
+					<span>(c) <a href="https://exlmoto.ru" title="EXL&#039;s Developer Blog" target="_blank">EXL</a>, 2020-</span><span th:text="${#dates.year(#dates.createNow())}"></span>
+					|
+					<a href="https://github.com/EXL/CodePolyglot" th:title="#{code.source}">Code Polyglot</a>
+					|
+					<span th:text="#{code.powered}">Powered by</span> <a href="https://www.graalvm.org/" title="GraalVM Community">GraalVM</a> v<span th:text="${version}"></span>
+				</span>
+				<span class="right">
+					<span th:text="#{code.skin}">Skin:</span>
+					<a title="Techno" th:href="${'/opts/?skin=techno'}">Techno</a>
+					|
+					<a title="Pastorg" th:href="${'/opts/?skin=pastorg'}">Pastorg</a>
+				</span>
+			</div>
+		</div>
+	</body>
+</html>

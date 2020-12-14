@@ -26,6 +26,7 @@ class HighlightServiceTest {
 		testSnippets("Java", "java");
 		testSnippets("Css", "css");
 		testSnippets("Js", "js");
+		testSnippets("Html", "html");
 		testSnippets("Python", "python");
 		testSnippets("Diff", "diff");
 	}
