@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" th:lang="${lang}">
 	<head>
-		<meta charset="UTF-8">
 		<title th:text="#{code.title}">Code Polyglot!</title>
+		<meta charset="UTF-8">
+		<meta property="og:title" th:content="#{code.title}"/>
+		<!-- TODO: Favicon meta property="og:image" content="icon/apple-touch-icon.png"/-->
+		<meta property="og:site_name" th:content="#{code.title}"/>
+		<meta property="og:description" th:content="#{code.desc}"/>
+		<!-- TODO: Favicon -->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/__${skin}__/code.css}"/>
 		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/hjs.css}"/>
 		<link rel="stylesheet" type="text/css" th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/merged.css}"/>
