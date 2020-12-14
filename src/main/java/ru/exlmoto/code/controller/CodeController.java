@@ -107,7 +107,7 @@ public class CodeController {
 	}
 
 	@RequestMapping(path = "/opts")
-	public String skin(@RequestParam(name = "skin", required = false) Optional<String> theme,
+	public String opts(@RequestParam(name = "skin", required = false) Optional<String> theme,
 	                   @RequestParam(name = "lang", required = false) Optional<String> lang,
 	                   HttpServletRequest request, HttpServletResponse response) {
 		theme.ifPresent((skin) -> cookies.setSkin(response, Skin.checkSkin(skin)));

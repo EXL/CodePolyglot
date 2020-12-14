@@ -5,7 +5,7 @@
     * Lang.java +
     * Skin.java +
     * ApiController.java -
-    * CodeController.java -
+    * CodeController.java +
     * ResourceHelper.java +
     * UtilityHelper.java +
     * Language.java +
