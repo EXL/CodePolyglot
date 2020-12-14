@@ -6,6 +6,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.Matchers.endsWith;
 
@@ -21,8 +22,39 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 public class ControllerTestHelper {
+	public void validatePlainTextUtf8(MockMvc mvc, String path, String contains) throws Exception {
+		mvc.perform(get(path).contentType(MediaType.TEXT_PLAIN))
+			.andDo(print())
+			.andExpect(header().string("content-type", containsString("text/plain;charset=UTF-8")))
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString(contains)));
+	}
+
+	public void validateCssUtf8(MockMvc mvc, String path, String contains) throws Exception {
+		mvc.perform(get(path))
+			.andDo(print())
+			.andExpect(header().string("content-type", containsString("text/css;charset=UTF-8")))
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString(contains)));
+	}
+
+	public void validateJsonUtf8(MockMvc mvc, String path) throws Exception {
+		mvc.perform(get(path).contentType(MediaType.APPLICATION_JSON))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(header().string("content-type", containsString("application/json;charset=UTF-8")))
+			.andExpect(content().string(startsWith("{")))
+			.andExpect(content().string(endsWith("}")));
+	}
+
 	public void validateHtmlUtf8(MockMvc mvc, String path, String contains) throws Exception {
-		validateHtmlAux(mvc, path, "text/html;charset=UTF-8", contains);
+		mvc.perform(get(path).contentType(MediaType.TEXT_HTML))
+			.andDo(print())
+			.andExpect(header().string("content-type", containsString("text/html;charset=UTF-8")))
+			.andExpect(status().isOk())
+			.andExpect(content().string(startsWith("<!")))
+			.andExpect(content().string(endsWith(">\n")))
+			.andExpect(content().string(containsString(contains)));
 	}
 
 	public void checkError4xx(MockMvc mvc, String path) throws Exception {
@@ -49,6 +81,23 @@ public class ControllerTestHelper {
 	                                                 String paramFirst, String valueFirst,
 	                                                 String paramSecond, String valueSecond) throws Exception {
 		authorizedAux(mvc, path, redirectPattern, paramFirst, valueFirst, paramSecond, valueSecond, authorizedUser());
+	}
+
+	public void checkUnauthorizedPlainTextWithoutCsrf(MockMvc mvc, String path, String contains) throws Exception {
+		mvc.perform(post(path).contentType(MediaType.TEXT_PLAIN))
+			.andDo(print())
+			.andExpect(header().string("content-type", containsString("text/plain;charset=UTF-8")))
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString(contains)));
+	}
+
+	public void checkUnauthorizedPlainTextWithoutCsrfWithData(MockMvc mvc, String path,
+	                                                          String in, String out) throws Exception {
+		mvc.perform(post(path).contentType(MediaType.TEXT_PLAIN).content(in))
+			.andDo(print())
+			.andExpect(header().string("content-type", containsString("text/plain;charset=UTF-8")))
+			.andExpect(status().isOk())
+			.andExpect(content().string(equalTo(out)));
 	}
 
 	public void checkRedirect(MockMvc mvc, String path, String redirectPattern) throws Exception {
@@ -78,16 +127,6 @@ public class ControllerTestHelper {
 			.andDo(print())
 			.andExpect(redirectedUrlPattern(redirectPattern))
 			.andExpect(status().isFound());
-	}
-
-	private void validateHtmlAux(MockMvc mvc, String path, String produces, String contains) throws Exception {
-		mvc.perform(get(path).contentType(MediaType.TEXT_HTML))
-			.andDo(print())
-			.andExpect(header().string("content-type", containsString(produces)))
-			.andExpect(status().isOk())
-			.andExpect(content().string(startsWith("<!")))
-			.andExpect(content().string(endsWith(">\n")))
-			.andExpect(content().string(containsString(contains)));
 	}
 
 	private RequestPostProcessor authorizedUser() {

@@ -1,10 +1,10 @@
 1. Create Icon -
 2. Create Techno theme -
-3. Write Tests: -
+3. Write Tests: +
     * Info.java +
     * Lang.java +
     * Skin.java +
-    * ApiController.java -
+    * ApiController.java +
     * CodeController.java +
     * ResourceHelper.java +
     * UtilityHelper.java +

@@ -36,6 +36,7 @@ class CodeControllerTest {
 		helper.validateHtmlUtf8(mvc, "/unknown/", "!DOCTYPE");
 		helper.validateHtmlUtf8(mvc, "/1", "!DOCTYPE");
 		helper.validateHtmlUtf8(mvc, "/1/", "!DOCTYPE");
+
 		helper.checkError4xx(mvc, "/unknown/unknown");
 
 		try {
@@ -74,13 +75,16 @@ class CodeControllerTest {
 		doReturn(true).when(database).deleteCodeSnippet(anyLong());
 
 		helper.validateHtmlUtf8(mvc, "/delete", "!DOCTYPE");
+
 		helper.checkRedirect(mvc, "/delete/100/", "/**");
+
 		helper.checkError4xx(mvc, "/delete/100/unknown");
 	}
 
 	@Test
 	public void testOpts() throws Exception {
 		helper.checkRedirect(mvc, "/opts", "/**");
+
 		helper.checkRedirectAndCookie(mvc, "/opts?lang=ru", "/**", "lang", "ru");
 		helper.checkRedirectAndCookie(mvc, "/opts?skin=techno", "/**", "skin", "techno");
 		helper.checkRedirectAndCookie(mvc, "/opts?lang=ru&skin=techno", "/**", "lang", "ru");
@@ -89,6 +93,7 @@ class CodeControllerTest {
 		helper.checkRedirectAndCookie(mvc, "/opts?lang=en&skin=pastorg", "/**", "skin", "pastorg");
 		helper.checkRedirectAndCookie(mvc, "/opts?lang=unknown&skin=unknown", "/**", "lang", "ru");
 		helper.checkRedirectAndCookie(mvc, "/opts?lang=unknown&skin=unknown", "/**", "skin", "techno");
+
 		helper.checkError4xx(mvc, "/opts/unknown");
 	}
 }
