@@ -247,3 +247,10 @@ textarea {
 	scrollbar-color: grey whitesmoke !important;
 	scrollbar-width: 10px !important;
 }
+
+/* Custom Selection */
+::selection {
+	background: darkred;
+	color: white;
+	text-shadow: none;
+}

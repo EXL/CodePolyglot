@@ -258,6 +258,13 @@ textarea {
 	scrollbar-width: 10px !important;
 }
 
+/* Custom Selection */
+::selection {
+	background: #82FF86;
+	color: black;
+	text-shadow: none;
+}
+
 /* Custom Fonts */
 @font-face {
 	font-family: "Synergy Full Bold Condensed";
