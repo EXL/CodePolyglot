@@ -111,7 +111,7 @@ class UtilityHelperTest {
 		assertEquals("01-Feb-2020 08:30:24", util.getSimpleSnippetName(" ", "en", 1580520624L));
 		assertEquals("unknown", util.getSimpleSnippetName("unknown", "en", 1580520624L));
 
-		assertEquals("Snippet Title", util.getSimpleSnippetName("Snippet Title", "en", 1580520624L));
-		assertEquals("Long Long Snippet Ti…", util.getSimpleSnippetName("Long Long Snippet Title", "en", 1580520624L));
+		assertEquals("Snippet Ti…", util.getSimpleSnippetName("Snippet Title", "en", 1580520624L));
+		assertEquals("Long Long …", util.getSimpleSnippetName("Long Long Snippet Title", "en", 1580520624L));
 	}
 }
