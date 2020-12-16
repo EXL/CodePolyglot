@@ -160,6 +160,7 @@ textarea {
 	margin: 0;
 }
 .table-line {
+	padding-left: 5px;
 	padding-right: 5px;
 	text-align: right;
 	white-space: nowrap;

@@ -7,7 +7,6 @@ a:hover {
 	color: black;
 	text-shadow: -1px -1px 0 #42C3FF, 1px -1px 0 #42C3FF, -1px 1px 0 #42C3FF, 1px 1px 0 #42C3FF;
 }
-
 h2, h4 {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -163,12 +162,13 @@ textarea {
 	font: 14px "Iosevka Fixed Bold", monospace;
 }
 .code-table .hll {
-	background-color: #FFFFBB;
+	background-color: #4D1500;
 }
 .code-table pre {
 	margin: 0;
 }
 .table-line {
+	padding-left: 5px;
 	padding-right: 5px;
 	text-align: right;
 	white-space: nowrap;
@@ -177,10 +177,9 @@ textarea {
 }
 .table-line a {
 	text-decoration: none;
-	color: black;
 }
 .table-line a:hover {
-	color: orangered;
+	color: black;
 }
 .code-line {
 	padding-left: 5px;
@@ -189,22 +188,22 @@ textarea {
 	width: 100%;
 }
 .code-line:hover {
-	background: #EEE;
+	background: #112C40;
 }
 .l-code {
-	background: white;
+	background: #0E2739;
 }
 .l-table {
-	background: lightgray;
+	background: transparent url("/img/techno/cell_frg.png");
 }
 .d-code {
-	background: #FBFBFB;
+	background: #081C29;
 }
 .d-table {
-	background: darkgray;
+	background: transparent url("/img/techno/cell_bkg.png");
 }
 #code {
-	color: black;
+	color: #84FF9C;
 	border: 1px solid #82FF86;
 	overflow-x: auto;
 }
