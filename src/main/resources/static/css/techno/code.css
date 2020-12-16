@@ -119,16 +119,24 @@ textarea {
 	text-align: right;
 }
 .img-button {
-	border: 1px solid #777;
+	border: 1px solid #82FF86;
+	background: #081C29;
 }
 .img-button:hover {
-	background: orangered;
+	border: 1px solid #56CBED;
+	background: black;
+}
+.img-button-toggle {
+	border: 1px solid orange;
+}
+.super {
+	vertical-align: super;
 }
 .hide {
 	display: none;
 }
 .info {
-	color: red;
+	color: darkred;
 }
 #options {
 	width: 520px;

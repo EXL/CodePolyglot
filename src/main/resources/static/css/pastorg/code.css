@@ -117,6 +117,12 @@ textarea {
 .img-button:hover {
 	background: orangered;
 }
+.img-button-toggle {
+	outline: 1px solid darkred;
+}
+.super {
+	vertical-align: super;
+}
 .hide {
 	display: none;
 }

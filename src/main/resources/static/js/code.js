@@ -19,18 +19,18 @@ document.getElementById('button-copy').onclick = function () {
 document.getElementById('button-wide').onclick = function () {
 	if (document.getElementById('panel').classList.toggle('hide')) {
 		document.getElementById('code-form').style.marginLeft = '0';
-		document.getElementById('button-wide').style.outline = '1px solid darkred';
+		document.getElementById('button-wide').classList.add('img-button-toggle');
 	} else {
 		document.getElementById('code-form').style.marginLeft = '175px';
-		document.getElementById('button-wide').style.outline = '';
+		document.getElementById('button-wide').classList.remove('img-button-toggle');
 	}
 }
 document.getElementById('button-wrap').onclick = function () {
 	if (document.getElementById('panel').classList.toggle('toggle')) {
 		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre-wrap');
-		document.getElementById('button-wrap').style.outline = '1px solid darkred';
+		document.getElementById('button-wrap').classList.add('img-button-toggle');
 	} else {
 		document.querySelectorAll('.code-line').forEach(line => line.style.whiteSpace = 'pre');
-		document.getElementById('button-wrap').style.outline = '';
+		document.getElementById('button-wrap').classList.remove('img-button-toggle');
 	}
 }

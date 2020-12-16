@@ -37,7 +37,7 @@
 				</div>
 				<div class="content block" th:if="${code}">
 					<div class="buttons">
-						<span id="copy-label" class="hide" th:text="#{code.toolbar.copied}"></span>
+						<span id="copy-label" class="hide" th:text="#{code.toolbar.copied}"></span><span class="super">&nbsp;</span>
 						<img id="button-copy" class="img-button" width="20" height="16" src="../static/img/techno/copy.png" th:src="@{/img/__${skin}__/copy.png}" alt="Copy" th:alt="#{code.toolbar.copy}" th:title="#{code.toolbar.copy}"/>
 						<img id="button-wide" class="img-button" width="20" height="16" src="../static/img/techno/wide.png" th:src="@{/img/__${skin}__/wide.png}" alt="Toggle Sidebar" th:alt="#{code.toolbar.wide}" th:title="#{code.toolbar.wide}"/>
 						<img id="button-wrap" class="img-button" width="20" height="16" src="../static/img/techno/wrap.png" th:src="@{/img/__${skin}__/wrap.png}" alt="Toggle Wrap" th:alt="#{code.toolbar.wrap}" th:title="#{code.toolbar.wrap}"/>
