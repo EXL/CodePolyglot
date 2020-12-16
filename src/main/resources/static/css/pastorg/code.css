@@ -62,6 +62,9 @@ textarea {
 .recent a:visited {
 	color: grey;
 }
+.recent a:hover {
+	color: orangered;
+}
 .content {
 	margin-bottom: 10px;
 }

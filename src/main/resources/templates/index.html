@@ -16,11 +16,11 @@
 	<body>
 		<div class="page">
 			<div id="panel" class="sidebar">
-				<a href="/" th:title="#{code.title}"><h2 class="block center header" th:text="#{code.title}">Code Polyglot!</h2></a>
+				<a id="logo" href="/" th:title="#{code.title}"><h2 class="block center header" th:text="#{code.title}">Code Polyglot!</h2></a>
 				<div class="block recent">
 					<h4 class="center header" th:text="#{code.recent}">Recent Snippets</h4>
 					<div th:if="${!snippets.isEmpty()}">
-						<div th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
+						<div class="arrow" th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
 							🡒 <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
 						</div>
 					</div>

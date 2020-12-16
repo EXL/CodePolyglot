@@ -1,23 +1,25 @@
 /* Tags */
 a, a:visited {
 	text-decoration: none;
-	color: darkred;
+	color: #76FF41;
 }
 a:hover {
-	color: orangered;
+	color: black;
+	text-shadow: -1px -1px 0 #42C3FF, 1px -1px 0 #42C3FF, -1px 1px 0 #42C3FF, 1px 1px 0 #42C3FF;
 }
+
 h2, h4 {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 textarea, input, body {
-	color: black;
-	background: #CCC;
+	color: #84FF9C;
+	background: #081C29;
 }
 textarea, input {
 	padding: 2px;
 	font-family: monospace;
-	border: 1px #777 solid;
+	border: 1px #82FF86 solid;
 }
 textarea:focus, input:focus {
 	outline: none;
@@ -41,12 +43,13 @@ textarea {
 	margin-left: auto;
 	margin-right: auto;
 	font: 11px "DejaVu Sans", sans-serif;
-	border: 1px #777 solid;
+	border: 1px #56CBED solid;
+	background: transparent url(/img/techno/cell_bkg.png);
 }
 .block {
 	padding: 5px;
-	border: 1px #777 solid;
-	background: white;
+	border: 1px #82FF86 solid;
+	background: transparent url(/img/techno/cell_frg.png);
 }
 .center {
 	text-align: center;
@@ -60,7 +63,14 @@ textarea {
 	margin-bottom: 5px;
 }
 .recent a:visited {
-	color: grey;
+	color: #A8F6B6;
+}
+.arrow:hover {
+	color: #42C3FF;
+}
+.recent a:hover {
+	color: #48ff00;
+	text-shadow: none;
 }
 .content {
 	margin-bottom: 10px;
@@ -94,7 +104,7 @@ textarea {
 	padding: 2px;
 	text-align: center;
 	vertical-align: middle;
-	border: 1px solid #777;
+	border: 1px solid #82FF86;
 }
 .footer {
 	clear: both;
@@ -155,7 +165,7 @@ textarea {
 	text-align: right;
 	white-space: nowrap;
 	user-select: none;
-	border-right: 1px solid #777;
+	border-right: 1px solid #82FF86;
 }
 .table-line a {
 	text-decoration: none;
@@ -186,7 +196,7 @@ textarea {
 	background: darkgray;
 }
 #code {
-	border: 1px solid #777;
+	border: 1px solid #82FF86;
 	overflow-x: auto;
 }
 
