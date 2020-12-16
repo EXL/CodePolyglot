@@ -219,17 +219,20 @@ textarea {
 }
 .radio-mark {
 	position: absolute;
-	top: 0;
+	top: -1px;
 	left: 0;
 	height: 10px;
 	width: 10px;
-	background-color: grey;
+	background-color: darkred;
+	border: 1px solid #82FF86;
 }
 .radio-container:hover input ~ .radio-mark {
-	background-color: orangered;
+	background-color: black;
+	border: 1px solid #56CBED;
 }
 .radio-container input:checked ~ .radio-mark {
-	background-color: darkred;
+	background-color: darkgreen;
+	border: 1px solid #82FF86;
 }
 
 /* Custom Scrollbars */
@@ -238,13 +241,13 @@ textarea {
 	height: 10px;
 }
 ::-webkit-scrollbar-track {
-	background: whitesmoke;
+	background: #315573;
 }
 ::-webkit-scrollbar-thumb {
-	background: grey;
+	background: #82FF86;
 }
 :root {
-	scrollbar-color: grey whitesmoke !important;
+	scrollbar-color: #82FF86 #315573 !important;
 	scrollbar-width: 10px !important;
 }
 
