@@ -23,3 +23,4 @@
 8. Add Copyright on all files -
 9. Add arrow navigation +
 10. Add Custom CSS selection +
+11. Print versions -

@@ -129,6 +129,10 @@ textarea {
 .info {
 	color: red;
 }
+.version {
+	clear: both;
+	color: gray;
+}
 #options {
 	width: 520px;
 }

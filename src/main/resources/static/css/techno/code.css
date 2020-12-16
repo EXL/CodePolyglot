@@ -32,6 +32,12 @@ textarea {
 	resize: none;
 	white-space: pre;
 }
+textarea::placeholder {
+	color: #5ACBE7;
+}
+input::placeholder {
+	color: #5ACBE7;
+}
 
 /* Classes */
 .page {
@@ -135,7 +141,12 @@ textarea {
 	display: none;
 }
 .info {
-	color: darkred;
+	color: orangered;
+}
+.version {
+	clear: both;
+	font-size: 14px;
+	color: #5ACBE7;
 }
 #options {
 	width: 520px;
@@ -152,6 +163,9 @@ textarea {
 }
 #copy-label {
 	vertical-align: super;
+}
+#site-recent-header {
+	margin-bottom: 0;
 }
 
 /* Code Block */
@@ -260,7 +274,7 @@ textarea {
 
 /* Custom Selection */
 ::selection {
-	background: #82FF86;
+	background: rgba(130, 255, 134, 0.99);
 	color: black;
 	text-shadow: none;
 }
