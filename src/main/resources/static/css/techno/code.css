@@ -18,7 +18,7 @@ textarea, input, body {
 }
 textarea, input {
 	padding: 2px;
-	font-family: monospace;
+	font-family: "Iosevka Fixed Bold", monospace;
 	border: 1px #82FF86 solid;
 }
 textarea:focus, input:focus {
@@ -42,14 +42,14 @@ textarea {
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	font: 11px "DejaVu Sans", sans-serif;
+	font: 12px "Synergy Full Bold Condensed", "DejaVu Sans", sans-serif;
 	border: 1px #56CBED solid;
-	background: transparent url(/img/techno/cell_bkg.png);
+	background: transparent url("/img/techno/cell_bkg.png");
 }
 .block {
 	padding: 5px;
 	border: 1px #82FF86 solid;
-	background: transparent url(/img/techno/cell_frg.png);
+	background: transparent url("/img/techno/cell_frg.png");
 }
 .center {
 	text-align: center;
@@ -80,7 +80,7 @@ textarea {
 	grid-template-columns: 645px 400px;
 }
 .markdown {
-	font-size: 16px;
+	font: 16px "Iosevka Fixed Bold", monospace;
 }
 .inline {
 	display: inline-block;
@@ -152,7 +152,7 @@ textarea {
 	width: 100%;
 	border-spacing: 0;
 	border-collapse: collapse;
-	font: 12px monospace;
+	font: 14px "Iosevka Fixed Bold", monospace;
 }
 .code-table .hll {
 	background-color: #FFFFBB;
@@ -196,6 +196,7 @@ textarea {
 	background: darkgray;
 }
 #code {
+	color: black;
 	border: 1px solid #82FF86;
 	overflow-x: auto;
 }
@@ -245,4 +246,15 @@ textarea {
 :root {
 	scrollbar-color: grey whitesmoke !important;
 	scrollbar-width: 10px !important;
+}
+
+/* Custom Fonts */
+@font-face {
+	font-family: "Synergy Full Bold Condensed";
+	src: url("/font/synergy-full-bold-condensed.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Iosevka Fixed Bold";
+	src: url("/font/iosevka-fixed-bold.woff2") format("woff2");
 }

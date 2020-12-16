@@ -189,6 +189,7 @@ textarea {
 	background: darkgray;
 }
 #code {
+	color: black;
 	border: 1px solid #777;
 	overflow-x: auto;
 }
