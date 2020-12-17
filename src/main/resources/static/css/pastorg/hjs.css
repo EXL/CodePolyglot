@@ -1,6 +1,7 @@
-/* IntelliJ IDEA-like CSS for Highlight.js, (c) EXL <exlmotodev@gmail.com> <exl@bk.ru>, 2020 */
+/* IntelliJ IDEA-like CSS for Highlight.js */
+/* (c) EXL <exlmotodev@gmail.com> <exl@bk.ru>, 2020 */
 
-.hljs { background: #FFFFFF }                                                   /* Code block background */
+.hljs { color: #000000; background: #FFFFFF }                                   /* Code block general */
 .hljs-keyword { color: #0033B3 }                                                /* Keyword */
 .hljs-built_in { color: #0033B3 }                                               /* Constant, class, function */
 .hljs-type { color: #0033B3 }                                                   /* String, int, array */
@@ -13,6 +14,7 @@
 .hljs-subst { color: #264EFF }                                                  /* Section inside a literal string */
 .hljs-symbol { color: #000000 }                                                 /* Goto label */
 .hljs-class { color: #0033B3 }                                                  /* General class + name */
+.hljs-class .hljs-title { color: #0033B3 }                                      /* General class + name */
 .hljs-function { color: #000000 }                                               /* Function or method declaration */
 .hljs-variable { color: #000000 }                                               /* Variables */
 .hljs-title { color: #00008B }                                                  /* Class and function name */
@@ -21,7 +23,9 @@
 .hljs-doctag { color: #008DDE; font-style: italic; text-decoration: underline } /* Documentation comments */
 .hljs-meta { color: #9E880D }                                                   /* Annotation, preprocessor macros */
 .hljs-meta-keyword { color: #9E880D }                                           /* Annotation, preprocessor keywords */
+.hljs-meta .hljs-meta-keyword { color: #CB4B16 }                                /* Annotation, preprocessor keywords */
 .hljs-meta-string { color: #067D17 }                                            /* Annotation, preprocessor strings */
+.hljs-meta .hljs-meta-string { color: #9E880D }                                 /* Annotation, preprocessor strings */
 .hljs-section { color: #000000; font-weight: bold }                             /* Heading in text markup and configs */
 .hljs-tag { color: #000000 }                                                    /* XML/HTML tags: <> </> */
 .hljs-name { color: #0033B3 }                                                   /* Tag names: html, strong; s-expr */
@@ -30,8 +34,8 @@
 .hljs-attribute { color: #174AD4 }                                              /* CSS properties */
 .hljs-bullet { color: #000000 }                                                 /* List item bullet */
 .hljs-code { color: #000000; }                                                  /* Code block */
-.hljs-emphasis { color: #000000; font-style: italic }                           /* Emphasis */
-.hljs-strong { color: #000000; font-weight: bold }                              /* Strong */
+.hljs-emphasis { font-style: italic }                                           /* Emphasis */
+.hljs-strong { font-weight: bold }                                              /* Strong */
 .hljs-formula { color: #000000 }                                                /* Mathematical formula */
 .hljs-link { color: #006DCC; font-style: italic; text-decoration: underline }   /* Hyperlink */
 .hljs-quote { color: #8C8C8C; font-style: italic }                              /* Quotation or blockquote */

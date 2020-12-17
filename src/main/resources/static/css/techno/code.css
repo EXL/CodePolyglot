@@ -29,7 +29,7 @@ input {
 textarea {
 	width: 630px;
 	height: 240px;
-	margin-top: 1px;
+	margin-top: 0;
 	resize: none;
 	white-space: pre;
 }
@@ -177,7 +177,7 @@ input::placeholder {
 	font: 14px "Iosevka Fixed Bold", monospace;
 }
 .code-table .hll {
-	background-color: #4D1500;
+	background-color: #411;
 }
 .code-table pre {
 	margin: 0;
@@ -203,22 +203,24 @@ input::placeholder {
 	width: 100%;
 }
 .code-line:hover {
-	background: #112C40;
+	background: #003744;
 }
 .l-code {
-	background: #0E2739;
+	background: #00313E;
 }
 .l-table {
 	background: transparent url("/img/techno/cell_frg.png");
 }
 .d-code {
-	background: #081C29;
+	background: #002B36;
 }
 .d-table {
 	background: transparent url("/img/techno/cell_bkg.png");
 }
+.d-table strong {
+	text-decoration: underline;
+}
 #code {
-	color: #84FF9C;
 	border: 1px solid #82FF86;
 	overflow-x: auto;
 }

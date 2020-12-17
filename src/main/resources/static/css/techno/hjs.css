@@ -1,46 +1,50 @@
-/* IntelliJ IDEA-like CSS for Highlight.js, (c) EXL <exlmotodev@gmail.com> <exl@bk.ru>, 2020 */
+/* Solarized Dark CSS for Highlight.js */
+/* (c) Jeremy Hull <sourdrums@gmail.com>, https://ethanschoonover.com/solarized */
 
-.hljs { background: #FFFFFF }                                                   /* Code block background */
-.hljs-keyword { color: #0033B3 }                                                /* Keyword */
-.hljs-built_in { color: #0033B3 }                                               /* Constant, class, function */
-.hljs-type { color: #0033B3 }                                                   /* String, int, array */
-.hljs-literal { color: #871094 }                                                /* True, false, null */
-.hljs-number { color: #1750EB }                                                 /* Literal number */
-.hljs-operator { color: #000000 }                                               /* Operators */
-.hljs-punctuation { color: #000000 }                                            /* Parentheses, brackets */
-.hljs-regexp { color: #264EFF }                                                 /* Literal regexp */
-.hljs-string { color: #067D17 }                                                 /* Literal string, character */
-.hljs-subst { color: #264EFF }                                                  /* Section inside a literal string */
-.hljs-symbol { color: #000000 }                                                 /* Goto label */
-.hljs-class { color: #0033B3 }                                                  /* General class + name */
-.hljs-function { color: #000000 }                                               /* Function or method declaration */
-.hljs-variable { color: #000000 }                                               /* Variables */
-.hljs-title { color: #00008B }                                                  /* Class and function name */
-.hljs-params { color: #000000 }                                                 /* Function arguments */
-.hljs-comment { color: #8C8C8C; font-style: italic }                            /* Comments */
-.hljs-doctag { color: #008DDE; font-style: italic; text-decoration: underline } /* Documentation comments */
-.hljs-meta { color: #9E880D }                                                   /* Annotation, preprocessor macros */
-.hljs-meta-keyword { color: #9E880D }                                           /* Annotation, preprocessor keywords */
-.hljs-meta-string { color: #067D17 }                                            /* Annotation, preprocessor strings */
-.hljs-section { color: #000000; font-weight: bold }                             /* Heading in text markup and configs */
-.hljs-tag { color: #000000 }                                                    /* XML/HTML tags: <> </> */
-.hljs-name { color: #0033B3 }                                                   /* Tag names: html, strong; s-expr */
-.hljs-builtin-name { color: #00008B }                                           /* S-expr from the standard library */
-.hljs-attr { color: #174AD4 }                                                   /* HTML attrs, JSON keys, .ini attrs */
-.hljs-attribute { color: #174AD4 }                                              /* CSS properties */
-.hljs-bullet { color: #000000 }                                                 /* List item bullet */
-.hljs-code { color: #000000; }                                                  /* Code block */
-.hljs-emphasis { color: #000000; font-style: italic }                           /* Emphasis */
-.hljs-strong { color: #000000; font-weight: bold }                              /* Strong */
-.hljs-formula { color: #000000 }                                                /* Mathematical formula */
-.hljs-link { color: #006DCC; font-style: italic; text-decoration: underline }   /* Hyperlink */
-.hljs-quote { color: #8C8C8C; font-style: italic }                              /* Quotation or blockquote */
-.hljs-selector-tag { color: #0033B3 }                                           /* CSS-selector: tag */
-.hljs-selector-id { color: #000000 }                                            /* CSS-selector: #id */
-.hljs-selector-class { color: #00008B }                                         /* CSS-selector: .class */
-.hljs-selector-attr { color: #174AD4 }                                          /* CSS-selector: [attr] */
-.hljs-selector-pseudo { color: #9E880D }                                        /* CSS-selector: :pseudo */
-.hljs-template-tag { color: #4033B3 }                                           /* Template language tag */
-.hljs-template-variable { color: #300363 }                                      /* Template language variable */
-.hljs-addition { color: #0F770F }                                               /* DIFF: Added or changed lines */
-.hljs-deletion { color: #D02B0A }                                               /* DIFF: deleted lines */
+.hljs { color: #839496; background: #002B36 }                                   /* Code block */
+.hljs-keyword { color: #859900 }                                                /* Keyword */
+.hljs-built_in { color: #DC322F }                                               /* Constant, class, function */
+.hljs-type { color: #B58900 }                                                   /* String, int, array */
+.hljs-literal { color: #2AA198 }                                                /* True, false, null */
+.hljs-number { color: #2AA198 }                                                 /* Literal number */
+.hljs-operator { color: #839496 }                                               /* Operators */
+.hljs-punctuation { color: #839496 }                                            /* Parentheses, brackets */
+.hljs-regexp { color: #2AA198 }                                                 /* Literal regexp */
+.hljs-string { color: #2AA198 }                                                 /* Literal string, character */
+.hljs-subst { color: #CB4B16 }                                                  /* Section inside a literal string */
+.hljs-symbol { color: #CB4B16 }                                                 /* Goto label */
+.hljs-class { color: #B58900 }                                                  /* General class + name */
+.hljs-class .hljs-title { color: #B58900 }                                      /* General class + name */
+.hljs-function { color: #839496 }                                               /* Function or method declaration */
+.hljs-variable { color: #B58900 }                                               /* Variables */
+.hljs-title { color: #268BD2 }                                                  /* Class and function name */
+.hljs-params { color: #839496 }                                                 /* Function arguments */
+.hljs-comment { color: #586E75; font-style: italic }                            /* Comments */
+.hljs-doctag { color: #2AA198; font-style: italic; text-decoration: underline } /* Documentation comments */
+.hljs-meta { color: #CB4B16 }                                                   /* Annotation, preprocessor macros */
+.hljs-meta-string { color: #839496 }                                            /* Annotation, preprocessor strings */
+.hljs-meta .hljs-meta-string { color: #2AA198 }                                 /* Annotation, preprocessor strings */
+.hljs-meta-keyword { color: #839496 }                                           /* Annotation, preprocessor keywords */
+.hljs-meta .hljs-meta-keyword { color: #CB4B16 }                                /* Annotation, preprocessor keywords */
+.hljs-section { color: #268BD2; font-weight: bold }                             /* Heading in text markup and configs */
+.hljs-tag { color: #839496 }                                                    /* XML/HTML tags: <> </> */
+.hljs-name { color: #268BD2 }                                                   /* Tag names: html, strong; s-expr */
+.hljs-builtin-name { color: #6B7274 }                                           /* S-expr from the standard library */
+.hljs-attr { color: #B58900 }                                                   /* HTML attrs, JSON keys, .ini attrs */
+.hljs-attribute { color: #B58900 }                                              /* CSS properties */
+.hljs-bullet { color: #CB4B16 }                                                 /* List item bullet */
+.hljs-code { color: #839496; }                                                  /* Code block */
+.hljs-emphasis { font-style: italic }                                           /* Emphasis */
+.hljs-strong { font-weight: bold }                                              /* Strong */
+.hljs-formula { color: #839496 }                                                /* Mathematical formula */
+.hljs-link { color: #CB4B16; font-style: italic; text-decoration: underline }   /* Hyperlink */
+.hljs-quote { color: #586E75; font-style: italic }                              /* Quotation or blockquote */
+.hljs-selector-tag { color: #859900 }                                           /* CSS-selector: tag */
+.hljs-selector-id { color: #268BD2 }                                            /* CSS-selector: #id */
+.hljs-selector-class { color: #268BD2 }                                         /* CSS-selector: .class */
+.hljs-selector-attr { color: #CB4B16 }                                          /* CSS-selector: [attr] */
+.hljs-selector-pseudo { color: #CB4B16 }                                        /* CSS-selector: :pseudo */
+.hljs-template-tag { color: #839496 }                                           /* Template language tag */
+.hljs-template-variable { color: #B58900 }                                      /* Template language variable */
+.hljs-addition { color: #859900 }                                               /* DIFF: Added or changed lines */
+.hljs-deletion { color: #DC322F }                                               /* DIFF: deleted lines */
