@@ -34,7 +34,7 @@ class HighlightServiceTest {
 	@Test
 	public void testApplicationVersions() {
 		assertTrue(checkVersion(highlight.getApplicationVersions().getFirst()));
-		String[] versionChunks = highlight.getApplicationVersions().getSecond().split(" ");
+		String[] versionChunks = highlight.getApplicationVersions().getSecond().split(", ");
 		assertTrue(checkVersion(versionChunks[0]));
 	}
 

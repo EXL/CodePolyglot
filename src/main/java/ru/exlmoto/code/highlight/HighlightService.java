@@ -151,7 +151,7 @@ public class HighlightService {
 			log.error(String.format("Cannot get build date time: '%s'.", re.getLocalizedMessage()), re);
 		}
 
-		return Pair.of(graalVmVersion, applicationVersion + " " + applicationRevision + " " + buildDateTime);
+		return Pair.of(graalVmVersion, applicationVersion + ", " + applicationRevision + ", " + buildDateTime);
 	}
 
 	public Map<Mode, Pair<String, String>> getLibraryVersions() {
@@ -203,7 +203,7 @@ public class HighlightService {
 	}
 
 	public Pair<String, String> getApplicationVersions()
-		return Pair.of(Version.getCurrent().toString(), "1.0.0 unknown");
+		return Pair.of(Version.getCurrent().toString(), "1.0.0, unknown, unknown");
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {
