@@ -30,7 +30,7 @@ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 //import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
-/*
+
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
@@ -184,7 +184,7 @@ public class HighlightService {
 		}
 	}
 }
-*/
+/*
 // Stub service class.
 @Service
 public class HighlightService {
@@ -210,3 +210,4 @@ public class HighlightService {
 		return code;
 	}
 }
+*/
