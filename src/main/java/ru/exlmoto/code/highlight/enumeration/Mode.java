@@ -32,7 +32,8 @@ public enum Mode {
 	HighlightJs,
 	HighlightRouge,
 //	HighlightPygmentsJython,
-	HighlightPygments;
+//	HighlightPygments
+	;
 
 	public static String getName(Mode mode) {
 		switch (mode) {
@@ -41,9 +42,9 @@ public enum Mode {
 				return "Highlight.js";
 			case HighlightRouge:
 				return "Rouge";
-			case HighlightPygments:
+//			case HighlightPygments:
 //			case HighlightPygmentsJython:
-				return "Pygments";
+//				return "Pygments";
 		}
 	}
 
@@ -52,7 +53,7 @@ public enum Mode {
 			default:
 			case HighlightJs:
 			case HighlightRouge:
-			case HighlightPygments:
+//			case HighlightPygments:
 				return "GraalVM";
 //			case HighlightPygmentsJython:
 //				return "Jython";
@@ -68,8 +69,8 @@ public enum Mode {
 				return "code.table.moderate";
 //			case HighlightPygmentsJython:
 //				return "code.table.slow";
-			case HighlightPygments:
-				return "code.table.very.slow";
+//			case HighlightPygments:
+//				return "code.table.very.slow";
 		}
 	}
 
@@ -80,9 +81,9 @@ public enum Mode {
 				return "JavaScript";
 			case HighlightRouge:
 				return "Ruby";
-			case HighlightPygments:
+//			case HighlightPygments:
 //			case HighlightPygmentsJython:
-				return "Python";
+//				return "Python";
 		}
 	}
 
@@ -98,7 +99,7 @@ public enum Mode {
 	public static String getCss(Mode mode, Skin theme) {
 		switch (mode) {
 			case HighlightRouge:
-			case HighlightPygments:
+//			case HighlightPygments:
 //			case HighlightPygmentsJython:
 				return "static/css/" + theme.name() + "/merged.css";
 		}
