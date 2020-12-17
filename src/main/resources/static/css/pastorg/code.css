@@ -28,6 +28,7 @@ input {
 textarea {
 	width: 630px;
 	height: 240px;
+	margin-top: 0;
 	resize: none;
 	white-space: pre;
 }
@@ -131,7 +132,7 @@ textarea {
 }
 .version {
 	clear: both;
-	color: gray;
+	color: #404040;
 }
 #options {
 	width: 520px;
