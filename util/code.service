@@ -1,0 +1,18 @@
+[Unit]
+Description=Code Polyglot
+Wants=network-online.target
+After=network.target network-online.target postgresql.service
+
+[Service]
+User=opc
+WorkingDirectory=/srv/
+ExecStart=/opt/graalvm/graalvm-ce-java8-20.3.0/bin/java -jar /srv/code-polyglot-1.0.0.jar
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=code
+SuccessExitStatus=143
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
