@@ -5,9 +5,13 @@ import org.graalvm.home.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
+import ru.exlmoto.code.configuration.CodeConfiguration;
+import ru.exlmoto.code.helper.UtilityHelper;
 import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.highlight.filter.HighlightFilter;
 import ru.exlmoto.code.highlight.implementation.HighlightJs;
@@ -19,19 +23,24 @@ import ru.exlmoto.code.highlight.parser.OptionsParser;
 import javax.annotation.PostConstruct;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
-/*
+
 @Service
 public class HighlightService {
 	private final Logger log = LoggerFactory.getLogger(HighlightService.class);
 
+	private final ApplicationContext context;
+
 	private final OptionsParser optionsParser;
 	private final HighlightFilter highlightFilter;
+	private final UtilityHelper util;
+	private final CodeConfiguration config;
 
 	private final HighlightJs highlightJs;
 	private final HighlightPygments highlightPygments;
@@ -39,13 +48,19 @@ public class HighlightService {
 
 	private final Map<Mode, Pair<String, String>> versions;
 
-	public HighlightService(OptionsParser optionsParser,
+	public HighlightService(ApplicationContext context,
+	                        OptionsParser optionsParser,
 	                        HighlightFilter highlightFilter,
+	                        UtilityHelper util,
+	                        CodeConfiguration config,
 	                        HighlightJs highlightJs,
 	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
+		this.context = context;
 		this.optionsParser = optionsParser;
 		this.highlightFilter = highlightFilter;
+		this.util = util;
+		this.config = config;
 		this.highlightJs = highlightJs;
 		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
@@ -55,7 +70,8 @@ public class HighlightService {
 
 	@PostConstruct
 	private void getAllVersions() {
-		log.info(String.format("GraalVM version '%s'.", getGraalVMVersion()));
+		log.info(String.format("GraalVM version '%s'.", getApplicationVersions().getFirst()));
+		log.info(String.format("Code Polyglot version '%s'.", getApplicationVersions().getSecond()));
 
 		versions.put(HighlightJs,
 			Pair.of(highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
@@ -110,11 +126,35 @@ public class HighlightService {
 				highlightFilter.simpleCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd);
 	}
 
-	public String getGraalVMVersion() {
-		return Version.getCurrent().toString();
+	public Pair<String, String> getApplicationVersions() {
+		final String graalVmVersion = Version.getCurrent().toString();
+
+		String applicationVersion = "unknown";
+		try {
+			applicationVersion = context.getBean(BuildProperties.class).getVersion();
+		} catch (RuntimeException re) {
+			log.error(String.format("Cannot get application version: '%s'.", re.getLocalizedMessage()), re);
+		}
+
+		String applicationRevision = "unknown";
+		try {
+			applicationRevision = context.getBean(BuildProperties.class).get("revision");
+		} catch (RuntimeException re) {
+			log.error(String.format("Cannot get application revision: '%s'.", re.getLocalizedMessage()), re);
+		}
+
+		String buildDateTime = "unknown";
+		try {
+			buildDateTime = util.getDateFromTimestamp(config.getDateFormat(), Locale.forLanguageTag("en"),
+				context.getBean(BuildProperties.class).getTime().getEpochSecond());
+		} catch (RuntimeException re) {
+			log.error(String.format("Cannot get build date time: '%s'.", re.getLocalizedMessage()), re);
+		}
+
+		return Pair.of(graalVmVersion, applicationVersion + " " + applicationRevision + " " + buildDateTime);
 	}
 
-	public Map<Mode, Pair<String, String>> getVersions() {
+	public Map<Mode, Pair<String, String>> getLibraryVersions() {
 		return versions;
 	}
 
@@ -144,7 +184,7 @@ public class HighlightService {
 		}
 	}
 }
-*/
+/*
 // Stub service class.
 @Service
 public class HighlightService {
@@ -170,3 +210,4 @@ public class HighlightService {
 		return code;
 	}
 }
+*/

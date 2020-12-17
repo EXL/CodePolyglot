@@ -81,8 +81,8 @@
 										<span class="radio-mark"></span>
 									</label>
 								</div>
-								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + versions.get(mode).getFirst()}"></div>
-								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + versions.get(mode).getSecond()}"></div>
+								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getLang(mode) + ' ' + library_versions.get(mode).getFirst()}"></div>
+								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getName(mode) + ' ' + library_versions.get(mode).getSecond()}"></div>
 								<div class="table-cell" th:text="${T(ru.exlmoto.code.highlight.enumeration.Mode).getVm(mode)}"></div>
 								<div class="table-cell" th:text="#{__${T(ru.exlmoto.code.highlight.enumeration.Mode).getSpeed(mode)}__}"></div>
 							</div>
@@ -97,7 +97,7 @@
 			</form>
 			<div class="version">
 				<span th:text="#{code.version}"></span>
-				<span th:text="${version}"></span>
+				<span th:text="${application_version}"></span>
 			</div>
 			<div id="site-footer" class="footer block center">
 				<span class="left">
@@ -113,7 +113,7 @@
 					|
 					<a href="https://github.com/EXL/CodePolyglot" th:title="#{code.source}">Code Polyglot</a>
 					|
-					<span th:text="#{code.powered}">Powered by</span> <a href="https://www.graalvm.org/" title="GraalVM Community">GraalVM</a> v<span th:text="${version}"></span>
+					<span th:text="#{code.powered}">Powered by</span> <a href="https://www.graalvm.org/" title="GraalVM Community">GraalVM</a> v<span th:text="${graalvm_version}"></span>
 				</span>
 				<span class="right">
 					<span th:text="#{code.skin}">Skin:</span>

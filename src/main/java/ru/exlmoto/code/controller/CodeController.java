@@ -67,8 +67,9 @@ public class CodeController {
 		info.ifPresent((sInfo) -> model.addAttribute("info", Info.getDescription(sInfo)));
 		model.addAttribute("snippets",
 			util.generateSnippetLinks(database.getCodeSnippets(config.getSnippetCount()), cookies.getLang(request)));
-		model.addAttribute("versions", highlight.getVersions());
-		model.addAttribute("version", highlight.getGraalVMVersion());
+		model.addAttribute("library_versions", highlight.getLibraryVersions());
+		model.addAttribute("graalvm_version", highlight.getApplicationVersions().getFirst());
+		model.addAttribute("application_version", highlight.getApplicationVersions().getSecond());
 		model.addAttribute("form", form);
 
 		return "index";

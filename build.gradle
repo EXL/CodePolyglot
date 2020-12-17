@@ -18,6 +18,16 @@ repositories {
 	mavenCentral()
 }
 
+springBoot {
+	buildInfo {
+		properties {
+			additional = [
+					'revision': getShortGitRevision()
+			]
+		}
+	}
+}
+
 dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
@@ -43,4 +53,15 @@ dependencies {
 test {
 	maxHeapSize = '3072m'
 	useJUnitPlatform()
+}
+
+def getShortGitRevision() {
+	def commit = 'git rev-parse --short HEAD'
+	def count = 'git rev-list --count HEAD'
+	try {
+		return [commit.execute().text.trim(), count.execute().text.trim()].join('_')
+	} catch (IOException ignored) {
+		logger.warn('Cannot get information from Git commands. Is Git installed?')
+		return 'unknown'
+	}
 }

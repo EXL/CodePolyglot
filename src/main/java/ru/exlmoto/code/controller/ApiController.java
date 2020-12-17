@@ -111,13 +111,14 @@ public class ApiController {
 	public String versions() {
 		final ObjectMapper mapper = new ObjectMapper();
 		final ObjectNode root = mapper.createObjectNode();
-		highlight.getVersions().forEach((k, v) -> {
+		highlight.getLibraryVersions().forEach((k, v) -> {
 			final ObjectNode child = mapper.createObjectNode();
 			child.put("language", v.getFirst());
 			child.put("library", v.getSecond());
 			root.set(k.name(), child);
 		});
-		root.put("GraalVM", highlight.getGraalVMVersion());
+		root.put("GraalVM", highlight.getApplicationVersions().getFirst());
+		root.put("CodePolyglot", highlight.getApplicationVersions().getSecond());
 
 		try {
 			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);

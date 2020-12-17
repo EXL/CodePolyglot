@@ -32,13 +32,15 @@ class HighlightServiceTest {
 	}
 
 	@Test
-	public void testGraalVMVersion() {
-		assertTrue(checkVersion(highlight.getGraalVMVersion()));
+	public void testApplicationVersions() {
+		assertTrue(checkVersion(highlight.getApplicationVersions().getFirst()));
+		String[] versionChunks = highlight.getApplicationVersions().getSecond().split(" ");
+		assertTrue(checkVersion(versionChunks[0]));
 	}
 
 	@Test
-	public void testGetVersions() {
-		highlight.getVersions().forEach((key, value) -> {
+	public void testGetLibraryVersions() {
+		highlight.getLibraryVersions().forEach((key, value) -> {
 			assertTrue(checkVersion(value.getFirst()));
 			assertTrue(checkVersion(value.getSecond()));
 		});
