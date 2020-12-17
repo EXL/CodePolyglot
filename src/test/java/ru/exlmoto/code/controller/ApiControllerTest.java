@@ -57,8 +57,7 @@ class ApiControllerTest {
 		helper.validateCssUtf8(mvc, "/api/css", "/*");
 		helper.validateCssUtf8(mvc, "/api/css?skin=techno", "/*");
 		helper.validateCssUtf8(mvc, "/api/css?skin=techno&mode=HighlightRouge", "/*");
-		helper.validateCssUtf8(mvc, "/api/css?skin=techno&mode=HighlightPygments", "/*");
-		helper.validateCssUtf8(mvc, "/api/css?skin=unknown&mode=HighlightPygments", "Error");
+		helper.validateCssUtf8(mvc, "/api/css?skin=unknown&mode=HighlightRouge", "Error");
 		helper.validateCssUtf8(mvc, "/api/css?skin=techno&mode=unknown", "Error");
 
 		helper.checkError4xx(mvc, "/api/css/unknown");
