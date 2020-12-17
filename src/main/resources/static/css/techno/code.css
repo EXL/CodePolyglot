@@ -92,12 +92,13 @@ input::placeholder {
 	width: 26px;
 }
 .button {
-	width: 77px;
+	width: 78px;
 	padding: 2px;
 }
 .table {
 	display: table;
 	width: 100%;
+	margin-top: 1px;
 	margin-bottom: 10px;
 	border-collapse: collapse;
 }
