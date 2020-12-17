@@ -4,10 +4,12 @@
 		<title th:text="#{code.title}">Code Polyglot!</title>
 		<meta charset="UTF-8">
 		<meta property="og:title" th:content="#{code.title}"/>
-		<!-- TODO: Favicon meta property="og:image" content="icon/apple-touch-icon.png"/-->
+		<meta property="og:image" content="icon/apple-touch-icon.png"/>
 		<meta property="og:site_name" th:content="#{code.title}"/>
 		<meta property="og:description" th:content="#{code.desc}"/>
-		<!-- TODO: Favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="../static/icon/apple-touch-icon.png" th:href="@{/icon/apple-touch-icon.png}">
+		<link rel="icon" type="image/png" sizes="32x32" href="../static/icon/favicon-32x32.png" th:href="@{/icon/favicon-32x32.png}">
+		<link rel="icon" type="image/png" sizes="16x16" href="../static/icon/favicon-16x16.png" th:href="@{/icon/favicon-16x16.png}">
 		<link rel="stylesheet" type="text/css" th:href="@{/css/__${skin}__/code.css}"/>
 		<link rel="stylesheet" type="text/css" th:if="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/hjs.css}"/>
 		<link rel="stylesheet" type="text/css" th:unless="${highlight == T(ru.exlmoto.code.highlight.enumeration.Mode).HighlightJs}" th:href="@{/css/__${skin}__/merged.css}"/>

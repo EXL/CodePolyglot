@@ -70,9 +70,6 @@ public class HighlightService {
 
 	@PostConstruct
 	private void getAllVersions() {
-		log.info(String.format("GraalVM version '%s'.", getApplicationVersions().getFirst()));
-		log.info(String.format("Code Polyglot version '%s'.", getApplicationVersions().getSecond()));
-
 		versions.put(HighlightJs,
 			Pair.of(highlightJs.getLanguageVersion(), highlightJs.getLibraryVersion()));
 		log.info(String.format("GraalVM JavaScript version '%s' and Highlight.js version '%s' loaded.",
@@ -94,6 +91,9 @@ public class HighlightService {
 //			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
 //		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
 //			versions.get(HighlightPygmentsJython).getFirst(), versions.get(HighlightPygmentsJython).getSecond()));
+
+		log.info(String.format("GraalVM version '%s'.", getApplicationVersions().getFirst()));
+		log.info(String.format("Code Polyglot version '%s'.", getApplicationVersions().getSecond()));
 
 //		checkCssStyles();
 	}
