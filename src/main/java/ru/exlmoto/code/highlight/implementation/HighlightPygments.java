@@ -1,6 +1,6 @@
 package ru.exlmoto.code.highlight.implementation;
 
-import org.python.util.PythonInterpreter;
+//import org.python.util.PythonInterpreter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class HighlightPygments extends Highlight {
 	private final Logger log = LoggerFactory.getLogger(HighlightPygments.class);
 
 	private boolean useJython = false;
-	private final PythonInterpreter jython = new PythonInterpreter();
+//	private final PythonInterpreter jython = new PythonInterpreter();
 
 	@Override
 	protected String language() {
@@ -87,28 +87,28 @@ public class HighlightPygments extends Highlight {
 
 	@Override
 	protected void importValue(String name, String value) {
-		if (useJython)
-			try {
-				jython.set(name, value);
-			} catch (RuntimeException re) {
-				log.error(String.format("Cannot import '%s' value to Jython context: '%s'.",
-					name, re.getLocalizedMessage()), re);
-			}
-		else
+//		if (useJython)
+//			try {
+//				jython.set(name, value);
+//			} catch (RuntimeException re) {
+//				log.error(String.format("Cannot import '%s' value to Jython context: '%s'.",
+//					name, re.getLocalizedMessage()), re);
+//			}
+//		else
 			super.importValue(name, value);
 	}
 
 	@Override
 	protected Optional<String> execute(String sourceCode) {
-		if (useJython) {
-			try {
-				jython.exec(injectChunkToLastLineStart(sourceCode, "result = "));
-				return Optional.ofNullable(jython.get("result", String.class));
-			} catch (RuntimeException re) {
-				log.error(String.format("Cannot execute code with Jython: '%s'.", re.getLocalizedMessage()), re);
-				return Optional.empty();
-			}
-		} else
+//		if (useJython) {
+//			try {
+//				jython.exec(injectChunkToLastLineStart(sourceCode, "result = "));
+//				return Optional.ofNullable(jython.get("result", String.class));
+//			} catch (RuntimeException re) {
+//				log.error(String.format("Cannot execute code with Jython: '%s'.", re.getLocalizedMessage()), re);
+//				return Optional.empty();
+//			}
+//		} else
 			return super.execute(sourceCode);
 	}
 

@@ -29,7 +29,7 @@ import java.util.Map;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
-import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
+//import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
 
 @Service
 public class HighlightService {
@@ -83,19 +83,19 @@ public class HighlightService {
 		log.info(String.format("GraalVM Ruby version '%s' and Rouge version '%s' loaded.",
 			versions.get(HighlightRouge).getFirst(), versions.get(HighlightRouge).getSecond()));
 
-		highlightPygments.setUseJython(false);
+//		highlightPygments.setUseJython(false);
 		versions.put(HighlightPygments,
 			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
 		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
 			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
 
-		highlightPygments.setUseJython(true);
-		versions.put(HighlightPygmentsJython,
-			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
-		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
-			versions.get(HighlightPygmentsJython).getFirst(), versions.get(HighlightPygmentsJython).getSecond()));
+//		highlightPygments.setUseJython(true);
+//		versions.put(HighlightPygmentsJython,
+//			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+//		log.info(String.format("Jython Python version '%s' and Pygments version '%s' loaded.",
+//			versions.get(HighlightPygmentsJython).getFirst(), versions.get(HighlightPygmentsJython).getSecond()));
 
-		// checkCssStyles();
+//		checkCssStyles();
 	}
 
 	private void checkCssStyles() {
@@ -103,12 +103,12 @@ public class HighlightService {
 			.ifPresent((css) -> log.info(HighlightJs.name() + ":\n" + css + "\n---\n"));
 		highlightRouge.generateCssStyle("base16")
 			.ifPresent((css) -> log.info(HighlightRouge.name() + ":\n" + css + "\n---\n"));
-		highlightPygments.setUseJython(false);
+//		highlightPygments.setUseJython(false);
 		highlightPygments.generateCssStyle("vs")
 			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
-		highlightPygments.setUseJython(true);
-		highlightPygments.generateCssStyle("vim")
-			.ifPresent((css) -> log.info(HighlightPygmentsJython.name() + ":\n" + css + "\n---\n"));
+//		highlightPygments.setUseJython(true);
+//		highlightPygments.generateCssStyle("vim")
+//			.ifPresent((css) -> log.info(HighlightPygmentsJython.name() + ":\n" + css + "\n---\n"));
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {
@@ -170,13 +170,13 @@ public class HighlightService {
 					return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
 				}
 				case HighlightPygments: {
-					highlightPygments.setUseJython(false);
+//					highlightPygments.setUseJython(false);
 					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
 				}
-				case HighlightPygmentsJython: {
-					highlightPygments.setUseJython(true);
-					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
-				}
+//				case HighlightPygmentsJython: {
+//					highlightPygments.setUseJython(true);
+//					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+//				}
 			}
 		} catch (RuntimeException re) {
 			highlightFilter.setEscape(true);
@@ -198,12 +198,12 @@ public class HighlightService {
 		versions.put(HighlightPygmentsJython, Pair.of("2.7.2", "2.6.2"));
 	}
 
-	public Map<Mode, Pair<String, String>> getVersions() {
+	public Map<Mode, Pair<String, String>> getLibraryVersions() {
 		return versions;
 	}
 
-	public String getGraalVMVersion() {
-		return Version.getCurrent().toString();
+	public Pair<String, String> getApplicationVersions()
+		return Pair.of(Version.getCurrent().toString(), "1.0.0 unknown");
 	}
 
 	public String highlightCode(Mode mode, String options, String code) {

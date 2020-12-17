@@ -7,7 +7,7 @@ import ru.exlmoto.code.controller.enumeration.Skin;
 public enum Mode {
 	HighlightJs,
 	HighlightRouge,
-	HighlightPygmentsJython,
+//	HighlightPygmentsJython,
 	HighlightPygments;
 
 	public static String getName(Mode mode) {
@@ -18,7 +18,7 @@ public enum Mode {
 			case HighlightRouge:
 				return "Rouge";
 			case HighlightPygments:
-			case HighlightPygmentsJython:
+//			case HighlightPygmentsJython:
 				return "Pygments";
 		}
 	}
@@ -30,8 +30,8 @@ public enum Mode {
 			case HighlightRouge:
 			case HighlightPygments:
 				return "GraalVM";
-			case HighlightPygmentsJython:
-				return "Jython";
+//			case HighlightPygmentsJython:
+//				return "Jython";
 		}
 	}
 
@@ -42,8 +42,8 @@ public enum Mode {
 				return "code.table.fast";
 			case HighlightRouge:
 				return "code.table.moderate";
-			case HighlightPygmentsJython:
-				return "code.table.slow";
+//			case HighlightPygmentsJython:
+//				return "code.table.slow";
 			case HighlightPygments:
 				return "code.table.very.slow";
 		}
@@ -57,7 +57,7 @@ public enum Mode {
 			case HighlightRouge:
 				return "Ruby";
 			case HighlightPygments:
-			case HighlightPygmentsJython:
+//			case HighlightPygmentsJython:
 				return "Python";
 		}
 	}
@@ -75,7 +75,7 @@ public enum Mode {
 		switch (mode) {
 			case HighlightRouge:
 			case HighlightPygments:
-			case HighlightPygmentsJython:
+//			case HighlightPygmentsJython:
 				return "static/css/" + theme.name() + "/merged.css";
 		}
 		return "static/css/" + theme.name() + "/hjs.css";
