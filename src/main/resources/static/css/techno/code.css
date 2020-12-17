@@ -29,6 +29,7 @@ input {
 textarea {
 	width: 630px;
 	height: 240px;
+	margin-top: 1px;
 	resize: none;
 	white-space: pre;
 }
@@ -98,7 +99,6 @@ input::placeholder {
 .table {
 	display: table;
 	width: 100%;
-	margin-top: 1px;
 	margin-bottom: 10px;
 	border-collapse: collapse;
 }
