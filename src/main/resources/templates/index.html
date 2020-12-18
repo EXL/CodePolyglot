@@ -23,7 +23,7 @@
 					<h4 id="site-recent-header" class="center header" th:text="#{code.recent}">Recent Snippets</h4>
 					<div th:if="${!snippets.isEmpty()}">
 						<div class="arrow" th:each="snippet : ${snippets}" th:with="name=${snippet.getFirst()},address=${'/' + snippet.getSecond()},delete=${'/delete/' + snippet.getSecond()}">
-							🡒 <a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
+							→&nbsp;<a th:href="${address}" th:text="${name}" th:title="${name}">Snippet Name</a> <a class="right" sec:authorize="isAuthenticated()" th:href="${delete}" th:title="#{code.delete}">×</a>
 						</div>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="content block" th:if="${code}">
 					<h2 th:if="*{title}" th:with="head=*{title}">
-						<span th:text="${head} + ' |'"></span> <span th:text="*{date}"></span> <a href="#site-footer" th:title="#{code.arrow.down}">🡓</a>
+						<span th:text="${head} + ' |'"></span> <span th:text="*{date}"></span> <a href="#site-footer" th:title="#{code.arrow.down}">↓</a>
 					</h2>
 				</div>
 				<div class="content block" th:if="${code}">
@@ -104,7 +104,7 @@
 			<div id="site-footer" class="footer block center">
 				<span class="left">
 					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:title="#{code.logout}">×</a>
-					<a href="#site-logo" th:title="#{code.arrow.up}">🡑</a>
+					<a href="#site-logo" th:title="#{code.arrow.up}">↑</a>
 					<span th:text="#{code.lang}">Language:</span>
 					<a th:href="${'/opts/?lang=techno'}" th:text="#{code.lang.ru}" th:title="#{code.lang.ru}">Русский</a>
 					|
