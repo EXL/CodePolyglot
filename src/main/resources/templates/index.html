@@ -118,7 +118,7 @@
 					<span th:text="#{code.powered}">Powered by</span> <a href="https://www.graalvm.org/" title="GraalVM Community">GraalVM</a> v<span th:text="${graalvm_version}"></span>
 				</span>
 				<span class="right">
-					<a id="font" th:if="${#strings.equals(skin, 'techno')}" th:title="#{code.font}">𝑓</a>
+					<a id="font" th:if="${#strings.equals(skin, 'techno')}" th:title="#{code.font}">𝑓</a>&nbsp;
 					<span th:text="#{code.skin}">Skin:</span>
 					<a title="Techno" th:href="${'/opts/?skin=techno'}">Techno</a>
 					|

@@ -3,7 +3,7 @@ Code Polyglot
 
 Code Polyglot is code snippets sharing service powered by GraalVM and Spring Boot.
 
-![Code Polyglot Techno Screenshot](image/CodePolyglot_TechnoSkin_Screenshot.png)
+![Code Polyglot Techno Screenshot](image/CodePolyglot_TechnoSkin_Nokia_Screenshot.png)
 
 Demo: [code.exlmoto.ru](https://code.exlmoto.ru)
 
