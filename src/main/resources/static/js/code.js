@@ -46,3 +46,18 @@ if (button_wrap) {
 		}
 	}
 }
+
+var font = document.getElementById('font');
+if (font) {
+	font.onclick = function () {
+		if (font.classList.toggle('toggle-font')) {
+			document.getElementsByClassName('page')[0].style.font = '12px "Synergy Full Bold Condensed", "DejaVu Sans", sans-serif';
+			document.getElementsByClassName('table')[0].style.fontSize = '12px'
+			document.querySelectorAll('.radio-mark').forEach(radio => radio.style.left = '2px');
+		} else {
+			document.getElementsByClassName('page')[0].style.font = '12px "Nokia Standard Bold", "DejaVu Sans", sans-serif';
+			document.getElementsByClassName('table')[0].style.fontSize = '11px'
+			document.querySelectorAll('.radio-mark').forEach(radio => radio.style.left = '1px');
+		}
+	}
+}

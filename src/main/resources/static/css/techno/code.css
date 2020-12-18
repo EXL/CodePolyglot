@@ -170,6 +170,9 @@ input::placeholder {
 #site-recent-header {
 	margin-bottom: 0;
 }
+#font {
+	cursor: pointer;
+}
 
 /* Code Block */
 .code-table {
@@ -245,7 +248,7 @@ input::placeholder {
 }
 .radio-mark {
 	position: absolute;
-	top: 0;
+	top: -1px;
 	left: 1px;
 	height: 9px;
 	width: 9px;
@@ -285,6 +288,11 @@ input::placeholder {
 }
 
 /* Custom Fonts */
+@font-face {
+	font-family: "Synergy Full Bold Condensed";
+	src: url("/font/synergy-full-bold-condensed.woff2") format("woff2");
+}
+
 @font-face {
 	font-family: "Nokia Standard Bold";
 	src: url("/font/nokia-standard-bold.woff2") format("woff2");
