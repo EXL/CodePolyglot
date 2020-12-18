@@ -16,7 +16,7 @@ textarea, input, body {
 }
 textarea, input {
 	padding: 2px;
-	font-family: Consolas, Monaco, Menlo, "DejaVu Mono", "Courier New", monospace;
+	font: 14px Consolas, Monaco, Menlo, "DejaVu Mono", "Courier New", monospace;
 	border: 1px #777 solid;
 }
 textarea:focus, input:focus {
@@ -41,7 +41,7 @@ textarea {
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	font: 11px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "DejaVu Sans", sans-serif;
+	font: 11px "DejaVu Sans", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 	border: 1px #777 solid;
 }
 .block {

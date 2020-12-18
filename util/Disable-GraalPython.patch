@@ -1,0 +1,229 @@
+From 8dc0a7ea50bb88c18292c43003f6e5c00ecdf452 Mon Sep 17 00:00:00 2001
+From: EXL <exlmotodev@gmail.com>
+Date: Thu, 17 Dec 2020 22:02:36 +0700
+Subject: [PATCH 2/2] Disable GraalPython
+
+---
+ .../code/highlight/HighlightService.java      | 30 +++++++++----------
+ .../code/highlight/enumeration/Mode.java      | 19 ++++++------
+ .../code/highlight/HighlightServiceTest.java  |  6 ++--
+ .../highlight/enumeration/ModeUnitTest.java   |  6 ++--
+ 4 files changed, 31 insertions(+), 30 deletions(-)
+
+diff --git a/src/main/java/ru/exlmoto/code/highlight/HighlightService.java b/src/main/java/ru/exlmoto/code/highlight/HighlightService.java
+index 1044a3e..2ef4276 100644
+--- a/src/main/java/ru/exlmoto/code/highlight/HighlightService.java
++++ b/src/main/java/ru/exlmoto/code/highlight/HighlightService.java
+@@ -15,7 +15,7 @@ import ru.exlmoto.code.helper.UtilityHelper;
+ import ru.exlmoto.code.highlight.enumeration.Mode;
+ import ru.exlmoto.code.highlight.filter.HighlightFilter;
+ import ru.exlmoto.code.highlight.implementation.HighlightJs;
+-import ru.exlmoto.code.highlight.implementation.HighlightPygments;
++//import ru.exlmoto.code.highlight.implementation.HighlightPygments;
+ import ru.exlmoto.code.highlight.implementation.HighlightRouge;
+ import ru.exlmoto.code.highlight.parser.Options;
+ import ru.exlmoto.code.highlight.parser.OptionsParser;
+@@ -28,7 +28,7 @@ import java.util.Map;
+ 
+ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
+ import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
+-import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
++//import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
+ //import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
+ 
+ @Service
+@@ -43,7 +43,7 @@ public class HighlightService {
+ 	private final CodeConfiguration config;
+ 
+ 	private final HighlightJs highlightJs;
+-	private final HighlightPygments highlightPygments;
++//	private final HighlightPygments highlightPygments;
+ 	private final HighlightRouge highlightRouge;
+ 
+ 	private final Map<Mode, Pair<String, String>> versions;
+@@ -54,7 +54,7 @@ public class HighlightService {
+ 	                        UtilityHelper util,
+ 	                        CodeConfiguration config,
+ 	                        HighlightJs highlightJs,
+-	                        HighlightPygments highlightPygments,
++//	                        HighlightPygments highlightPygments,
+ 	                        HighlightRouge highlightRouge) {
+ 		this.context = context;
+ 		this.optionsParser = optionsParser;
+@@ -62,7 +62,7 @@ public class HighlightService {
+ 		this.util = util;
+ 		this.config = config;
+ 		this.highlightJs = highlightJs;
+-		this.highlightPygments = highlightPygments;
++//		this.highlightPygments = highlightPygments;
+ 		this.highlightRouge = highlightRouge;
+ 
+ 		this.versions = new HashMap<>();
+@@ -81,10 +81,10 @@ public class HighlightService {
+ 			versions.get(HighlightRouge).getFirst(), versions.get(HighlightRouge).getSecond()));
+ 
+ //		highlightPygments.setUseJython(false);
+-		versions.put(HighlightPygments,
+-			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+-		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
+-			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
++//		versions.put(HighlightPygments,
++//			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
++//		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
++//			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
+ 
+ //		highlightPygments.setUseJython(true);
+ //		versions.put(HighlightPygmentsJython,
+@@ -104,8 +104,8 @@ public class HighlightService {
+ 		highlightRouge.generateCssStyle("base16")
+ 			.ifPresent((css) -> log.info(HighlightRouge.name() + ":\n" + css + "\n---\n"));
+ //		highlightPygments.setUseJython(false);
+-		highlightPygments.generateCssStyle("vs")
+-			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
++//		highlightPygments.generateCssStyle("vs")
++//			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
+ //		highlightPygments.setUseJython(true);
+ //		highlightPygments.generateCssStyle("vim")
+ //			.ifPresent((css) -> log.info(HighlightPygmentsJython.name() + ":\n" + css + "\n---\n"));
+@@ -169,10 +169,10 @@ public class HighlightService {
+ 				case HighlightRouge: {
+ 					return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+ 				}
+-				case HighlightPygments: {
++//				case HighlightPygments: {
+ //					highlightPygments.setUseJython(false);
+-					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+-				}
++//					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
++//				}
+ //				case HighlightPygmentsJython: {
+ //					highlightPygments.setUseJython(true);
+ //					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+@@ -194,7 +194,7 @@ public class HighlightService {
+ 		this.versions = new HashMap<>();
+ 		versions.put(HighlightJs, Pair.of("20.3.0", "10.0.1"));
+ 		versions.put(HighlightRouge, Pair.of("2.6.6", "3.1.0"));
+-		versions.put(HighlightPygments, Pair.of("3.8.0", "2.7.2"));
++//		versions.put(HighlightPygments, Pair.of("3.8.0", "2.7.2"));
+ //		versions.put(HighlightPygmentsJython, Pair.of("2.7.2", "2.6.2"));
+ 	}
+ 
+diff --git a/src/main/java/ru/exlmoto/code/highlight/enumeration/Mode.java b/src/main/java/ru/exlmoto/code/highlight/enumeration/Mode.java
+index fe0edfd..6ffdb0a 100644
+--- a/src/main/java/ru/exlmoto/code/highlight/enumeration/Mode.java
++++ b/src/main/java/ru/exlmoto/code/highlight/enumeration/Mode.java
+@@ -8,7 +8,8 @@ public enum Mode {
+ 	HighlightJs,
+ 	HighlightRouge,
+ //	HighlightPygmentsJython,
+-	HighlightPygments;
++//	HighlightPygments
++	;
+ 
+ 	public static String getName(Mode mode) {
+ 		switch (mode) {
+@@ -17,9 +18,9 @@ public enum Mode {
+ 				return "Highlight.js";
+ 			case HighlightRouge:
+ 				return "Rouge";
+-			case HighlightPygments:
++//			case HighlightPygments:
+ //			case HighlightPygmentsJython:
+-				return "Pygments";
++//				return "Pygments";
+ 		}
+ 	}
+ 
+@@ -28,7 +29,7 @@ public enum Mode {
+ 			default:
+ 			case HighlightJs:
+ 			case HighlightRouge:
+-			case HighlightPygments:
++//			case HighlightPygments:
+ 				return "GraalVM";
+ //			case HighlightPygmentsJython:
+ //				return "Jython";
+@@ -44,8 +45,8 @@ public enum Mode {
+ 				return "code.table.moderate";
+ //			case HighlightPygmentsJython:
+ //				return "code.table.slow";
+-			case HighlightPygments:
+-				return "code.table.very.slow";
++//			case HighlightPygments:
++//				return "code.table.very.slow";
+ 		}
+ 	}
+ 
+@@ -56,9 +57,9 @@ public enum Mode {
+ 				return "JavaScript";
+ 			case HighlightRouge:
+ 				return "Ruby";
+-			case HighlightPygments:
++//			case HighlightPygments:
+ //			case HighlightPygmentsJython:
+-				return "Python";
++//				return "Python";
+ 		}
+ 	}
+ 
+@@ -74,7 +75,7 @@ public enum Mode {
+ 	public static String getCss(Mode mode, Skin theme) {
+ 		switch (mode) {
+ 			case HighlightRouge:
+-			case HighlightPygments:
++//			case HighlightPygments:
+ //			case HighlightPygmentsJython:
+ 				return "static/css/" + theme.name() + "/merged.css";
+ 		}
+diff --git a/src/test/java/ru/exlmoto/code/highlight/HighlightServiceTest.java b/src/test/java/ru/exlmoto/code/highlight/HighlightServiceTest.java
+index 3f53477..d51de50 100644
+--- a/src/test/java/ru/exlmoto/code/highlight/HighlightServiceTest.java
++++ b/src/test/java/ru/exlmoto/code/highlight/HighlightServiceTest.java
+@@ -53,14 +53,14 @@ class HighlightServiceTest {
+ 			resource.readFileToString("classpath:/expected/HighlightJs/" + filename + ".html.txt");
+ 		String htmlRouge =
+ 			resource.readFileToString("classpath:/expected/Rouge/" + filename + ".html.txt");
+-		String htmlPygments =
+-			resource.readFileToString("classpath:/expected/Pygments/" + filename + ".html.txt");
++//		String htmlPygments =
++//			resource.readFileToString("classpath:/expected/Pygments/" + filename + ".html.txt");
+ //		String htmlPygmentsJython =
+ //			resource.readFileToString("classpath:/expected/PygmentsJython/" + filename + ".html.txt");
+ 
+ 		assertEquals(htmlHighlightJs, highlight.highlightCode(Mode.HighlightJs, lang, snippet));
+ 		assertEquals(htmlRouge, highlight.highlightCode(Mode.HighlightRouge, lang, snippet));
+-		assertEquals(htmlPygments, highlight.highlightCode(Mode.HighlightPygments, lang, snippet));
++//		assertEquals(htmlPygments, highlight.highlightCode(Mode.HighlightPygments, lang, snippet));
+ //		assertEquals(htmlPygmentsJython, highlight.highlightCode(Mode.HighlightPygmentsJython, lang, snippet));
+ 	}
+ 
+diff --git a/src/test/java/ru/exlmoto/code/highlight/enumeration/ModeUnitTest.java b/src/test/java/ru/exlmoto/code/highlight/enumeration/ModeUnitTest.java
+index 0a6f286..7562bd2 100644
+--- a/src/test/java/ru/exlmoto/code/highlight/enumeration/ModeUnitTest.java
++++ b/src/test/java/ru/exlmoto/code/highlight/enumeration/ModeUnitTest.java
+@@ -14,7 +14,7 @@ class ModeUnitTest {
+ 		assertEquals(Mode.HighlightJs, Mode.getMode(" "));
+ 		assertEquals(Mode.HighlightJs, Mode.getMode("unknown"));
+ 		assertEquals(Mode.HighlightJs, Mode.getMode("HighlightJs"));
+-		assertEquals(Mode.HighlightPygments, Mode.getMode("HighlightPygments"));
++//		assertEquals(Mode.HighlightPygments, Mode.getMode("HighlightPygments"));
+ //		assertEquals(Mode.HighlightPygmentsJython, Mode.getMode("HighlightPygmentsJython"));
+ 		assertEquals(Mode.HighlightRouge, Mode.getMode("HighlightRouge"));
+ 	}
+@@ -22,11 +22,11 @@ class ModeUnitTest {
+ 	@Test
+ 	public void testGetCss() {
+ 		assertEquals("static/css/techno/hjs.css", Mode.getCss(Mode.HighlightJs, Skin.techno));
+-		assertEquals("static/css/techno/merged.css", Mode.getCss(Mode.HighlightPygments, Skin.techno));
++//		assertEquals("static/css/techno/merged.css", Mode.getCss(Mode.HighlightPygments, Skin.techno));
+ //		assertEquals("static/css/techno/merged.css", Mode.getCss(Mode.HighlightPygmentsJython, Skin.techno));
+ 		assertEquals("static/css/techno/merged.css", Mode.getCss(Mode.HighlightRouge, Skin.techno));
+ 		assertEquals("static/css/pastorg/hjs.css", Mode.getCss(Mode.HighlightJs, Skin.pastorg));
+-		assertEquals("static/css/pastorg/merged.css", Mode.getCss(Mode.HighlightPygments, Skin.pastorg));
++//		assertEquals("static/css/pastorg/merged.css", Mode.getCss(Mode.HighlightPygments, Skin.pastorg));
+ //		assertEquals("static/css/pastorg/merged.css", Mode.getCss(Mode.HighlightPygmentsJython, Skin.pastorg));
+ 		assertEquals("static/css/pastorg/merged.css", Mode.getCss(Mode.HighlightRouge, Skin.pastorg));
+ 	}
+-- 
+2.29.2
+
