@@ -1,9 +1,9 @@
 Code Polyglot
 =============
 
-![Code Polyglot Techno Screenshot](image/CodePolyglot_TechnoSkin_Nokia_Screenshot.png)
-
 Code snippets sharing service powered by [GraalVM](https://www.graalvm.org/) and [Spring Boot](https://spring.io/).
+
+![Code Polyglot Techno Screenshot](image/CodePolyglot_TechnoSkin_Nokia_Screenshot.png)
 
 Syntax highlighting is implemented using several libraries and languages:
 
@@ -13,10 +13,10 @@ Syntax highlighting is implemented using several libraries and languages:
 
 ![Code Polyglot Pastorg Screenshot](image/CodePolyglot_PastorgSkin_Screenshot.png)
 
-*Live demo: [code.exlmoto.ru](https://code.exlmoto.ru) with Highlight.js and Rouge syntax higlighters.\
-Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive.
+*Live demo: [code.exlmoto.ru](https://code.exlmoto.ru) with Highlight.js and Rouge syntax higlighters.*\
+*Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive.*
 
-Note: Service can sometimes be offline.*
+*Note: Service can sometimes be offline.*
 
 ## API examples
 
@@ -147,6 +147,7 @@ export PATH=$GRAALVM_HOME/bin:$PATH
 
 cd ~/CodePolyglot/
 DB_CONNECTION=jdbc:postgresql://localhost:5432/code DB_USERNAME=user DB_PASSWORD=password ./gradlew clean build
+# ./gradlew clean bootJar
 sudo mv build/libs/code-polyglot-*.jar /srv/
 ```
 
