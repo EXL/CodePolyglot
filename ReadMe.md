@@ -7,15 +7,16 @@ Code snippets sharing service powered by [GraalVM](https://www.graalvm.org/) and
 
 Syntax highlighting is implemented using several libraries and languages:
 
-    1. [Highlight.js](https://github.com/highlightjs/highlight.js/) and JavaScript.
-    2. [Rouge](https://github.com/rouge-ruby/rouge) and Ruby.
-    3. [Pygments](https://github.com/pygments/pygments) and Python.
+1. [Highlight.js](https://github.com/highlightjs/highlight.js/) and JavaScript.
+2. [Rouge](https://github.com/rouge-ruby/rouge) and Ruby.
+3. [Pygments](https://github.com/pygments/pygments) and Python.
 
 ![Code Polyglot Pastorg Screenshot](image/CodePolyglot_PastorgSkin_Screenshot.png)
 
-Live demo: [code.exlmoto.ru](https://code.exlmoto.ru) with Highlight.js and Rouge syntax higlighters. Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive.
+*Live demo: [code.exlmoto.ru](https://code.exlmoto.ru) with Highlight.js and Rouge syntax higlighters.\
+Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive.
 
-*Note: Service can sometimes be offline.*
+Note: Service can sometimes be offline.*
 
 ## API examples
 
@@ -26,8 +27,8 @@ cat src.java | curl --data-binary @- "https://code.exlmoto.ru/api/?o=java"
 cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;nolines"
 cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;nolines;15"
 cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;nolines;15,20"
-cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;nolines;15,20&h=HighlightJs"
-cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;nolines;15,20&h=HighlightRouge"
+cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml;15&h=HighlightJs"
+cat file.xml | curl --data-binary @- "https://code.exlmoto.ru/api/?o=xml&h=HighlightRouge"
 ```
 
 ## Requirements
@@ -103,8 +104,8 @@ psql
 ALTER USER user WITH PASSWORD 'password';
 \q
 
-pg_dump digest > /tmp/digest-service.sql # Optional. BackUp database.
-psql digest < /tmp/digest-service.sql # Optional. Restore database.
+pg_dump code > /tmp/code-service.sql # Optional. BackUp database.
+psql code < /tmp/code-service.sql # Optional. Restore database.
 
 exit
 
@@ -128,7 +129,7 @@ echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random
 
 cd ~/CodePolyglot/
 sudo cp util/nginx/code.conf /etc/nginx/conf.d/
-sudo vim /etc/nginx/conf.d/digest.conf # Change "code.exlmoto.ru" address to yours e.g. ":%s/code\.exlmoto\.ru/test\.exlmoto\.ru/g".
+sudo vim /etc/nginx/conf.d/code.conf # Change "code.exlmoto.ru" address to yours e.g. ":%s/code\.exlmoto\.ru/test\.exlmoto\.ru/g".
 
 sudo systemctl restart nginx
 
@@ -137,7 +138,7 @@ sudo reboot
 sudo systemctl enable nginx
 ```
 
-### Recipe: Build and test Code Polyglot application
+### Recipe: Build and Test Code Polyglot application
 
 ```bash
 export GRAALVM_HOME=/opt/graalvm/graalvm-ce-java8-20.3.0
@@ -187,4 +188,4 @@ journalctl -fu code # Show Code Polyglot logs dynamically.
 
 ## Additional Information
 
-Please read ["Creating Code Polyglot"](https://exlmoto.ru/code-polyglot) (in Russian) article for more information about creating the Code Polyglot project.
+Please read ["Creating Code Polyglot"](https://exlmoto.ru/code-polyglot) (in Russian) article for more information.

@@ -18,7 +18,7 @@
     * DatabaseService.java +
 4. Create Open Graph Meta Links +
 5. Test Deploy +
-6. Write ChangeLog.md -
+6. Write ChangeLog.md +
 7. Write ReadMe.md +
 8. Add Copyright on all files -
 9. Add arrow navigation +
