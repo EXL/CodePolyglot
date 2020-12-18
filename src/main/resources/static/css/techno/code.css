@@ -10,6 +10,7 @@ a:hover {
 h2, h4 {
 	margin-top: 0;
 	margin-bottom: 0;
+	font-weight: 500;
 }
 textarea, input, body {
 	color: #84FF9C;
@@ -244,7 +245,7 @@ input::placeholder {
 .radio-mark {
 	position: absolute;
 	top: -1px;
-	left: 0;
+	left: 1px;
 	height: 10px;
 	width: 10px;
 	background-color: darkred;

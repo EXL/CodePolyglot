@@ -16,7 +16,7 @@ textarea, input, body {
 }
 textarea, input {
 	padding: 2px;
-	font-family: monospace;
+	font-family: Consolas, Monaco, Menlo, "DejaVu Mono", "Courier New", monospace;
 	border: 1px #777 solid;
 }
 textarea:focus, input:focus {
@@ -41,7 +41,7 @@ textarea {
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	font: 11px "DejaVu Sans", sans-serif;
+	font: 11px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "DejaVu Sans", sans-serif;
 	border: 1px #777 solid;
 }
 .block {
@@ -156,7 +156,7 @@ textarea {
 	width: 100%;
 	border-spacing: 0;
 	border-collapse: collapse;
-	font: 12px monospace;
+	font: 12px Consolas, Monaco, Menlo, "DejaVu Mono", "Courier New", monospace;
 }
 .code-table .hll {
 	background-color: #FFFFBB;
@@ -224,7 +224,7 @@ textarea {
 .radio-mark {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 1px;
 	height: 10px;
 	width: 10px;
 	background-color: grey;
