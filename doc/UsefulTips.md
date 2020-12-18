@@ -1,6 +1,22 @@
 Useful Tips
 ===========
 
+## Find non-ASCII symbols
+
+```shell script
+grep -rP '[^\x00-\x7f]' src/ doc/ util/
+```
+
+This command should be run at the root of the project.
+
+## Find TODO: labels
+
+```shell script
+grep -ri TODO src/ doc/ util/
+```
+
+This command should be run at the root of the project.
+
 ## Find all files without line ending at the end
 
 ```shell script

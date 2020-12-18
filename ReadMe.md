@@ -14,9 +14,8 @@ Syntax highlighting is implemented using several libraries and languages:
 ![Code Polyglot Pastorg Screenshot](image/CodePolyglot_PastorgSkin_Screenshot.png)
 
 *Live demo: [code.exlmoto.ru](https://code.exlmoto.ru) with Highlight.js and Rouge syntax higlighters.*\
-*Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive.*
-
-*Note: Service can sometimes be offline.*
+*Warning: Pygments on [GraalPython](https://github.com/oracle/graalpython) are CPU and RAM intensive and therefore disabled.*\
+*Note: Demo service may not be available.*
 
 ## API examples
 
