@@ -1,5 +1,5 @@
-1. Create Icon -
-2. Create Techno theme -
+1. Create Icon +
+2. Create Techno theme +
 3. Write Tests: +
     * Info.java +
     * Lang.java +
@@ -16,7 +16,7 @@
     * OptionsParser.java +
     * HighlightService.java +
     * DatabaseService.java +
-4. Create Open Graph Meta Links -
+4. Create Open Graph Meta Links +
 5. Test Deploy -
 6. Write ChangeLog.md -
 7. Write ReadMe.md -
