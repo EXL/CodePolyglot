@@ -49,7 +49,7 @@ input::placeholder {
 	padding: 5px;
 	margin-left: auto;
 	margin-right: auto;
-	font: 12px "Synergy Full Bold Condensed", "DejaVu Sans", sans-serif;
+	font: 12px "Nokia Standard Bold", "DejaVu Sans", sans-serif;
 	border: 1px #56CBED solid;
 	background: transparent url("/img/techno/cell_bkg.png");
 }
@@ -285,8 +285,8 @@ input::placeholder {
 
 /* Custom Fonts */
 @font-face {
-	font-family: "Synergy Full Bold Condensed";
-	src: url("/font/synergy-full-bold-condensed.woff2") format("woff2");
+	font-family: "Nokia Standard Bold";
+	src: url("/font/nokia-standard-bold.woff2") format("woff2");
 }
 
 @font-face {
