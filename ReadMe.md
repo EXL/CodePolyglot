@@ -75,12 +75,12 @@ gu install ruby
 # /opt/graalvm/graalvm-ce-java8-20.3.0/jre/languages/ruby/lib/truffle/post_install_hook.sh
 
 graalpython -m ginstall install setuptools
-curl -LOJ https://github.com/pygments/pygments/archive/2.7.2.tar.gz
-tar -xvzf pygments-2.7.2.tar.gz
-cd pygments-2.7.2/
+curl -LOJ https://github.com/pygments/pygments/archive/2.7.3.tar.gz
+tar -xvzf pygments-2.7.3.tar.gz
+cd pygments-2.7.3/
 graalpython setup.py install --user
 cd ..
-rm -Rf pygments-2.7.2/ pygments-2.7.2.tar.gz
+rm -Rf pygments-2.7.3/ pygments-2.7.3.tar.gz
 
 gem install rouge
 ```
