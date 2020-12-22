@@ -22,17 +22,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<builder>paketobuildpacks/builder:tiny</builder>
-						<env>
-							<BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
-							<BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-								--enable-all-security-services
-							</BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-						</env>
-					</image>
-				</configuration>
 				<executions>
 					<execution>
 						<id>build-info</id>
@@ -197,7 +186,7 @@
 
 	<profiles>
 		<profile>
-			<id>agent</id>
+			<id>native</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -207,7 +196,11 @@
 						<configuration>
 							<mainClass>ru.exlmoto.code.CodePolyglotApplication</mainClass>
 							<imageName>code-polyglot</imageName>
-							<buildArgs>-Dspring.native.remove-yaml-support=true</buildArgs>
+							<buildArgs>
+								-Dspring.native.remove-yaml-support=true
+								--features=org.graalvm.home.HomeFinderFeature
+								--enable-all-security-services
+							</buildArgs>
 						</configuration>
 						<executions>
 							<execution>
