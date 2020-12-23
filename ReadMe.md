@@ -43,8 +43,9 @@ For example, on CentOS 7 Linux distro.
 ### Recipe: Initial server settings
 
 ```bash
+sudo yum -y install epel-release
 sudo yum -y upgrade
-sudo yum -y install epel-release vim git logrotate openssh deltarpm yum-utils p7zip p7zip-plugins
+sudo yum -y vim git logrotate openssh deltarpm yum-utils p7zip p7zip-plugins
 sudo timedatectl set-timezone "Europe/Moscow"
 
 git clone https://github.com/EXL/CodePolyglot
@@ -178,6 +179,39 @@ sudo systemctl start code
 sudo systemctl stop code # Stop Code Polyglot application.
 journalctl -u code # Show Code Polyglot logs.
 journalctl -fu code # Show Code Polyglot logs dynamically.
+```
+
+## Additional Recipes
+
+### Recipe: Build JAR-file with Maven
+
+```bash
+export GRAALVM_HOME=/opt/graalvm/graalvm-ce-java8-20.3.0
+export JAVA_HOME=$GRAALVM_HOME
+export PATH=$GRAALVM_HOME/bin:$PATH
+
+REVISION=`git rev-parse --short HEAD`_`git rev-list --count HEAD` ./mvnw clean package -DskipTests=true
+REVISION=`git rev-parse --short HEAD`_`git rev-list --count HEAD` ./mvnw clean package
+```
+
+### Recipe: Build prototype native-image (experimental)
+
+```bash
+export GRAALVM_HOME=/opt/graalvm/graalvm-ce-java8-20.3.0
+export JAVA_HOME=$GRAALVM_HOME
+export PATH=$GRAALVM_HOME/bin:$PATH
+
+sudo yum install gcc glibc-devel zlib-devel libstdc++-static
+
+gu install native-image
+gu rebuild-images polyglot libpolyglot
+
+cd util/
+javac Highlighter.java
+jar -cvfe highlighter.jar Highlighter *.class
+native-image --language:js -jar highlighter.jar
+
+cat Highlighter.java | ./highlighter hjs java
 ```
 
 ## Configuration Files
