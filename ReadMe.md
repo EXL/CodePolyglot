@@ -215,6 +215,16 @@ native-image --language:js -jar highlighter.jar
 cat Highlighter.java | ./highlighter hjs java
 ```
 
+### Recipe: Build Code Polyglot native-image (experimental)
+
+```bash
+export GRAALVM_HOME=/opt/graalvm/graalvm-ce-java8-20.3.0
+export JAVA_HOME=$GRAALVM_HOME
+export PATH=$GRAALVM_HOME/bin:$PATH
+
+REVISION=native-image_`git rev-parse --short HEAD`_`git rev-list --count HEAD` ./mvnw -Pnative clean package -DskipTests=true
+```
+
 ## Configuration Files
 
 1. [application.properties](src/main/resources/application.properties) is main configuration file for the Code Polyglot application.
