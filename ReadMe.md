@@ -45,7 +45,7 @@ For example, on CentOS 7 Linux distro.
 ```bash
 sudo yum -y install epel-release
 sudo yum -y upgrade
-sudo yum -y vim git logrotate openssh deltarpm yum-utils p7zip p7zip-plugins
+sudo yum -y install vim git logrotate openssh deltarpm yum-utils p7zip p7zip-plugins
 sudo timedatectl set-timezone "Europe/Moscow"
 
 git clone https://github.com/EXL/CodePolyglot
