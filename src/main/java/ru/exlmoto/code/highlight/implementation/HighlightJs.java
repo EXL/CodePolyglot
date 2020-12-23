@@ -34,7 +34,7 @@ import ru.exlmoto.code.helper.ResourceHelper;
 
 import java.util.Optional;
 
-@Component
+//@Component
 public class HighlightJs extends Highlight {
 	private final ResourceHelper resourceHelper;
 

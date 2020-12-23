@@ -31,7 +31,7 @@ import ru.exlmoto.code.highlight.enumeration.Language;
 
 import java.util.Optional;
 
-@Component
+//@Component
 public class HighlightRouge extends Highlight {
 	@Override
 	protected String language() {

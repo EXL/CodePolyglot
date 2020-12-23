@@ -37,7 +37,7 @@ import ru.exlmoto.code.highlight.enumeration.Language;
 
 import java.util.Optional;
 
-@Component
+//@Component
 public class HighlightPygments extends Highlight {
 	private final Logger log = LoggerFactory.getLogger(HighlightPygments.class);
 
