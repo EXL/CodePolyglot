@@ -55,6 +55,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>net.bytebuddy</groupId>
+					<artifactId>byte-buddy</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -197,8 +207,10 @@
 							<mainClass>ru.exlmoto.code.CodePolyglotApplication</mainClass>
 							<imageName>code-polyglot</imageName>
 							<buildArgs>
+								-H:ReflectionConfigurationFiles=${basedir}/src/main/resources/reflection-config.json
 								-Dspring.native.remove-yaml-support=true
 								--features=org.graalvm.home.HomeFinderFeature
+								--initialize-at-run-time=java.sql.DriverManager
 								--enable-all-security-services
 							</buildArgs>
 						</configuration>

@@ -1,0 +1,8 @@
+[
+	{
+		"name": "org.hibernate.dialect.PostgreSQL9Dialect",
+		"allDeclaredFields": true,
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	}
+]

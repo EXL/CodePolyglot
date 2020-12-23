@@ -24,8 +24,10 @@
 
 package ru.exlmoto.code.configuration;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Configuration
 @ConfigurationProperties(prefix = "code")
 public class CodeConfiguration {
 	private String dateFormat;
