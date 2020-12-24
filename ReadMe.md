@@ -138,7 +138,7 @@ sudo reboot
 sudo systemctl enable nginx
 ```
 
-### Recipe: Build and Test Code Polyglot application
+### Recipe: Build, Run and Test Code Polyglot application
 
 ```bash
 export GRAALVM_HOME=/opt/graalvm/graalvm-ce-java8-20.3.0
@@ -148,6 +148,7 @@ export PATH=$GRAALVM_HOME/bin:$PATH
 cd ~/CodePolyglot/
 DB_CONNECTION=jdbc:postgresql://localhost:5432/code DB_USERNAME=user DB_PASSWORD=password ./gradlew clean build
 # ./gradlew clean bootJar
+DB_CONNECTION=jdbc:postgresql://localhost:5432/code DB_USERNAME=user DB_PASSWORD=password java -jar build/libs/code-polyglot-*.jar
 sudo mv build/libs/code-polyglot-*.jar /srv/
 ```
 
