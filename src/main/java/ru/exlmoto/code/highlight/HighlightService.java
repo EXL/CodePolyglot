@@ -39,7 +39,7 @@ import ru.exlmoto.code.helper.UtilityHelper;
 import ru.exlmoto.code.highlight.enumeration.Mode;
 import ru.exlmoto.code.highlight.filter.HighlightFilter;
 import ru.exlmoto.code.highlight.implementation.HighlightJs;
-//import ru.exlmoto.code.highlight.implementation.HighlightPygments;
+import ru.exlmoto.code.highlight.implementation.HighlightPygments;
 import ru.exlmoto.code.highlight.implementation.HighlightRouge;
 import ru.exlmoto.code.highlight.parser.Options;
 import ru.exlmoto.code.highlight.parser.OptionsParser;
@@ -52,7 +52,7 @@ import java.util.Map;
 
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightJs;
 import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightRouge;
-//import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
+import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygments;
 //import static ru.exlmoto.code.highlight.enumeration.Mode.HighlightPygmentsJython;
 
 @Service
@@ -67,7 +67,7 @@ public class HighlightService {
 	private final CodeConfiguration config;
 
 	private final HighlightJs highlightJs;
-//	private final HighlightPygments highlightPygments;
+	private final HighlightPygments highlightPygments;
 	private final HighlightRouge highlightRouge;
 
 	private final Map<Mode, Pair<String, String>> versions;
@@ -78,7 +78,7 @@ public class HighlightService {
 	                        UtilityHelper util,
 	                        CodeConfiguration config,
 	                        HighlightJs highlightJs,
-//	                        HighlightPygments highlightPygments,
+	                        HighlightPygments highlightPygments,
 	                        HighlightRouge highlightRouge) {
 		this.context = context;
 		this.optionsParser = optionsParser;
@@ -86,7 +86,7 @@ public class HighlightService {
 		this.util = util;
 		this.config = config;
 		this.highlightJs = highlightJs;
-//		this.highlightPygments = highlightPygments;
+		this.highlightPygments = highlightPygments;
 		this.highlightRouge = highlightRouge;
 
 		this.versions = new HashMap<>();
@@ -105,10 +105,10 @@ public class HighlightService {
 			versions.get(HighlightRouge).getFirst(), versions.get(HighlightRouge).getSecond()));
 
 //		highlightPygments.setUseJython(false);
-//		versions.put(HighlightPygments,
-//			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
-//		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
-//			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
+		versions.put(HighlightPygments,
+			Pair.of(highlightPygments.getLanguageVersion(), highlightPygments.getLibraryVersion()));
+		log.info(String.format("GraalVM Python version '%s' and Pygments version '%s' loaded.",
+			versions.get(HighlightPygments).getFirst(), versions.get(HighlightPygments).getSecond()));
 
 //		highlightPygments.setUseJython(true);
 //		versions.put(HighlightPygmentsJython,
@@ -128,8 +128,8 @@ public class HighlightService {
 		highlightRouge.generateCssStyle("base16")
 			.ifPresent((css) -> log.info(HighlightRouge.name() + ":\n" + css + "\n---\n"));
 //		highlightPygments.setUseJython(false);
-//		highlightPygments.generateCssStyle("vs")
-//			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
+		highlightPygments.generateCssStyle("vs")
+			.ifPresent((css) -> log.info(HighlightPygments.name() + ":\n" + css + "\n---\n"));
 //		highlightPygments.setUseJython(true);
 //		highlightPygments.generateCssStyle("vim")
 //			.ifPresent((css) -> log.info(HighlightPygmentsJython.name() + ":\n" + css + "\n---\n"));
@@ -193,10 +193,10 @@ public class HighlightService {
 				case HighlightRouge: {
 					return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
 				}
-//				case HighlightPygments: {
+				case HighlightPygments: {
 //					highlightPygments.setUseJython(false);
-//					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
-//				}
+					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+				}
 //				case HighlightPygmentsJython: {
 //					highlightPygments.setUseJython(true);
 //					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
@@ -218,7 +218,7 @@ public class HighlightService {
 		this.versions = new HashMap<>();
 		versions.put(HighlightJs, Pair.of("20.3.0", "10.0.1"));
 		versions.put(HighlightRouge, Pair.of("2.6.6", "3.1.0"));
-//		versions.put(HighlightPygments, Pair.of("3.8.0", "2.7.2"));
+		versions.put(HighlightPygments, Pair.of("3.8.0", "2.7.2"));
 //		versions.put(HighlightPygmentsJython, Pair.of("2.7.2", "2.6.2"));
 	}
 

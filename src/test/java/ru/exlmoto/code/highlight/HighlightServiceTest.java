@@ -77,14 +77,14 @@ class HighlightServiceTest {
 			resource.readFileToString("classpath:/expected/HighlightJs/" + filename + ".html.txt");
 		String htmlRouge =
 			resource.readFileToString("classpath:/expected/Rouge/" + filename + ".html.txt");
-//		String htmlPygments =
-//			resource.readFileToString("classpath:/expected/Pygments/" + filename + ".html.txt");
+		String htmlPygments =
+			resource.readFileToString("classpath:/expected/Pygments/" + filename + ".html.txt");
 //		String htmlPygmentsJython =
 //			resource.readFileToString("classpath:/expected/PygmentsJython/" + filename + ".html.txt");
 
 		assertEquals(htmlHighlightJs, highlight.highlightCode(Mode.HighlightJs, lang, snippet));
 		assertEquals(htmlRouge, highlight.highlightCode(Mode.HighlightRouge, lang, snippet));
-//		assertEquals(htmlPygments, highlight.highlightCode(Mode.HighlightPygments, lang, snippet));
+		assertEquals(htmlPygments, highlight.highlightCode(Mode.HighlightPygments, lang, snippet));
 //		assertEquals(htmlPygmentsJython, highlight.highlightCode(Mode.HighlightPygmentsJython, lang, snippet));
 	}
 
