@@ -115,6 +115,10 @@ class UtilityHelperTest {
 		assertEquals("java|nolines", util.getCorrectOptions("java| nolines "));
 		assertEquals("java|nolines|30", util.getCorrectOptions("java |nolines | 30"));
 		assertEquals("java|nolines|15:30", util.getCorrectOptions("java |nolines; 15, 30"));
+
+		assertEquals("java|nolines", util.getCorrectOptions("java| nolines \n"));
+		assertEquals("java|nolines|30", util.getCorrectOptions("java |nolines | 30\r\n"));
+		assertEquals("java|nolines|15:30", util.getCorrectOptions("java \n\n\r|nolines; 15, 30\n\r"));
 	}
 
 	@Test

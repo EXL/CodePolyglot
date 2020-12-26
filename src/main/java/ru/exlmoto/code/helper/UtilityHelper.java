@@ -67,7 +67,13 @@ public class UtilityHelper {
 
 	public String getCorrectOptions(String options) {
 		return StringUtils.hasText(options) ?
-			options.replaceAll(";", "|").replaceAll(",", ":").replaceAll(" ", "") : options;
+			options
+				.replaceAll(";", "|")
+				.replaceAll(",", ":")
+				.replaceAll(" ", "")
+				.replaceAll("\r", "")
+				.replaceAll("\n", "") :
+			options;
 	}
 
 	public List<Pair<String, String>> generateSnippetLinks(List<CodeEntity> snippets, String language) {
