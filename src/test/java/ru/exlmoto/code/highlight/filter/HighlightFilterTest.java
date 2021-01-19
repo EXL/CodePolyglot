@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 EXL <exlmotodev@gmail.com>
+ * Copyright (c) 2020-2021 EXL <exlmotodev@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,8 +57,8 @@ class HighlightFilterTest {
 		String tableCode = resource.readFileToString("classpath:/expected/TableCode.html.txt");
 		String tableCodeHighlight = resource.readFileToString("classpath:/expected/TableCodeHighlight.html.txt");
 
-		assertEquals(tableCode, filter.tableCode(snippet, 0L, 0L));
-		assertEquals(tableCodeHighlight, filter.tableCode(snippet, 3L, 5L));
+		assertEquals(tableCode, filter.tableCode(snippet, 0L, 0L, false));
+		assertEquals(tableCodeHighlight, filter.tableCode(snippet, 3L, 5L, false));
 	}
 
 	@Test
@@ -78,8 +78,8 @@ class HighlightFilterTest {
 		String simpleCode = resource.readFileToString("classpath:/expected/SimpleCode.html.txt");
 		String simpleCodeHighlight = resource.readFileToString("classpath:/expected/SimpleCodeHighlight.html.txt");
 
-		assertEquals(simpleCode, filter.simpleCode(snippet, 0L, 0L));
-		assertEquals(simpleCodeHighlight, filter.simpleCode(snippet, 3L, 5L));
+		assertEquals(simpleCode, filter.simpleCode(snippet, 0L, 0L, false));
+		assertEquals(simpleCodeHighlight, filter.simpleCode(snippet, 3L, 5L, false));
 	}
 
 	@Test

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 EXL <exlmotodev@gmail.com>
+ * Copyright (c) 2020-2021 EXL <exlmotodev@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,8 +43,6 @@ public class HighlightFilter {
 
 	private final TagCompensator tagCompensator;
 
-	private boolean escape = false;
-
 	public HighlightFilter(TagCompensator tagCompensator) {
 		this.tagCompensator = tagCompensator;
 	}
@@ -53,23 +51,23 @@ public class HighlightFilter {
 		return source.replaceAll("\r", "");
 	}
 
-	public String tableCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table));
+	public String tableCode(String codeLines, long hStart, long hEnd, boolean escape) {
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table, escape));
 	}
 
 	public String tableCodePlain(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table_plain));
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.table_plain, true));
 	}
 
-	public String simpleCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.simple));
+	public String simpleCode(String codeLines, long hStart, long hEnd, boolean escape) {
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.simple, escape));
 	}
 
 	public String plainCode(String codeLines, long hStart, long hEnd) {
-		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain));
+		return filterBlock(filterLines(codeLines, hStart, hEnd, Filter.plain, true));
 	}
 
-	private String filterLines(String codeLines, long hStart, long hEnd, Filter filter) {
+	private String filterLines(String codeLines, long hStart, long hEnd, Filter filter, boolean escape) {
 		final String compensatedCodeLines = tagCompensator.compensateTags(codeLines).orElse(codeLines);
 		StringBuilder sb = new StringBuilder();
 		try {
@@ -77,7 +75,7 @@ public class HighlightFilter {
 			String line = reader.readLine();
 			int i = 1;
 			while (line != null) {
-				filterLinesAux(sb, i, hStart, hEnd, line, filter);
+				filterLinesAux(sb, i, hStart, hEnd, line, filter, escape);
 				i++;
 				line = reader.readLine();
 			}
@@ -93,9 +91,8 @@ public class HighlightFilter {
 
 	private void filterLinesAux(StringBuilder stringBuilder,
 	                            long i, long hStart, long hEnd,
-	                            String line, Filter filter) {
-		final String codeLine = (escape || filter == Filter.plain || filter == Filter.table_plain) ?
-			Encode.forHtml(line) : line;
+	                            String line, Filter filter, boolean escape) {
+		final String codeLine = (escape) ? Encode.forHtml(line) : line;
 		final String codeLineClass = (i % 2 == 0) ? "d-code" : "l-code";
 		final String tableLineClass = (i % 2 == 0) ? "d-table" : "l-table";
 		final boolean hll = ((i >= hStart) && (i <= hEnd));
@@ -108,9 +105,5 @@ public class HighlightFilter {
 		}
 		stringBuilder.append("<td class=\"code-line").append(hll ? "" : " " + codeLineClass).append("\">");
 		stringBuilder.append(codeLine).append("\n</td></tr>");
-	}
-
-	public void setEscape(boolean escape) {
-		this.escape = escape;
 	}
 }

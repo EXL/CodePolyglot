@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 EXL <exlmotodev@gmail.com>
+ * Copyright (c) 2020-2021 EXL <exlmotodev@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -140,14 +140,11 @@ public class HighlightService {
 		final long hStart = settings.gethStart();
 		final long hEnd = settings.gethEnd();
 		final String filteredCode = highlightFilter.filterCarriageReturn(code);
-		highlightFilter.setEscape(false);
 		return (settings.isHighlightDisabled()) ?
 			(settings.isTable()) ?
 				highlightFilter.tableCodePlain(filteredCode, hStart, hEnd) :
 				highlightFilter.plainCode(filteredCode, hStart, hEnd) :
-			(settings.isTable()) ?
-				highlightFilter.tableCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd) :
-				highlightFilter.simpleCode(highlightCodeAux(mode, filteredCode, settings), hStart, hEnd);
+			highlightCurrentCode(mode, filteredCode, settings, hStart, hEnd);
 	}
 
 	public Pair<String, String> getApplicationVersions() {
@@ -182,20 +179,36 @@ public class HighlightService {
 		return versions;
 	}
 
-	private String highlightCodeAux(Mode mode, String code, Options options) {
+	private String highlightCurrentCode(Mode mode, String code, Options options, long hStart, long hEnd) {
+		final Pair<Boolean, String> highlightedCode = highlightCodeAux(mode, code, options);
+		return (options.isTable()) ?
+			highlightFilter.tableCode(highlightedCode.getSecond(), hStart, hEnd, !highlightedCode.getFirst()) :
+			highlightFilter.simpleCode(highlightedCode.getSecond(), hStart, hEnd, !highlightedCode.getFirst());
+	}
+
+	private Pair<Boolean, String> highlightCodeAux(Mode mode, String code, Options options) {
 		RuntimeException error = new RuntimeException("Error while highlighting code snippet.");
 		try {
 			switch (mode) {
 				default:
 				case HighlightJs: {
-					return highlightJs.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+					return Pair.of(
+						true,
+						highlightJs.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error)
+					);
 				}
 				case HighlightRouge: {
-					return highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+					return Pair.of(
+						true,
+						highlightRouge.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error)
+					);
 				}
 				case HighlightPygments: {
 //					highlightPygments.setUseJython(false);
-					return highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error);
+					return Pair.of(
+						true,
+						highlightPygments.renderHtmlFromCode(options.getLanguage(), code).orElseThrow(() -> error)
+					);
 				}
 //				case HighlightPygmentsJython: {
 //					highlightPygments.setUseJython(true);
@@ -203,8 +216,7 @@ public class HighlightService {
 //				}
 			}
 		} catch (RuntimeException re) {
-			highlightFilter.setEscape(true);
-			return code;
+			return Pair.of(false, code);
 		}
 	}
 }
